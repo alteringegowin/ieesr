@@ -190,3 +190,18 @@ function the_checkbox_dapur($param, $match)
         return '';
     }
 }
+
+function is_login()
+{
+    $ci = get_instance();
+    $ci->load->library('ion_auth');
+    return $ci->ion_auth->logged_in();
+}
+
+function get_koef_propinsi($propinsi_id)
+{
+    $ci = get_instance();
+    $ci->db->where('id', $propinsi_id);
+    $row = $ci->db->get('master_propinsi')->row();
+    return $row ? $row->propinsi_koefisien : 0;
+}

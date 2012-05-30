@@ -1,30 +1,27 @@
-<div id="login">
+<div id="login" class="">
 
     <div class="row">
         <div class="span6 offset3">
 
             <h3>Login</h3>
-            <form action="dash.html">
+            <form action="<?php echo current_url() ?>" method="post">
                 <fieldset>
-
                     <div class="control-group">
                         <label class="control-label" for="user_name">Username</label>
                         <div class="controls">
-                            <input type="text" class="input-large" id="user_name">
+                            <input type="text" class="input-large" id="user_name" name="username">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="pass_word">Password</label>
                         <div class="controls">
-                            <input type="password" class="input-large" id="pass_word">
+                            <input type="password" class="input-large" id="pass_word"  name="password">
                         </div>
                     </div>
                 </fieldset>
                 <a href="<?php echo site_url('auth/forgot_password') ?>">Forgot Password ?</a>
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-warning">
-                        Login
-                    </button>
+                    <button type="submit" class="btn btn-warning">Login</button>
                 </div>
             </form>
         </div>

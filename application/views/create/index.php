@@ -72,13 +72,16 @@
         });
         
         function onFinishCallback(){
+            
             var f = $('#form-komunikasi').serialize();
+            console.log(f);
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('create/submit') ?>/6/step6",
+                url: "<?php echo site_url('create/submit') ?>/6/step-6",
                 data: f
             });  
-            return true;
+            window.location.href = '<?php echo site_url('sampah') ?>';
+            return false;
         }
         function leaveAStepCallback(obj){
             var step = obj.attr('rel');
@@ -86,7 +89,6 @@
             switch(step)
             {
                 case '1':
-                    console.log(step);
                     for(i=0;i<10;i++)
                     {
                         var e = $("#input-"+i);

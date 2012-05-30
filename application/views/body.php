@@ -1,3 +1,6 @@
+<?php
+$pageName = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>assets/fancybox/jquery.fancybox.css?v=2.0.6" media="screen" />
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>assets/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.2" />
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>css/ui-lightness/jquery-ui-1.8.19.custom.css" />
-        <!--     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
+        <!--     <link href="<?php echo $themes ?>assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
         <link href="<?php echo $themes ?>css/main.css" rel="stylesheet">
         <link href="<?php echo $themes ?>assets/js/google-code-prettify/prettify.css" rel="stylesheet">
         <link href="<?php echo $themes ?>assets/css/smart_wizard.css" rel="stylesheet">
@@ -73,7 +76,9 @@
 
     <body>
 
-
+        <div class="headerbg">
+            test
+        </div>
         <header>
             <!-- Navbar
             ================================================== -->
@@ -85,24 +90,20 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <a class="brand" href="<?php echo site_url() ?>">Bootstrap</a>
+                        <a class="brand" href="./index.html">Karbon Kalkulator</a>
                         <div class="nav-collapse collapse">
                             <ul class="nav">
-                                <li class="">
-                                    <a href="#">Penghitungan Baseline Emisi</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Pengurangan Emisi</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Komitmen</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Data Profil</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Logout</a>
-                                </li>
+                                <li class=""><a href="<?php echo site_url('create') ?>">Penghitungan Baseline Emisi</a></li>
+                                <li class=""><a href="#">Pengurangan Emisi</a></li>
+                                <li class=""><a href="#">Komitmen</a></li>
+
+                                <?php if (is_login()): ?>
+                                    <li class=""><a href="<?php echo site_url('profil') ?>">Data Profil</a></li>
+                                    <li class=""><a href="<?php echo site_url('auth/logout') ?>">Logout</a></li>
+                                <?php else: ?>
+                                    <li class=""><a href="<?php echo site_url('auth') ?>">Login</a></li>
+                                    <li class=""><a href="<?php echo site_url('auth/register') ?>">Register</a></li>
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </div>
@@ -110,22 +111,25 @@
             </div>
             <div class="topbar topbar-fixed">
                 <ul class="nav navBottom nav-pills">
-                    <li class=""><a href="listrik.php"><img src="<?php echo $themes ?>img/icons/homegreen.png" width="40" />&nbsp;&nbsp;&nbsp;Rumah</a></li>
-                    <li class=""><a href="sampah.php"><img src="<?php echo $themes ?>img/icons/trash.png" width="40" />&nbsp;&nbsp;&nbsp;Sampah</a></li>
-                    <li class=""><a href="darat.php"><img src="<?php echo $themes ?>img/icons/delivery.png" width="40" />&nbsp;&nbsp;&nbsp;Transportasi</a></li>
+                    <li class=""><a href="<?php echo site_url('create') ?>"><img src="<?php echo $themes ?>img/icons/homegreen.png" width="40" />&nbsp;&nbsp;&nbsp;Rumah</a></li>
+                    <li class=""><a href="<?php echo site_url('sampah') ?>"><img src="<?php echo $themes ?>img/icons/trash.png" width="40" />&nbsp;&nbsp;&nbsp;Sampah</a></li>
+                    <li class=""><a href="<?php echo site_url('transportasi') ?>"><img src="<?php echo $themes ?>img/icons/delivery.png" width="40" />&nbsp;&nbsp;&nbsp;Transportasi</a></li>
                 </ul>
             </div>
-            <br /><center>Penghitungan baseline emisi pernah anda lakukan pada tanggal 06 May 2012 20:56<br /> 
-                Apakah Anda ingin menghapus data ini dan mengisikan ulang perhitungan emisi anda? Hapus data ini</center>
         </header>
+        <div id="main" class="container">
+            <div class="alert alert-success">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                Penghitungan baseline emisi pernah anda lakukan pada tanggal 06 May 2012 20:56<br />
+                Apakah Anda ingin menghapus data ini dan mengisikan ulang perhitungan emisi anda? Hapus data ini</div>
 
 
 
-        <?php echo $content; ?>
+            <?php echo $content; ?>
 
 
-        <footer>
-        </footer>
+            <footer>
+            </footer>
 
     </body>
 </html>

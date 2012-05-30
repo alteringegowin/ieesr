@@ -11,7 +11,6 @@
                 </a></li>
         </ul>
         <div id="step-1">	
-
             <div style="float: right;">
                 <img src="<?php echo $themes ?>img/organic.png" height="48" width="48"  />
             </div>

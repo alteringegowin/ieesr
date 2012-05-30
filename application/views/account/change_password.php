@@ -16,7 +16,19 @@
                 </ul>
             </div>
             <div class="span9">
-                <form action="index.php/auth/change_password" method="post" accept-charset="utf-8" class="well form-horizontal">
+
+
+                <?php if (isset($freeze)): ?>
+                    <div class="alert alert-success"><?php echo $freeze ?></div>
+                <?php endif; ?>
+
+
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-error"><?php echo $error ?></div>
+                <?php endif; ?>
+
+
+                <form action="<?php echo current_url() ?>" method="post" accept-charset="utf-8" class="well form-horizontal">
                     <fieldset>
                         <div class="control-group">
                             <label for="input01" class="control-label">Current Password</label>

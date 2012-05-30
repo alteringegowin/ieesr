@@ -1,7 +1,18 @@
+/*@import url(http://fonts.googleapis.com/css?family=Handlee);*/
+.headerbg {
+	height: 3px;
+	background: url(../img/headStripe.png) repeat top left;
+	padding-bottom: 90px;
+}
+
 body {
 /* background:#f4f4f4 url(../img/bodybg.png) top repeat; */
 background:#c4dfe6 url(../img/texture_b.jpg) bottom fixed no-repeat;
 padding-top: 90px;
+font-family: 'Handlee', Helvetica nueu, sans-serif;
+}
+p {
+font-family: 'Handlee', Helvetica nueu, sans-serif;
 }
 .topbar {
   width: 100%;
@@ -21,7 +32,9 @@ padding-top: 90px;
           border-radius: 4px;
 	
 }
-
+#main.container {
+	width: 980px;
+}
 .topbar-fixed{
 	top:36px !important;
 }
@@ -208,8 +221,9 @@ padding-top: 90px;
 }
 @media (min-width: 980px) {
 	body{
-   	padding-top: 90px;
+/*    	padding-top: 90px; */
    }
+   
   .footerbar-fixed {
     position: fixed;
     bottom: 0;
@@ -638,16 +652,15 @@ list-style: none;
 	left:40%;
 }
 .modalForm .control-label {
-	width:480px ;
+	width:350px ;
 text-align: left;
 }
 .modalForm.transjauh .control-label {
 	width:380px ;	
 }
 .modalForm .controls {
-	margin-left: 0px;
+	margin-left: 470px;
 	margin-bottom: 5px;
-	margin-top: 10px;
 }
 .modalForm.transjauh .controls {
 	margin-left: 381px;
@@ -667,11 +680,14 @@ text-align: left;
 .fancybox-nav {
 	width:80px !important;
 }
+.navbar {
+	margin-top: 3px;
+}
 .navbar-inner {
 	height: 39px;
 }
 #main {
-	margin-top: 40px;
+	margin-top: 20px;
 }
 ul.nav.navBottom {
 	margin-left: 430px !important;
@@ -697,9 +713,11 @@ ul.nav.navBottom {
 	background: none !important;
 	border: none !important;
 }
+/*
 .alert-info {
 float: right;
 }
+*/
 
 .swMain ul.anchor li a
 {
@@ -718,9 +736,20 @@ font-size: 35px !important;
 font-weight: normal !important;
 font-family: Arial !important;
 }
-
-/* sugeng*/
-.span1
-{
-width: auto;
+.swMain ul.anchor li a .stepNumber, .swMain .stepContainer div.content, .swMain ul.anchor li a .stepDesc {
+	font-family: 'Handlee', Arial, sans-serif !important;
+}
+hr {
+margin: 10px 0 !important;
+}
+.form-horizontal .control-group {
+	margin-bottom: 10px !important;
+}
+.imgInfo{
+	margin-right: 20px;
+	float: left;
+	text-align: center;
+}
+.imgInfo img{
+	margin-bottom: 10px;
 }

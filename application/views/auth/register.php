@@ -2,12 +2,22 @@
     <div class="row">
         <div class="span6 offset3">
             <h3>Registration</h3>    
-            <form action="#">
+            <form action="<?php echo current_url() ?>" method="post" >
+                <?php if (validation_errors()): ?>
+                    <div class="alert alert-error">
+                        <?php echo validation_errors(); ?>
+                    </div>	
+                <?php endif; ?>
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-error">
+                        <?php echo $error; ?>
+                    </div>	
+                <?php endif; ?>
                 <fieldset>
                     <div class="control-group">
-                        <label class="control-label" for="user_name">Username</label>
+                        <label class="control-label" for="user_name">Your Name</label>
                         <div class="controls">
-                            <input type="text" name="user_name" value="" id="user_name">
+                            <input type="text" name="name" value="" id="user_name">
                         </div>
                     </div>
                     <div class="control-group">
@@ -23,11 +33,17 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="password_confirm">Ketik ulang Password</label>
+                        <label class="control-label" for="password_confirm">Confirm Password</label>
                         <div class="controls">
                             <input type="password" name="password_confirm" value="" id="password_confirm">
                         </div>
                     </div>				
+                    <div class="control-group">
+                        <label class="control-label" for="propinsi">Propinsi</label>
+                        <div class="controls">
+                            <?php echo form_dropdown('propinsi_id', $ddPropinsi) ?>
+                        </div>
+                    </div>
                 </fieldset>
                 <div class="alert alert-info">
                     By Pressing the "I Accept" button you agree to the terms and conditions of the "Subscription and Lisence Agreement".

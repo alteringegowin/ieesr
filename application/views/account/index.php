@@ -16,14 +16,21 @@
                 </ul>
             </div>
             <div class="span9">
-                <form action="auth" method="post" accept-charset="utf-8" class="well form-horizontal">
-                    <input type="hidden" name="id" value="1">
+
+
+                <?php if (isset($freeze)): ?>
+                    <div class="alert alert-success"><?php echo $freeze ?></div>
+                <?php endif; ?>
+
+
+
+                <form action="<?php echo current_url() ?>" method="post" accept-charset="utf-8" class="well form-horizontal">
                     <fieldset>
 
                         <div class="control-group error">
-                            <label class="control-label">Username</label>
+                            <label class="control-label">Email</label>
                             <div class="controls">
-                                <span class="input-large uneditable-input">user_name</span>
+                                <span class="input-large uneditable-input"><?php echo $user->email ?></span>
                                 <span class="help-inline"><em>cannot change</em></span>
                             </div>
                         </div>
@@ -31,34 +38,14 @@
                         <div class="control-group">
                             <label for="first_name" class="control-label">Name</label>
                             <div class="controls form-inline">
-                                <input type="text" name="first_name" value="" id="first_name" placeholder="First Name">
-                                <input type="text" name="last_name" value="" id="last_name" placeholder="Last Name">
+                                <input type="text" name="name" value="<?php echo $user->username ?>" id="first_name" placeholder="First Name">
                             </div>
                         </div>
+
                         <div class="control-group">
-                            <label for="email" class="control-label">Email</label>
+                            <label for="propinsi_id" class="control-label">Address</label>
                             <div class="controls">
-                                <input type="text" name="email" value="" id="email" placeholder="your@mail.com">
-                                <span class="help-inline"><em>required</em></span>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label for="phone" class="control-label">Phone</label>
-                            <div class="controls">
-                                <input type="text" name="phone" value="" id="phone" placeholder="000-000-0000">
-                                <span class="help-inline"><em>required</em></span>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label for="company" class="control-label">Company Name</label>
-                            <div class="controls">
-                                <input type="text" name="company" value="" id="company" placeholder="Company Name">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label for="address" class="control-label">Address</label>
-                            <div class="controls">
-                                <textarea name="address" cols="40" rows="3" id="address"></textarea>
+                                <?php echo form_dropdown('propinsi_id', $ddPropinsi, $user->propinsi_id) ?>
                             </div>
                         </div>
                         <div class="form-actions">
