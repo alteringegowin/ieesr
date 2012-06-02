@@ -17,57 +17,9 @@ $rumah_tangga = $this->session->userdata('rumah_tangga');
             </div>
         </div>
 
-        <div class="control-group">
-            <label class="control-label" for="input01">2. Mesin Pengering</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input class="span1"  constanta-id="4000" total-data="t-item-9" rel="counted"   value="<?php echo element('item-9', $rumah_tangga, '') ?>"   size="16" type="text" name="item-9"><span class="add-on">jam</span>
-                    <input type="hidden" name="t-item-9" id="t-item-9" value="<?php echo element('t-item-9', $rumah_tangga, '') ?>"/>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="input01">3. Setrika</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input class="span1"   constanta-id="500" total-data="t-item-10" rel="counted"  value="<?php echo element('item-10', $rumah_tangga, '') ?>"  size="16" type="text" name="item-10"><span class="add-on">jam</span>
-                    <input type="hidden" name="t-item-10" id="t-item-10" value="<?php echo element('t-item-10', $rumah_tangga, '') ?>"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label class="control-label" for="input01">4. Kipas Angin</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input class="span1"  constanta-id="50" total-data="t-item-11" rel="counted"    value="<?php echo element('item-11', $rumah_tangga, '') ?>" size="16" type="text" name="item-11"><span class="add-on">jam</span>
-                    <input type="hidden" name="t-item-11" id="t-item-11"  value="<?php echo element('t-item-11', $rumah_tangga, '') ?>"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label class="control-label" for="input01">5. AC (1 PK)</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input class="span1" constanta-id="750" total-data="t-item-12" rel="counted"   value="<?php echo element('item-12', $rumah_tangga, '') ?>"  size="16" type="text" name="item-12"><span class="add-on">jam</span>
-                    <input type="hidden" name="t-item-12" id="t-item-12" value="<?php echo element('t-item-13', $rumah_tangga, '') ?>"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label class="control-label" for="input01">6. Vacuum Cleaner</label>
-            <div class="controls">
-                <div class="input-append">
-                    <input class="span1" constanta-id="1200"  total-data="t-item-13" rel="counted"    value="<?php echo element('item-13', $rumah_tangga, '') ?>" size="16" type="text"  name="item-13"><span class="add-on">jam</span>
-                    <input type="hidden" name="t-item-13" id="t-item-13" value="<?php echo element('t-item-13', $rumah_tangga, '') ?>"/>
-                </div>
-            </div>
-        </div>
-        <input type="hidden" id="total_rumah_tangga" name="total_rumah_tangga" value="<?php echo element('total_rumah_tangga', $rumah_tangga, 0) ?>"/>
 
     </fieldset>
+    <input type="hidden" id="total_rumah_tangga" name="total_rumah_tangga" value="<?php echo element('total_rumah_tangga', $rumah_tangga, 0) ?>"/>
 </form>
 
 

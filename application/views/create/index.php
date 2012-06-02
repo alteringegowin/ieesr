@@ -74,7 +74,6 @@
         function onFinishCallback(){
             
             var f = $('#form-komunikasi').serialize();
-            console.log(f);
             $.ajax({
                 type: 'POST',
                 url: "<?php echo site_url('create/submit') ?>/6/step-6",

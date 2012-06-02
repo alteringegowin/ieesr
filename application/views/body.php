@@ -20,6 +20,8 @@ $pageName = basename($_SERVER['PHP_SELF']);
         <link href="<?php echo $themes ?>assets/js/google-code-prettify/prettify.css" rel="stylesheet">
         <link href="<?php echo $themes ?>assets/css/smart_wizard.css" rel="stylesheet">
         <link href="<?php echo $themes ?>assets/css/smart_wizard_vertical.css" rel="stylesheet">
+        
+        <link href="<?php echo $themes ?>assets/js/nouislider.css" rel="stylesheet">
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -51,7 +53,10 @@ $pageName = basename($_SERVER['PHP_SELF']);
         <script src="<?php echo $themes ?>assets/js/bootstrap-carousel.js"></script>
         <script src="<?php echo $themes ?>assets/js/bootstrap-typeahead.js"></script>
         <script src="<?php echo $themes ?>assets/js/application.js"></script>
+        <script src="<?php echo $themes ?>assets/js/jquery.nouislider.min.js"></script>
+        
         <script src="<?php echo $themes ?>assets/js/jquery.smartWizard-2.0.min.js"></script>
+        
         <!-- Add mousewheel plugin (this is optional) -->
         <script type="text/javascript" src="<?php echo $themes ?>assets/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
 
