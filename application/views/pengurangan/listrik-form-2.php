@@ -8,6 +8,7 @@
                 <div class="control-group" id="dapur-<?php echo $i ?>">
                     <label class="control-label" for="input01"><?php echo $item[$i]->item_name ?></label>
                     <div class="controls">
+                        <input name="jam-<?php echo $i ?>" id="jam-<?php echo $i ?>"  type="hidden" value="<?php echo element('item-' . $i, $dapur) ?>">
                         <a class="btn btn-danger btn-small delete-dapur" rel-id="<?php echo $i ?>" href="#"><i class="icon-remove icon-white"></i></a>
                     </div>
                 </div>
@@ -20,7 +21,7 @@
                     <label class="control-label" for="jam-<?php echo $i ?>"><?php echo $item[$i]->item_name ?> dari <?php echo element('item-' . $i, $dapur) ?> jam menjadi</label>
                     <div class="controls">
                         <div class="input-append">
-                            <input class="span1 countdapur" id="jam-<?php echo $i ?>" rel-id="<?php echo $i ?>" size="16" type="text" value="<?php echo element('item-' . $i, $dapur) ?>"><span class="add-on">jam</span>
+                            <input class="span1 countdapur" name="jam-<?php echo $i ?>" id="jam-<?php echo $i ?>" rel-id="<?php echo $i ?>" size="16" type="text" value="<?php echo element('item-' . $i, $dapur) ?>"><span class="add-on">jam</span>
                         </div>
                     </div>
                 </div>

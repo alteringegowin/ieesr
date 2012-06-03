@@ -24,15 +24,15 @@
 
             <?php $i = 1; ?>
             <?php foreach ($lampu['item'] as $r): ?>
-                <div id="input-<?php echo $i; ?>" class="clonedInput">
+                <div id="input-<?php echo $i; ?>" class="sclonedInput" rel="<?php echo $i ?>">
                     <div class="input-append">
-                        <?php echo form_dropdown('x', config_item('app_dropdown_lampu'), $r['tipe'], 'class="change-type" rel="' . $i . '" id="select-' . $i . '"') ?>
+                        <?php echo form_dropdown('tipelampu-' . $i, config_item('app_dropdown_lampu'), $r['tipe'], 'class="change-type" rel="' . $i . '" id="select-' . $i . '"') ?>
                     </div>
                     <div class="input-append">
-                        <input class="span1 recount" id="daya-<?php echo $i ?>" size="16" type="text" value="<?php echo $r['daya'] ?>"><span class="add-on">watt</span>
+                        <input class="span1 recount" name="daya-<?php echo $i ?>" id="daya-<?php echo $i ?>" size="16" type="text" value="<?php echo $r['daya'] ?>"><span class="add-on">watt</span>
                     </div>
                     <div class="input-append">
-                        <input class="span1 recount" id="waktu-<?php echo $i ?>" size="16" type="text" value="<?php echo $r['waktu'] ?>"><span class="add-on">Jam</span>
+                        <input class="span1 recount" name="waktu-<?php echo $i ?>" id="waktu-<?php echo $i ?>" size="16" type="text" value="<?php echo $r['waktu'] ?>"><span class="add-on">Jam</span>
                     </div>
                     <a class="btn btn-danger btn-small delete-lampu" rel="input-<?php echo $i; ?>" href="#"><i class="icon-remove icon-white"></i></a>
                 </div>
@@ -57,23 +57,43 @@
         $('#form-step-1').delegate('.recount','keyup',recount_lampu);
         $('#form-step-1').delegate('.delete-lampu','click',function(){
             var rel = $(this).attr('rel');
-            $('#'+rel).remove();
-            recount_lampu();
-        });
-        
-        function recount_lampu(){
-            var tot = <?php echo count($lampu); ?>;
+            
             var total_all = 0;
-            for(var i = 1;i<= tot;i++){
-                var daya = $("#daya-"+i).val();
-                var waktu = $("#waktu-"+i).val();
+            $(".sclonedInput").each(function(i,v){
+                var is = i+1;
+                var daya = $("#daya-"+is).val();
+                var waktu = $("#waktu-"+is).val();
                 var total_item = waktu*daya*PROPINSI_CONS;
                 if(isNaN(total_item)){
-                    total_all = total_all+0;
                 }else{
                     total_all = total_all+total_item;
                 }
-            }
+            })
+            
+            $("#total_lampu_all").val(total_all);
+            $("#total_all_text").html(total_all);
+            
+            $('#'+rel).remove();
+            recount_lampu();
+            return false;
+            
+        });
+        
+        function recount_lampu(){
+            
+            var total_all = 0;
+            $(".sclonedInput").each(function(i,v){
+                var is = i+1;
+                var daya = $("#daya-"+is).val();
+                var waktu = $("#waktu-"+is).val();
+                var total_item = waktu*daya*PROPINSI_CONS;
+                if(isNaN(total_item)){
+                }else{
+                    total_all = total_all+total_item;
+                }
+            })
+            
+            
             var lampu_before = $("#total_lampu_asli").val();
             if(total_all > lampu_before){
                 $('#form-step-1').each (function(){

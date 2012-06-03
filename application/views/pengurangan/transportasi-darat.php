@@ -61,7 +61,7 @@
                                 <span class="add-on" style="margin-right:-4px;">Rp</span>
                                 <input class="span1" id="konsumsi" size="16" type="text" name="konsumsi" value="<?php echo element('konsumsi', $darat) ?>">
                             </div>
-                            <input class="span2" id="total_darat" size="16" type="hidden" name="total_darat" value="<?php echo element('konsumsi', $darat) ?>">
+                            <input class="span2" id="total_darat" size="16" type="text" name="total_darat" value="<?php echo element('total_darat', $darat) ?>">
                         </div>
                     </div>
                 </div>
@@ -74,3 +74,4 @@
         </div>
     </div>          			
 </div>
+

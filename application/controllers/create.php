@@ -29,6 +29,15 @@ class Create extends CI_Controller
 
     public function step()
     {
+        $res = $this->db->get('ac_items')->result();
+        foreach ($res as $r) {
+            $f[$r->id] = $r;
+        }
+        foreach ($res as $r) {
+            $fgroup[$r->group_item_id][] = $r;
+        }
+        $this->tpl['item'] = $f;
+        $this->tpl['fgroup'] = $fgroup;
         $step_number = $this->input->post('step_number', true);
         $this->load->view('create/step-' . $step_number, $this->tpl);
     }

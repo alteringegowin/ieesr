@@ -10,7 +10,7 @@
                     <label class="control-label" for="rt-<?php echo $r->id ?>"><?php echo $r->item_name ?></label>
                     <div class="controls">
                         <div class="input-append">
-                            <input class="span1 countrt" rel-id="<?php echo $r->id ?>" id="rt-<?php echo $r->id ?>" size="16" type="text" value="<?php echo element('item-' . $r->id, $rumah_tangga) ?>"><span class="add-on">jam</span>
+                            <input class="span1 countrt" rel-id="<?php echo $r->id ?>" name="jam-<?php echo $r->id ?>"  id="jam-<?php echo $r->id ?>" size="16" type="text" value="<?php echo element('item-' . $r->id, $rumah_tangga) ?>"><span class="add-on">jam</span>
                         </div>
                     </div>
                 </div>
@@ -64,11 +64,10 @@
             });
             
             if(total_rumah_tangga > $("#total_rumah_tangga_asli").val()){
-                alert(total_rumah_tangga); 
                 $('#form-step-3').each (function(){
                     this.reset();
                 });
-                //alert('Nilai Total Emisi Rumah Tangga Tidak Berkurang');
+                alert('Nilai Total Emisi Rumah Tangga Tidak Berkurang');
             }else{
                 $("#total_rumah_tangga").val(total_rumah_tangga);
                 $("#total_rumah_tangga_text").html(total_rumah_tangga);

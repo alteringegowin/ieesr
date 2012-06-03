@@ -67,6 +67,19 @@
             onFinish:onFinishCallback
         });
         function onFinishCallback(){
+            var c = $('#form-step-1').serialize();
+            var d = $('#form-step-2').serialize();
+            var e = $('#form-step-3').serialize();
+            var f = $('#form-step-4').serialize();
+            var g = $('#form-step-5').serialize();
+            var h = $('#form-step-6').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo site_url('pengurangan/submit') ?>/f1",
+                data: {f1:c,f2:d,f3:e,f4:f,f5:g,f6:h,f7:h}
+            });  
+            window.location.href = '<?php echo site_url('pengurangan/sampah') ?>';
+            return false;
         }
     });
 </script>

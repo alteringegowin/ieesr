@@ -87,7 +87,7 @@ class Transportasi extends CI_Controller
             $S = $Q * 72;
             $T = $R + $S;
             $TOTAL = ( $T / 1000) / 57;
-            echo number_format($TOTAL, 4);
+            echo $TOTAL;
         } else {
             echo 0;
         }
@@ -118,7 +118,7 @@ class Transportasi extends CI_Controller
             $R = $Q + $M;
             $T = $R / $S;
             $total = $T * 1000;
-            echo number_format($total, 4);
+            echo $total;
         } else {
             
         }

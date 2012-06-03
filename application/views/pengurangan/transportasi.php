@@ -38,15 +38,15 @@
             var form2 = $("#non-darat").serialize();
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('create/submit') ?>/darat",
+                url: "<?php echo site_url('pengurangan/submit') ?>/darat",
                 data: form1
             });  
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('create/submit') ?>/udara",
+                url: "<?php echo site_url('pengurangan/submit') ?>/udara",
                 data: form2
             });  
-            //window.location.href = '<?php echo site_url('transportasi') ?>';
+            window.location.href = '<?php echo site_url('transportasi') ?>';
             return true;
         }
         
@@ -56,14 +56,14 @@
                 var form1 = $("#jarak-dekat").serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "<?php echo site_url('create/submit') ?>/darat",
+                    url: "<?php echo site_url('pengurangan/submit') ?>/darat",
                     data: form1
                 });  
             }else{
                 var form2 = $("#non-darat").serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "<?php echo site_url('create/submit') ?>/udara",
+                    url: "<?php echo site_url('pengurangan/submit') ?>/udara",
                     data: form2
                 });  
             }

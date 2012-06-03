@@ -50,7 +50,7 @@ $pribadi = $this->session->userdata('pribadi');
             var i=14;
             var total=0;
             for (i=14;i<=15;i++){
-                var val = parseInt($("#t-item-"+i).val()) || 0;
+                var val = parseFloat($("#t-item-"+i).val()) || 0;
                 total = total + val;
             }
             $("#total_pribadi").val(total);

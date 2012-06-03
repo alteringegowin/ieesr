@@ -49,7 +49,6 @@ class Pengurangan extends CI_Controller
 
 
         //console::log($fgroup);
-        console::log($commitment['rumah_tangga']);
 
         $this->tpl['item'] = $f;
         $this->tpl['fgroup'] = $fgroup;
@@ -95,6 +94,28 @@ class Pengurangan extends CI_Controller
         $this->db->where('id', 1);
         $r = $this->db->get('ac_commitments')->row();
         xdebug(json_decode($r->commitment_values));
+    }
+
+    function submit($s)
+    {
+        switch ($s) {
+            case 'sampah':
+                $this->session->set_userdata('pengurangan_sampah', $this->input->post('sampah', true));
+                break;
+            case 'udara':
+                $this->session->set_userdata('pengurangan_udara', $this->input->post(NULL, true));
+                break;
+            case 'darat':
+                $this->session->set_userdata('pengurangan_darat', $this->input->post(NULL, true));
+                break;
+            default:
+                $c = array();
+                for ($i = 1; $i < 7; $i++) {
+                    $c[] = $this->input->post('f' . $i, true);
+                }
+                $this->session->set_userdata('pengurangan_rumah', $c);
+                break;
+        }
     }
 
 }
