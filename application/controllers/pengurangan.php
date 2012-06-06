@@ -1,6 +1,5 @@
 <?php
-
-if (!defined('BASEPATH'))
+if ( !defined('BASEPATH') )
     exit('No direct script access allowed');
 
 class Pengurangan extends CI_Controller
@@ -16,7 +15,7 @@ class Pengurangan extends CI_Controller
         $this->tpl['themes'] = base_url('resources') . '/';
         $this->load->library('ion_auth');
         $this->load->helper('form');
-        if (!$this->ion_auth->logged_in()) {
+        if ( !$this->ion_auth->logged_in() ) {
             redirect('auth');
         }
 
@@ -78,8 +77,6 @@ class Pengurangan extends CI_Controller
 
 
         $commitment = json_decode($this->baseline->commitment_values, true);
-        console::log($commitment['darat']);
-        console::log($commitment['udara']);
         $this->tpl['udara'] = $commitment['udara'];
         $this->tpl['darat'] = $commitment['darat'];
 
@@ -143,8 +140,8 @@ class Pengurangan extends CI_Controller
         parse_str($pengurangan['rumah'][5], $komunikasi);
         parse_str($pengurangan['sampah'], $sampah);
 
-        Console::log($commitment['udara']);
-        Console::log($pengurangan['udara']);
+        Console::log($commitment);
+        Console::log($rumah_tangga);
 
 
 
@@ -187,6 +184,13 @@ class Pengurangan extends CI_Controller
         $this->db->where('id', $this->baseline->id);
         $this->db->update('ac_commitments');
         
+        redirect('create');
+    }
+
+    function check_session()
+    {
+        $s = $this->session->userdata;
+        xdebug($s);
     }
 
 }

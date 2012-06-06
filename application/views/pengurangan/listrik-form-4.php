@@ -3,12 +3,13 @@
 <form id="form-step-4" class="form-horizontal modalForm">
     <fieldset>	   		
         <?php foreach ($fgroup[4] as $r): ?>
-            <?php if (element('item-' . $r->id, $pribadi)): ?>
+            <?php if ( element('item-' . $r->id, $pribadi) ): ?>
                 <div class="control-group">
                     <label class="control-label" for="input01"><?php echo $r->item_name ?></label>
                     <div class="controls">
                         <div class="input-append">
                             <input class="span1 count-pribadi" rel-id="<?php echo $r->id ?>" id="input-pribadi-<?php echo $r->id ?>"  name="jam-<?php echo $r->id ?>" size="16" type="text" value="<?php echo element('item-' . $r->id, $pribadi) ?>"><span class="add-on">jam</span>
+                            <input type="hidden" name="total-item-<?php echo $r->id ?>" id="total-item-<?php echo $r->id ?>"  value="<?php echo element('t-item-' . $r->id, $pribadi) ?>" />
                         </div>
                     </div>
                 </div>
@@ -53,11 +54,12 @@
             $.each(crt, function(i,v){
                 if($('#input-pribadi-'+v.id).length){
                     total_t = v.item_daya*v.item_hour*PROPINSI_CONS;
+                    
                     if(isNaN(total_t)){
-                        
-                    }else{
-                        total_pribadi += total_t;
+                        total_pribadi = 0;
                     }
+                    total_pribadi += total_t;
+                    $("#total-item-"+v.id).val(total_t);
                     
                 }
             });

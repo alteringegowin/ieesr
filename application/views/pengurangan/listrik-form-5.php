@@ -1,15 +1,16 @@
 <h2>Elektronik Lainnya</h2>
 <hr />
-<form id="form-step-5" class="form-horizontal">
+<form id="form-step-5" class="form-horizontal modalForm">
     <fieldset>	   		
 
         <?php foreach ($fgroup[5] as $r): ?>
-            <?php if (element('item-' . $r->id, $elektronik)): ?>
+            <?php if ( element('item-' . $r->id, $elektronik) ): ?>
                 <div class="control-group">
                     <label class="control-label" for="input-elektronik-<?php echo $r->id; ?>"><?php echo $r->item_name ?></label>
                     <div class="controls">
                         <div class="input-append">
                             <input class="span1 count-elektronik" rel-id="<?php echo $r->id ?>" name="jam-<?php echo $r->id; ?>" id="input-elektronik-<?php echo $r->id; ?>" size="16" type="text" value="<?php echo element('item-' . $r->id, $elektronik) ?>"><span class="add-on">jam</span>
+                            <input type="hidden" name="total-item-<?php echo $r->id ?>" id="total-item-<?php echo $r->id ?>"  value="<?php echo element('t-item-' . $r->id, $elektronik) ?>" />
                         </div>
                     </div>
                 </div>
@@ -54,10 +55,10 @@
                 if($('#input-elektronik-'+v.id).length){
                     total_t = v.item_daya*v.item_hour*PROPINSI_CONS;
                     if(isNaN(total_t)){
-                        
-                    }else{
-                        total_elektronik += total_t;
+                        total_elektronik = 0;
                     }
+                    total_elektronik += total_t;
+                    $("#total-item-"+v.id).val(total_t);
                     
                 }
             });

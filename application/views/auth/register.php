@@ -1,21 +1,21 @@
 <div id="login">
-    <div class="row">
+    <div class="row well" style="background-color: #fff">
         <div class="span6 offset3">
             <h3>Registration</h3>    
             <form action="<?php echo current_url() ?>" method="post" >
-                <?php if (validation_errors()): ?>
+                <?php if ( validation_errors() ): ?>
                     <div class="alert alert-error">
                         <?php echo validation_errors(); ?>
                     </div>	
                 <?php endif; ?>
-                <?php if (isset($error)): ?>
+                <?php if ( isset($error) ): ?>
                     <div class="alert alert-error">
                         <?php echo $error; ?>
                     </div>	
                 <?php endif; ?>
                 <fieldset>
                     <div class="control-group">
-                        <label class="control-label" for="user_name">Your Name</label>
+                        <label class="control-label" for="user_name">Nama Lengkap</label>
                         <div class="controls">
                             <input type="text" name="name" value="" id="user_name">
                         </div>
@@ -33,11 +33,26 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="password_confirm">Confirm Password</label>
+                        <label class="control-label" for="password_confirm">Ulangi Password Anda</label>
                         <div class="controls">
                             <input type="password" name="password_confirm" value="" id="password_confirm">
                         </div>
                     </div>				
+
+                    <div class="control-group">
+                        <label class="control-label">Jenis Kelamin</label>
+                        <div class="controls">
+                            <label class="radio">
+                                <input type="radio" name="jenis_kelamin" id="optionsRadios1" value="option1" checked="">
+                                Laki-laki
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="jenis_kelamin" id="optionsRadios2" value="option2">
+                                Perempuan
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="control-group">
                         <label class="control-label" for="propinsi">Propinsi</label>
                         <div class="controls">

@@ -16,7 +16,7 @@
         <h3>Sampah Organik</h3>
         <form id="form-sampah" class="form-horizontal modalForm trash">
             <fieldset>	   		
-                <?php if (element('item-25', $sampah)): ?>
+                <?php if ( element('item-25', $sampah) ): ?>
                     <div class="control-group">
                         <label class="control-label" for="input01">Sampah Organik dari <?php echo element('item-25', $sampah) ?> gram menjadi</label>
                         <div class="controls">
@@ -32,7 +32,7 @@
             </div>
             <h3>Sampah Kertas</h3>
             <fieldset>	   		
-                <?php if (element('item-26', $sampah)): ?>
+                <?php if ( element('item-26', $sampah) ): ?>
                     <div class="control-group">
                         <label class="control-label" for="input01">Dari <?php echo element('item-26', $sampah) ?> Lembar kertas menjadi</label>
                         <div class="controls">
@@ -47,7 +47,7 @@
             <h3>Sampah Plastik</h3>
             <fieldset>	   		   		
 
-                <?php if (element('item-27', $sampah)): ?>
+                <?php if ( element('item-27', $sampah) ): ?>
                     <div class="control-group">
                         <label class="control-label" for="input01">Air Minum Dalam Kemasan (AMDK) dari  <?php echo element('item-27', $sampah) ?> botol menjadi</label>
                         <div class="controls">
@@ -59,15 +59,15 @@
                 <?php endif; ?>
 
             </fieldset>
-            <input type="hidden" name="total_organik"  value="<?php echo element('total_organik', $sampah) ?>" id="total_organik" />
-            <input type="hidden" name="total_kertas" value="<?php echo element('total_kertas', $sampah) ?>" id="total_kertas" />
-            <input type="hidden" name="total_plastik" value="<?php echo element('total_plastik', $sampah) ?>" id="total_plastik" />
-            <input type="hidden" name="total_sampah" value="<?php echo element('total_sampah', $sampah) ?>" id="total_sampah" />
-            
-            <input type="hidden" name="total_organik_asli"  value="<?php echo element('total_organik', $sampah) ?>" id="total_organik_asli" />
-            <input type="hidden" name="total_kertas_asli" value="<?php echo element('total_kertas', $sampah) ?>" id="total_kertas_asli" />
-            <input type="hidden" name="total_plastik_asli" value="<?php echo element('total_plastik', $sampah) ?>" id="total_plastik_asli" />
-            <input type="hidden" name="total_sampah_asli" value="<?php echo element('total_sampah', $sampah) ?>" id="total_sampah_asli" />
+            <input type="text" name="total_organik"  value="<?php echo element('total_organik', $sampah) ?>" id="total_organik" />
+            <input type="text" name="total_kertas" value="<?php echo element('total_kertas', $sampah) ?>" id="total_kertas" />
+            <input type="text" name="total_plastik" value="<?php echo element('total_plastik', $sampah) ?>" id="total_plastik" />
+            <input type="text" name="total_sampah" value="<?php echo element('total_sampah', $sampah) ?>" id="total_sampah" />
+
+            <input type="text" name="total_organik_asli"  value="<?php echo element('total_organik', $sampah) ?>" id="total_organik_asli" />
+            <input type="text" name="total_kertas_asli" value="<?php echo element('total_kertas', $sampah) ?>" id="total_kertas_asli" />
+            <input type="text" name="total_plastik_asli" value="<?php echo element('total_plastik', $sampah) ?>" id="total_plastik_asli" />
+            <input type="text" name="total_sampah_asli" value="<?php echo element('total_sampah', $sampah) ?>" id="total_sampah_asli" />
         </form>
 
         <div class="alert alert-info" style="text-align:right">
@@ -88,13 +88,13 @@
         });
         function onFinishCallback(){
             var c = $('#form-sampah').serialize();
-            console.log(c);
             $.ajax({
                 type: 'POST',
                 url: "<?php echo site_url('pengurangan/submit') ?>/sampah",
                 data: {sampah:c}
+            }).done(function() { 
+                window.location.href = '<?php echo site_url('pengurangan/transportasi') ?>';
             });  
-            window.location.href = '<?php echo site_url('pengurangan/transportasi') ?>';
             return false;
         }
         

@@ -5,12 +5,13 @@
     <fieldset>	   		
 
         <?php foreach ($fgroup[6] as $r): ?>
-            <?php if (element('item-' . $r->id, $komunikasi)): ?>
+            <?php if ( element('item-' . $r->id, $komunikasi) ): ?>
                 <div class="control-group">
                     <label class="control-label" for="input-komunikasi-<?php echo $r->id; ?>"><?php echo $r->item_name ?></label>
                     <div class="controls">
                         <div class="input-append">
                             <input class="span1 count-komunikasi" rel-id="<?php echo $r->id ?>" name="jam-<?php echo $r->id; ?>" id="input-komunikasi-<?php echo $r->id; ?>" size="16" type="text" value="<?php echo element('item-' . $r->id, $komunikasi) ?>"><span class="add-on">jam</span>
+                            <input type="hidden" name="total-item-<?php echo $r->id ?>" id="total-item-<?php echo $r->id ?>"  value="<?php echo element('t-item-' . $r->id, $komunikasi) ?>" />
                         </div>
                     </div>
                 </div>
@@ -55,11 +56,10 @@
                 if($('#input-komunikasi-'+v.id).length){
                     total_t = v.item_daya*v.item_hour*PROPINSI_CONS;
                     if(isNaN(total_t)){
-                        
-                    }else{
-                        total_komunikasi += total_t;
+                        total_t = 0;
                     }
-                    
+                    total_komunikasi += total_t;
+                    $("#total-item-"+v.id).val(total_t);
                 }
             });
             

@@ -21,7 +21,7 @@ class Home extends CI_Controller
 
     public function ori()
     {
-        
+
         $str = '<div class="input-append"><select name="tipe[]" class="span1"><option>LED</option>
                         <option>Neon - CFL</option>
                         <option>Bohlam - Lampu Pijar</option>
@@ -39,6 +39,14 @@ class Home extends CI_Controller
         $str = str_replace("     ", ' ', $str);
         echo $str;
         //$this->load->view('ori', $this->tpl);
+    }
+
+    function error($v)
+    {
+
+        $this->tpl['error_msg'] = $this->session->flashdata('error_msg');
+        $this->tpl['content'] = $this->load->view('home/error_' . $v, $this->tpl, true);
+        $this->load->view('body', $this->tpl);
     }
 
 }

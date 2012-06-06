@@ -1,6 +1,5 @@
 <?php
-
-if (!defined('BASEPATH'))
+if ( !defined('BASEPATH') )
     exit('No direct script access allowed');
 
 class Create extends CI_Controller
@@ -14,13 +13,20 @@ class Create extends CI_Controller
         parent::__construct();
         $this->tpl['themes'] = base_url('resources') . '/';
         $this->load->library('ion_auth');
-        if (!$this->ion_auth->logged_in()) {
+        if ( !$this->ion_auth->logged_in() ) {
             redirect('auth');
         }
         $this->output->enable_profiler(TRUE);
 
         $this->user = $this->ion_auth->user()->row();
         $this->tpl['user'] = $this->user;
+
+        $this->db->where('user_id', $this->user->user_id);
+        $ada = $this->db->get('ac_commitments')->row();
+        if ( $ada ) {
+            $this->session->set_flashdata('baselinedata', $ada);
+            redirect('home/error/baseline');
+        }
     }
 
     public function index()
@@ -51,12 +57,12 @@ class Create extends CI_Controller
                 $post = $this->input->post(NULL, true);
                 $all = array();
                 for ($i = 0; $i < 10; $i++) {
-                    if ($post['items-' . $i . '-daya'] && $post['items-' . $i . '-waktu']) {
+                    if ( $post['items-' . $i . '-daya'] && $post['items-' . $i . '-waktu'] ) {
                         $d = array();
                         $d['tipe'] = $post['items-' . $i . '-tipe'];
                         $d['daya'] = $post['items-' . $i . '-daya'];
                         $d['waktu'] = $post['items-' . $i . '-waktu'];
-                        $d['total'] = $post['total-lampu-'.$i];
+                        $d['total'] = $post['total-lampu-' . $i];
                         $all[] = $d;
                     }
                 }
@@ -130,6 +136,7 @@ class Create extends CI_Controller
         $this->db->set('commitment_values', json_encode($s));
         $this->db->set('commitment_created', date('Y-m-d H:i:s'));
         $this->db->insert('ac_commitments');
+        redirect('create');
     }
 
     function confirm()
@@ -144,7 +151,7 @@ class Create extends CI_Controller
         $s['sampah'] = $this->session->userdata('sampah');
         $s['darat'] = $this->session->userdata('darat');
         $s['udara'] = $this->session->userdata('udara');
-        
+
         Console::Log($s['sampah']);
         Console::Log($s['darat']);
         Console::Log($s['udara']);

@@ -6,7 +6,7 @@
                 <hr/>
                 <div class="row">
                     <div class="span12">
-                        <?php if (isset($commitment['penerangan']['item'])): ?>
+                        <?php if ( isset($commitment['penerangan']['item']) ): ?>
                             <div id="emisi_penerangan">
                                 <h3>Penerangan</h3>
                                 <table class="table table-bordered table-striped">
@@ -38,7 +38,7 @@
                                         <?php endforeach; ?>
                                         <tr>
                                             <td colspan="3" style="text-align: right"><h4>Total Emisi Baseline : <?php echo element('total_lampu_asli', $lampu) ?></h4></td>
-                                            <td colspan="3" style="text-align: right"><h4>Total Emisi Setelah Pengurangan: <?php echo element('total_lampu_all', $lampu,0) ?></h4></td>
+                                            <td colspan="3" style="text-align: right"><h4>Total Emisi Setelah Pengurangan: <?php echo element('total_lampu_all', $lampu, 0) ?></h4></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -59,8 +59,8 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($fgroup[2] as $r): ?>
-                                        <?php if (isset($baseline_dapur['item-' . $r->id])): ?>
-                                            <?php if ($r->id < 6): ?>
+                                        <?php if ( isset($baseline_dapur['item-' . $r->id]) ): ?>
+                                            <?php if ( $r->id < 6 ): ?>
                                                 <tr>
                                                     <td><?php echo $r->item_name ?></td>
                                                     <td>Ya</td>
@@ -70,7 +70,7 @@
                                                 <tr>
                                                     <td><?php echo $r->item_name ?></td>
                                                     <td><?php echo element('item-' . $r->id, $baseline_dapur) ?> Jam</td>
-                                                    <td><?php echo element('jam-' . $r->id, $dapur, element('item-' . $r->id, $baseline_dapur)) ?> Jam</td>
+                                                    <td><?php echo element('jam-' . $r->id, $dapur) ?> Jam</td>
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -78,167 +78,177 @@
                                     <tr>
                                         <td>TOTAL</td>
                                         <td style="text-align: right"><h4>Baseline : <?php echo element('total_dapur_asli', $dapur) ?></h4></td>
-                                        <td style="text-align: right"><h4>Pengurangan: <?php echo element('total_dapur', $dapur) ?></h4></td>
+                                        <td style="text-align: right"><h4>Setelah Pengurangan: <?php echo abs(element('total_dapur_asli', $dapur) - element('total_dapur', $dapur)) ?></h4></td>
+                                    </tr>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
 
-
-                        <div id="emisi_rumah_tangga">
-                            <h3>Peralatan Rumah Tangga</h3>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <th>Jenis</th>
-                                        <th>Baseline</th>
-                                        <th>Menjadi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($fgroup[3] as $r): ?>
-                                        <?php if (isset($baseline_rumah_tangga['item-' . $r->id])): ?>
-                                            <tr>
-                                                <td><?php echo $r->item_name ?></td>
-                                                <td><?php echo element('item-' . $r->id, $baseline_rumah_tangga) ?> Jam</td>
-                                                <td><?php echo element('jam-' . $r->id, $rumah_tangga, element('item-' . $r->id, $baseline_rumah_tangga)) ?> Jam</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                    <tr>
-                                        <td>TOTAL</td>
-                                        <td style="text-align: right"><h4>Baseline : <?php echo element('total_rumah_tangga_asli', $rumah_tangga) ?></h4></td>
-                                        <td style="text-align: right"><h4>Pengurangan: <?php echo element('total_rumah_tangga', $rumah_tangga) ?></h4></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                        <div id="emisi_rumah_tangga">
-                            <h3>Peralatan Pribadi</h3>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <th>Jenis</th>
-                                        <th>Baseline</th>
-                                        <th>Menjadi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($fgroup[4] as $r): ?>
-                                        <?php if (isset($baseline_pribadi['item-' . $r->id])): ?>
-                                            <tr>
-                                                <td><?php echo $r->item_name ?></td>
-                                                <td><?php echo element('item-' . $r->id, $baseline_pribadi) ?> Jam</td>
-                                                <td><?php echo element('jam-' . $r->id, $pribadi, element('item-' . $r->id, $baseline_pribadi)) ?> Jam</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                    <tr>
-                                        <td>TOTAL</td>
-                                        <td style="text-align: right"><h4>Baseline : <?php echo element('total_pribadi_asli', $pribadi) ?></h4></td>
-                                        <td style="text-align: right"><h4>Pengurangan: <?php echo element('total_pribadi', $pribadi) ?></h4></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php if ( $baseline_rumah_tangga['total_rumah_tangga'] ): ?>)
+                            <div id="emisi_rumah_tangga">
+                                <h3>Peralatan Rumah Tangga</h3>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <th>Baseline</th>
+                                            <th>Menjadi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($fgroup[3] as $r): ?>
+                                            <?php if ( isset($baseline_rumah_tangga['item-' . $r->id]) ): ?>
+                                                <tr>
+                                                    <td><?php echo $r->item_name ?></td>
+                                                    <td><?php echo element('item-' . $r->id, $baseline_rumah_tangga, 0) ?> Jam</td>
+                                                    <td><?php echo element('jam-' . $r->id, $rumah_tangga, 0) ?> Jam</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <tr>
+                                            <td>TOTAL</td>
+                                            <td style="text-align: right"><h4>Baseline : <?php echo element('total_rumah_tangga_asli', $rumah_tangga) ?></h4></td>
+                                            <td style="text-align: right"><h4>Setelah Pengurangan: <?php echo abs(element('total_rumah_tangga_asli', $rumah_tangga) - element('total_rumah_tangga', $rumah_tangga)) ?></h4></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif; ?>
 
 
-                        <div id="emisi_elektronik">
-                            <h3>Peralatan Hiburan dan Elektronik</h3>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <th>Jenis</th>
-                                        <th>Baseline</th>
-                                        <th>Menjadi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($fgroup[5] as $r): ?>
-                                        <?php if (isset($baseline_elektronik['item-' . $r->id])): ?>
-                                            <tr>
-                                                <td><?php echo $r->item_name ?></td>
-                                                <td><?php echo element('item-' . $r->id, $baseline_elektronik) ?> Jam</td>
-                                                <td><?php echo element('jam-' . $r->id, $elektronik, element('item-' . $r->id, $baseline_elektronik)) ?> Jam</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                    <tr>
-                                        <td>TOTAL</td>
-                                        <td style="text-align: right"><h4>Baseline : <?php echo element('total_elektronik_asli', $elektronik) ?></h4></td>
-                                        <td style="text-align: right"><h4>Pengurangan: <?php echo element('total_elektronik', $elektronik) ?></h4></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php if ( $baseline_pribadi['total_pribadi'] ): ?>
+                            <div id="emisi_rumah_tangga">
+                                <h3>Peralatan Pribadi</h3>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <th>Baseline</th>
+                                            <th>Menjadi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($fgroup[4] as $r): ?>
+                                            <?php if ( isset($baseline_pribadi['item-' . $r->id]) ): ?>
+                                                <tr>
+                                                    <td><?php echo $r->item_name ?></td>
+                                                    <td><?php echo element('item-' . $r->id, $baseline_pribadi, 0) ?> Jam</td>
+                                                    <td><?php echo element('jam-' . $r->id, $pribadi, 0) ?> Jam</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <tr>
+                                            <td>TOTAL</td>
+                                            <td style="text-align: right"><h4>Baseline : <?php echo element('total_pribadi_asli', $pribadi) ?></h4></td>
+                                            <td style="text-align: right"><h4>Setelah Pengurangan: <?php echo abs(element('total_pribadi_asli', $pribadi) - element('total_pribadi_asli', $pribadi)) ?></h4></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif; ?>
 
-                        <h6></h6>
+                        <?php if ( $baseline_elektronik['total_elektronik'] ): ?>
 
-                        <div id="emisi_komunikasi">
-                            <h3>Informasi Dan Komunikasi</h3>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Jenis</th>
-                                        <th>Baseline</th>
-                                        <th>Menjadi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($fgroup[6] as $r): ?>
-                                        <?php if (isset($baseline_komunikasi['item-' . $r->id])): ?>
-                                            <tr>
-                                                <td><?php echo $r->item_name ?></td>
-                                                <td><?php echo element('item-' . $r->id, $baseline_komunikasi) ?> Jam</td>
-                                                <td><?php echo element('jam-' . $r->id, $komunikasi, element('item-' . $r->id, $baseline_komunikasi)) ?> Jam</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                    <tr>
-                                        <td>TOTAL</td>
-                                        <td style="text-align: right"><h4>Baseline : <?php echo element('total_komunikasi_asli', $komunikasi) ?></h4></td>
-                                        <td style="text-align: right"><h4>Pengurangan: <?php echo element('total_komunikasi', $komunikasi) ?></h4></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <div id="emisi_elektronik">
+                                <h3>Peralatan Hiburan dan Elektronik</h3>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                        </tr>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <th>Baseline</th>
+                                            <th>Menjadi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($fgroup[5] as $r): ?>
+                                            <?php if ( isset($baseline_elektronik['item-' . $r->id]) ): ?>
+                                                <tr>
+                                                    <td><?php echo $r->item_name ?></td>
+                                                    <td><?php echo element('item-' . $r->id, $baseline_elektronik, 0) ?> Jam</td>
+                                                    <td><?php echo element('jam-' . $r->id, $elektronik, 0) ?> Jam</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <tr>
+                                            <td>TOTAL</td>
+                                            <td style="text-align: right"><h4>Baseline : <?php echo element('total_elektronik_asli', $elektronik) ?></h4></td>
+                                            <td style="text-align: right"><h4>Setelah Pengurangan: <?php echo abs(element('total_elektronik_asli', $elektronik) - element('total_elektronik_asli', $elektronik)) ?></h4></td>
+                                            <?php Console::log($elektronik); ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif ?>
+
+
+                        <?php if ( $baseline_komunikasi['total_komunikasi'] ): ?>
+                            <div id="emisi_komunikasi">
+                                <h3>Informasi Dan Komunikasi</h3>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <th>Baseline</th>
+                                            <th>Menjadi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($fgroup[6] as $r): ?>
+                                            <?php if ( isset($baseline_komunikasi['item-' . $r->id]) ): ?>
+                                                <tr>
+                                                    <td><?php echo $r->item_name ?></td>
+                                                    <td><?php echo element('item-' . $r->id, $baseline_komunikasi) ?> Jam</td>
+                                                    <td><?php echo element('jam-' . $r->id, $komunikasi, element('item-' . $r->id, $baseline_komunikasi)) ?> Jam</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <tr>
+                                            <td>TOTAL</td>
+                                            <td style="text-align: right"><h4>Baseline : <?php echo element('total_komunikasi_asli', $komunikasi) ?></h4></td>
+                                            <td style="text-align: right"><h4>Setelah Pengurangan: <?php echo element('total_komunikasi', $komunikasi) ?></h4></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row ">
-            <div class="span12">
-                <h2>Emisi Sampah</h2>
-                <div class="row">
-                    <div class="span4">
-                        <h4>Sampah Organik</h4>
-                        <p>dari <span style="font-size: 20px"><?php echo element('item-25', $baseline_sampah, 0) ?> gram</span> menjadi <span style="font-size: 20px"><?php echo element('item-25', $sampah, 0) ?> gram</span></p>
-                    </div>
-                    <div class="span4">
-                        <h4>Sampah Kertas</h4>
-                        <p>dari <span style="font-size: 20px"><?php echo element('item-26', $baseline_sampah, 0) ?> lembar</span> menjadi <span style="font-size: 20px"><?php echo element('item-26', $sampah, 0) ?> lembar</span></p>
-                    </div>
-                    <div class="span4">
-                        <h4>Sampah Plastik</h4>
-                        <p>dari <span style="font-size: 20px"><?php echo element('item-27', $baseline_sampah, 0) ?> botol</span> menjadi <span style="font-size: 20px"><?php echo element('item-27', $sampah, 0) ?> botol</span></p>
+
+        <?php if ( $baseline_sampah ): ?>
+            <div class="row ">
+                <div class="span12">
+                    <h2>Emisi Sampah</h2>
+                    <div class="row">
+                        <div class="span4">
+                            <h4>Sampah Organik</h4>
+                            <p>dari <span style="font-size: 20px"><?php echo element('item-25', $baseline_sampah, 0) ?> gram</span> menjadi <span style="font-size: 20px"><?php echo element('item-25', $sampah, 0) ?> gram</span></p>
+                        </div>
+                        <div class="span4">
+                            <h4>Sampah Kertas</h4>
+                            <p>dari <span style="font-size: 20px"><?php echo element('item-26', $baseline_sampah, 0) ?> lembar</span> menjadi <span style="font-size: 20px"><?php echo element('item-26', $sampah, 0) ?> lembar</span></p>
+                        </div>
+                        <div class="span4">
+                            <h4>Sampah Plastik</h4>
+                            <p>dari <span style="font-size: 20px"><?php echo element('item-27', $baseline_sampah, 0) ?> botol</span> menjadi <span style="font-size: 20px"><?php echo element('item-27', $sampah, 0) ?> botol</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
 
         <div class="row ">
             <div class="span12">
-                <?php if ($darat): ?>
+                <?php if ( element('total_darat', $darat) ): ?>
                     <div class="row">
                         <div class="span12">
                             <h2>Emisi Perjalanan Darat</h2>
@@ -268,7 +278,7 @@
 
         <div class="row ">
             <div class="span12">
-                <?php if ($udara): ?>
+                <?php if ( $udara ): ?>
                     <div class="row">
                         <div class="span12">
                             <h2>Emisi Perjalanan Udara</h2>

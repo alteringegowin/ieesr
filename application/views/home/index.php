@@ -15,8 +15,8 @@
     <div class="paper"></div>
     <div class="paper2"></div>
     <div class="buttoncontentBottom">
-        <a href="listrik.php" rel="flow" class="button green fancybox fancybox.ajax">Mulai!</a>
-        <a href="#" class="button yellow">Pelajari</a>
+        <a href="<?php echo site_url('create')?>" rel="flow" class="button green fancybox fancybox.ajax">Mulai!</a>
+        <a href="<?php echo site_url('home/pelajari')?>" class="button yellow">Pelajari</a>
     </div>
 
 </div>

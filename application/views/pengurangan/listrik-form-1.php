@@ -34,7 +34,7 @@
                     <div class="input-append">
                         <input class="span1 recount" name="waktu-<?php echo $k ?>" id="waktu-<?php echo $k ?>" size="16" type="text" value="<?php echo $r['waktu'] ?>"><span class="add-on">Jam</span>
                     </div>
-                    <input type="text" name="total-lampu-<?php echo $k ?>" id="total-lampu-<?php echo $k ?>" value="" />
+                    <input type="hidden" name="total-lampu-<?php echo $k ?>" id="total-lampu-<?php echo $k ?>" value="" />
                     <a class="btn btn-danger btn-small delete-lampu" rel="input-<?php echo $k; ?>" href="#"><i class="icon-remove icon-white"></i></a>
                 </div>
                 <?php $i++; ?>

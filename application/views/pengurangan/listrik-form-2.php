@@ -4,11 +4,12 @@
 <form id="form-step-2" class="form-horizontal modalForm">
     <fieldset>
         <?php for ($i = 2; $i <= 5; $i++): ?>
-            <?php if (element('t-item-' . $i, $dapur)): ?>
+            <?php if ( element('t-item-' . $i, $dapur) ): ?>
                 <div class="control-group" id="dapur-<?php echo $i ?>">
                     <label class="control-label" for="input01"><?php echo $item[$i]->item_name ?></label>
                     <div class="controls">
                         <input name="jam-<?php echo $i ?>" id="jam-<?php echo $i ?>"  type="hidden" value="<?php echo element('item-' . $i, $dapur) ?>">
+                        <input type="hidden" name="total-item-<?php echo $i ?>" id="total-item-<?php echo $i ?>" value="" />
                         <a class="btn btn-danger btn-small delete-dapur" rel-id="<?php echo $i ?>" href="#"><i class="icon-remove icon-white"></i></a>
                     </div>
                 </div>
@@ -16,12 +17,13 @@
         <?php endfor; ?>
 
         <?php for ($i = 6; $i <= 7; $i++): ?>
-            <?php if (element('t-item-' . $i, $dapur)): ?>
+            <?php if ( element('t-item-' . $i, $dapur) ): ?>
                 <div class="control-group" id="dapur-<?php echo $i ?>">
                     <label class="control-label" for="jam-<?php echo $i ?>"><?php echo $item[$i]->item_name ?> dari <?php echo element('item-' . $i, $dapur) ?> jam menjadi</label>
                     <div class="controls">
                         <div class="input-append">
                             <input class="span1 countdapur" name="jam-<?php echo $i ?>" id="jam-<?php echo $i ?>" rel-id="<?php echo $i ?>" size="16" type="text" value="<?php echo element('item-' . $i, $dapur) ?>"><span class="add-on">jam</span>
+                            <input type="hidden" name="total-item-<?php echo $i ?>" id="total-item-<?php echo $i ?>" value="" />
                         </div>
                     </div>
                 </div>
@@ -65,11 +67,12 @@
             $.each(cdapur, function(i,v){
                 if($('#dapur-'+i).length){
                     total_t = cdapur[i].c*cdapur[i].j*PROPINSI_CONS;
+                    
+                    $("#total-item-"+i).val(total_t);
                     if(isNaN(total_dapur)){
-                        
-                    }else{
-                        total_dapur += total_t;
+                        total_t=0;
                     }
+                    total_dapur += total_t;
                     
                 }
             });

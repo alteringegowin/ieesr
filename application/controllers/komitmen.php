@@ -12,7 +12,7 @@ class Komitmen extends CI_Controller
 
         $this->load->library('ion_auth');
         $this->load->helper('komitmen');
-        if (!$this->ion_auth->logged_in()) {
+        if ( !$this->ion_auth->logged_in() ) {
             redirect('auth');
         }
         $this->user = $this->ion_auth->user()->row();
@@ -26,6 +26,7 @@ class Komitmen extends CI_Controller
 
         $baseline = json_decode($dbbaseline->commitment_values, true);
         $komitmen = json_decode($dbbaseline->commitment_shift, true);
+
         parse_str($komitmen['rumah'][0], $lampu);
         parse_str($komitmen['rumah'][1], $dapur);
         parse_str($komitmen['rumah'][2], $rumah_tangga);
@@ -35,6 +36,7 @@ class Komitmen extends CI_Controller
         parse_str($komitmen['sampah'], $sampah);
         $darat = element('darat', $komitmen, FALSE);
         $udara = element('udara', $komitmen, FALSE);
+        
 
 
 
@@ -47,7 +49,7 @@ class Komitmen extends CI_Controller
         }
 
 
-        if (isset($baseline['penerangan']['item']) && $baseline['penerangan']['item']) {
+        if ( isset($baseline['penerangan']['item']) && $baseline['penerangan']['item'] ) {
             foreach ($baseline['penerangan']['item'] as $k => $v) {
                 $s[] = cetak_komitmen_lampu($v, $lampu, $k);
             }
@@ -55,8 +57,8 @@ class Komitmen extends CI_Controller
 
         //dapur
         foreach ($fgroup[2] as $r):
-            if (isset($baseline['dapur']['item-' . $r->id])):
-                if ($r->id < 6):
+            if ( isset($baseline['dapur']['item-' . $r->id]) ):
+                if ( $r->id < 6 ):
                     $s[] = cetak_komitmen_dapur($r, $dapur);
                 else:
                     $s[] = cetak_komitmen_other($r, $baseline['dapur'], $dapur);
@@ -66,25 +68,25 @@ class Komitmen extends CI_Controller
 
 
         foreach ($fgroup[3] as $r):
-            if (isset($baseline['rumah_tangga']['item-' . $r->id])):
+            if ( isset($baseline['rumah_tangga']['item-' . $r->id]) ):
                 $s[] = cetak_komitmen_other($r, $baseline['rumah_tangga'], $rumah_tangga);
             endif;
         endforeach;
 
         foreach ($fgroup[4] as $r):
-            if (isset($baseline['pribadi']['item-' . $r->id])):
+            if ( isset($baseline['pribadi']['item-' . $r->id]) ):
                 $s[] = cetak_komitmen_other($r, $baseline['pribadi'], $pribadi);
             endif;
         endforeach;
 
         foreach ($fgroup[5] as $r):
-            if (isset($baseline['elektronik']['item-' . $r->id])):
+            if ( isset($baseline['elektronik']['item-' . $r->id]) ):
                 $s[] = cetak_komitmen_other($r, $baseline['elektronik'], $elektronik);
             endif;
         endforeach;
 
         foreach ($fgroup[6] as $r):
-            if (isset($baseline['komunikasi']['item-' . $r->id])):
+            if ( isset($baseline['komunikasi']['item-' . $r->id]) ):
                 $s[] = cetak_komitmen_other($r, $baseline['komunikasi'], $komunikasi);
             endif;
         endforeach;
@@ -93,21 +95,29 @@ class Komitmen extends CI_Controller
         $s['sampah'] = cetak_sampah($baseline['sampah'], $sampah);
         $s['darat'] = cetak_komitmen_darat($baseline['darat'], $darat);
         $s['udara'] = cetak_komitmen_udara($baseline['udara'], $udara);
-        
-        
+
         
 
 
         $this->load->library('Commitment_pdf');
         $this->commitment_pdf->AliasNbPages();
+
+        //$this->commitment_pdf->addPage();
+        //$this->commitment_pdf->cetak_nama();
+        //$this->commitment_pdf->cetak_data($s);
+
         $this->commitment_pdf->addPage();
-        $this->commitment_pdf->cetak_nama();
-        $this->commitment_pdf->cetak_data($s);
-        
-        $this->commitment_pdf->addPage();
-        $this->commitment_pdf->cetak_detail_lampu($s);
-        
-        
+        $this->commitment_pdf->cetak_detail_lampu($baseline, $lampu);
+        $this->commitment_pdf->cetak_detail_dapur($fgroup, 2, $baseline, $dapur);
+        $this->commitment_pdf->cetak_detail_item($fgroup, 3, $baseline, $rumah_tangga);
+        $this->commitment_pdf->cetak_detail_item($fgroup, 4, $baseline, $pribadi,'pribadi');
+        $this->commitment_pdf->cetak_detail_item($fgroup, 5, $baseline, $elektronik,'elektronik');
+        $this->commitment_pdf->cetak_detail_item($fgroup, 6, $baseline, $komunikasi,'komunikasi');
+        $this->commitment_pdf->cetak_detail_sampah($baseline['sampah'],$sampah);
+        $this->commitment_pdf->cetak_detail_darat($s['darat']);
+        $this->commitment_pdf->cetak_detail_darat($s['udara']);
+
+
         $this->commitment_pdf->Output('commitment.pdf', 'I');
     }
 

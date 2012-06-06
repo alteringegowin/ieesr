@@ -40,14 +40,17 @@
                 type: 'POST',
                 url: "<?php echo site_url('pengurangan/submit') ?>/darat",
                 data: form1
-            });  
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo site_url('pengurangan/submit') ?>/udara",
-                data: form2
-            });  
-            window.location.href = '<?php echo site_url('transportasi') ?>';
-            return true;
+            }).done(function() { 
+                $.ajax({
+                    type: 'POST',
+                    url: "<?php echo site_url('pengurangan/submit') ?>/udara",
+                    data: form2
+                }).done(function() { 
+                    window.location.href = '<?php echo site_url('pengurangan/confirm') ?>';
+                });   
+            });
+            
+            return false;
         }
         
         function leaveAStepCallback(obj){
