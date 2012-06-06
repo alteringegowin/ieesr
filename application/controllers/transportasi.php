@@ -12,6 +12,7 @@ class Transportasi extends CI_Controller
     {
         parent::__construct();
         $this->tpl['themes'] = base_url('resources') . '/';
+        
     }
 
     public function index()
@@ -57,8 +58,11 @@ class Transportasi extends CI_Controller
             $E = $row->n2o_hot;
             $N = $input * ($D + $E);
             $O = $input * ($H + $I);
-            $TOTAL = ( ( ($N * 2889) + ($O * 72) ) / 1000) / 57;
-            echo number_format($TOTAL, 4);
+            
+            $TOTAL = ( ( ($N * 2889) + ($O * 72) ) / 1000) / $row->vehicle_capacity;
+            
+            
+            echo $TOTAL;
         } else {
             echo 0;
         }
@@ -86,7 +90,7 @@ class Transportasi extends CI_Controller
             $R = $P * 2889;
             $S = $Q * 72;
             $T = $R + $S;
-            $TOTAL = ( $T / 1000) / 57;
+            $TOTAL = ( $T / 1000) / $row->vehicle_capacity;
             echo $TOTAL;
         } else {
             echo 0;

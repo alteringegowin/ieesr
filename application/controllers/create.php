@@ -16,7 +16,6 @@ class Create extends CI_Controller
         if ( !$this->ion_auth->logged_in() ) {
             redirect('auth');
         }
-        $this->output->enable_profiler(TRUE);
 
         $this->user = $this->ion_auth->user()->row();
         $this->tpl['user'] = $this->user;

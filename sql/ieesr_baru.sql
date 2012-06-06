@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2012 at 11:53 AM
+-- Generation Time: Jun 06, 2012 at 10:36 PM
 -- Server version: 5.1.58
 -- PHP Version: 5.3.6-13ubuntu3.6
 
@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS `ac_commitments` (
   `commitment_status` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT '0=belum selesai 1=sudah selesai',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `ac_commitments`
 --
 
 INSERT INTO `ac_commitments` (`id`, `user_id`, `commitment_values`, `commitment_shift`, `commitment_created`, `commitment_status`) VALUES
-(7, 1, '{"penerangan":{"item":[{"tipe":"LED","daya":"20","waktu":"8","total":"0"},{"tipe":"LED","daya":"40","waktu":"8","total":"0"}],"total":"427.68"},"dapur":{"item-2":"1","t-item-2":"27799.2","item-3":"1","t-item-3":"3207.6","item-4":"1","t-item-4":"3635.28","item-5":"1","t-item-5":"4169.88","item-6":"2","t-item-6":"891","item-7":"2","t-item-7":"1514.7","total_dapur":"41217.659999999996"},"rumah_tangga":{"item-8":"2","t-item-8":"623.7","item-9":"2","t-item-9":"7128","item-10":"2","t-item-10":"891","item-11":"2","t-item-11":"89.1","item-12":"2","t-item-12":"1336.5","item-13":"2","t-item-13":"2138.4","total_rumah_tangga":"12206.7"},"pribadi":{"item-14":"2","t-item-14":"1782","item-15":"2","t-item-15":"89.1","total_pribadi":"1871.1"},"elektronik":{"item-16":"2","t-item-16":"44.55","item-17":"2","t-item-17":"57.024","item-18":"2","t-item-18":"329.67","item-19":"2","t-item-19":"106.92","item-20":"2","t-item-20":"178.2","item-21":"2","t-item-21":"222.75","total_elektronik":"939.114"},"komunikasi":{"item-22":"2","t-item-22":"53.46","item-23":"2","t-item-23":"445.5","item-24":"2","t-item-24":"80.19","total_komunikasi":"579.15"},"sampah":{"item-25":"2","item-26":"2","item-27":"2","total_organik":"0.7494000000000001","total_kertas":"453.6","total_plastik":"151.104","total_sampah":"605.4534"},"darat":{"tipe":"pribadi","pribaditipe":"jarak","tipe_pribadi":"2","tipe_umum":"","jarak_tempuh":"200","konsumsi":"","total_darat":"173.7789"},"udara":{"tipe_pesawat":"Boeing 737-600","jumlah_penumpang":"","total_pesawat":""}}', '{"rumah":["tipelampu-0=LED&daya-0=10&waktu-0=8&total-lampu-0=71.28&tipelampu-1=Neon+-+CFL&daya-1=10&waktu-1=3&total-lampu-1=26.73&total_lampu_all=0&total_lampu_asli=427.68","jam-2=1&jam-5=1&jam-6=1&jam-7=1&total_dapur=2534.895&total_dapur_asli=41217.659999999996","jam-8=1&jam-9=1&jam-10=1&jam-11=1&jam-12=1&jam-13=1&total_rumah_tangga=0&total_rumah_tangga_asli=12206.7","jam-14=1&jam-15=1&total_pribadi=935.55&total_pribadi_asli=1871.1","jam-16=1&jam-17=1&jam-18=1&jam-19=1&jam-20=1&jam-21=1&total_elektronik=469.557&total_elektronik_asli=939.114","jam-22=2&jam-23=2&jam-24=2&total_komunikasi=579.15&total_komunikasi_asli=579.15"],"sampah":"item-25=2&item-26=2&item-27=1&total_organik=0.7494000000000001&total_kertas=453.6&total_plastik=841.4604&total_sampah=1295.8098&total_organik_asli=0.7494000000000001&total_kertas_asli=453.6&total_plastik_asli=151.104&total_sampah_asli=605.4534","darat":{"tipe":"pribadi","pribaditipe":"jarak","tipe_pribadi":"2","tipe_umum":"8","jarak_tempuh":"200","konsumsi":"","total_darat":"173.7789","total_darat_asli":"173.7789"},"udara":{"tipe_pesawat":"3","jumlah_penumpang":"","total_pesawat":"","total_pesawat_asli":""}}', '2012-06-06 04:50:15', '0');
+(8, 1, '{"penerangan":{"item":[{"tipe":"LED","daya":"10","waktu":"3","total":"0"},{"tipe":"LED","daya":"15","waktu":"2","total":"0"}],"total":"53.46"},"dapur":{"item-2":"0","t-item-2":"0","t-item-3":"0","item-4":"0","t-item-4":"0","item-5":"0","t-item-5":"0","item-6":"","t-item-6":"0","item-7":"5","t-item-7":"3786.75","total_dapur":"3786.75"},"rumah_tangga":{"item-8":"","t-item-8":"","item-9":"","t-item-9":"","item-10":"","t-item-10":"","item-11":"fgdhtfgjgf","t-item-11":"","item-12":"3","t-item-12":"2004.75","item-13":"","t-item-13":"","total_rumah_tangga":"2004.75"},"pribadi":{"item-14":"","t-item-14":"","item-15":"","t-item-15":"","total_pribadi":"0"},"elektronik":{"item-16":"","t-item-16":"","item-17":"","t-item-17":"","item-18":"","t-item-18":"","item-19":"","t-item-19":"","item-20":"","t-item-20":"","item-21":"","t-item-21":"","total_elektronik":"0"},"komunikasi":{"item-22":"","t-item-22":"","item-23":"","t-item-23":"","item-24":"","t-item-24":"","total_komunikasi":"0"},"sampah":{"item-25":"","item-26":"","item-27":"","total_organik":"","total_kertas":"","total_plastik":"","total_sampah":""},"darat":{"tipe_pribadi":"","tipe_umum":"","jarak_tempuh":"","konsumsi":"","total_darat":""},"udara":{"tipe_pesawat":"Boeing 737-600","jumlah_penumpang":"","total_pesawat":""}}', '{"rumah":["tipelampu-0=LED&daya-0=10&waktu-0=3&total-lampu-0=26.73&total_lampu_all=0&total_lampu_asli=53.46","jam-7=5&total;-item-7=&total_dapur=3786.75&total_dapur_asli=3786.75","jam-11=0&total-item-11=0&jam-12=3&total-item-12=2004.75&total_rumah_tangga=2004.75&total_rumah_tangga_asli=2004.75","total_pribadi=0&total_pribadi_asli=0","total_elektronik=0&total_elektronik_asli=0","total_komunikasi=0&total_komunikasi_asli=0"],"sampah":"total_organik=&total;_kertas=&total;_plastik=&total;_sampah=&total;_organik_asli=&total;_kertas_asli=&total;_plastik_asli=&total;_sampah_asli=","darat":{"tipe_pribadi":"2","tipe_umum":"8","jarak_tempuh":"","konsumsi":"","total_darat":"","total_darat_asli":""},"udara":false}', '2012-06-06 22:04:35', '0');
 
 -- --------------------------------------------------------
 
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `auth_users` (
 --
 
 INSERT INTO `auth_users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `fullname`, `propinsi_id`) VALUES
-(1, '\0\0', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1338928886, 1, 'Admin', 12),
+(1, '\0\0', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1338992012, 1, 'Admin', 12),
 (2, '\0\0', 'xa', 'bdb4d360f41da62ac9e7e858e5778b7291315499', NULL, 'test@test.com', NULL, NULL, NULL, NULL, 1336927466, 1336930204, 1, 'Tester #1', 17),
 (3, '\0\0', 'Erwin Handoko', 'cc560b12bc929ba2fe6c6aff3ee19b96baa9be97', NULL, 'erwin@think.web.id', NULL, NULL, NULL, NULL, 1338957994, 1338958006, 1, 'Erwin Handoko', 12);
 
@@ -345,6 +345,7 @@ CREATE TABLE IF NOT EXISTS `master_vehicles` (
   `n2o_hot` float NOT NULL,
   `ch4_cold` float NOT NULL,
   `ch4_hot` float NOT NULL,
+  `vehicle_capacity` int(4) NOT NULL,
   `fuel_economy` float NOT NULL,
   PRIMARY KEY (`id`),
   KEY `vehicle_type` (`vehicle_type`)
@@ -354,19 +355,19 @@ CREATE TABLE IF NOT EXISTS `master_vehicles` (
 -- Dumping data for table `master_vehicles`
 --
 
-INSERT INTO `master_vehicles` (`id`, `vehicle_name`, `vehicle_type`, `n2o_cold`, `n2o_hot`, `ch4_cold`, `ch4_hot`, `fuel_economy`) VALUES
-(1, 'Motor', 'pribadi', 2, 2, 200, 200, 0.0769231),
-(2, 'Bensin &lt; 1200cc', 'pribadi', 12, 3, 83, 3, 0.0666667),
-(3, 'Bensin 1500cc', 'pribadi', 15, 9, 7, 3, 0.0666667),
-(4, 'Bensin &gt; 2000cc', 'pribadi', 12, 3, 83, 3, 0.1),
-(5, 'Diesel &lt; 1200cc', 'pribadi', 15, 9, 7, 3, 0.1),
-(6, 'Diesel 1500cc', 'pribadi', 12, 3, 83, 3, 0.111111),
-(7, 'Diesel &gt; 2000cc', 'pribadi', 15, 9, 7, 3, 0.111111),
-(8, 'Bus Kota', 'umum', 30, 30, 175, 175, 0.0473709),
-(9, 'Mikrolet / Angkot', 'umum', 38, 22, 45, 26, 0.0672948),
-(10, 'Metromini', 'umum', 30, 30, 175, 175, 0.0672948),
-(11, 'Bus Way', 'umum', 30, 30, 175, 175, 0.0473709),
-(12, 'Ojek', 'umum', 2, 2, 200, 200, 0.0769231);
+INSERT INTO `master_vehicles` (`id`, `vehicle_name`, `vehicle_type`, `n2o_cold`, `n2o_hot`, `ch4_cold`, `ch4_hot`, `vehicle_capacity`, `fuel_economy`) VALUES
+(1, 'Motor', 'pribadi', 2, 2, 200, 200, 1, 0.0769231),
+(2, 'Bensin &lt; 1200cc', 'pribadi', 12, 3, 83, 3, 4, 0.0666667),
+(3, 'Bensin 1500cc', 'pribadi', 15, 9, 7, 3, 5, 0.0666667),
+(4, 'Bensin &gt; 2000cc', 'pribadi', 12, 3, 83, 3, 6, 0.1),
+(5, 'Diesel &lt; 1200cc', 'pribadi', 15, 9, 7, 3, 4, 0.1),
+(6, 'Diesel 1500cc', 'pribadi', 12, 3, 83, 3, 5, 0.111111),
+(7, 'Diesel &gt; 2000cc', 'pribadi', 15, 9, 7, 3, 6, 0.111111),
+(8, 'Bus Kota', 'umum', 30, 30, 175, 175, 57, 0.0473709),
+(9, 'Mikrolet / Angkot', 'umum', 38, 22, 45, 26, 14, 0.0672948),
+(10, 'Metromini', 'umum', 30, 30, 175, 175, 27, 0.0672948),
+(11, 'Bus Way', 'umum', 30, 30, 175, 175, 35, 0.0473709),
+(12, 'Ojek', 'umum', 2, 2, 200, 200, 2, 0.0769231);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
