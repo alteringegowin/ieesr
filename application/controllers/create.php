@@ -17,6 +17,8 @@ class Create extends CI_Controller
         if (!$this->ion_auth->logged_in()) {
             redirect('auth');
         }
+        $this->output->enable_profiler(TRUE);
+
         $this->user = $this->ion_auth->user()->row();
         $this->tpl['user'] = $this->user;
     }
@@ -54,6 +56,7 @@ class Create extends CI_Controller
                         $d['tipe'] = $post['items-' . $i . '-tipe'];
                         $d['daya'] = $post['items-' . $i . '-daya'];
                         $d['waktu'] = $post['items-' . $i . '-waktu'];
+                        $d['total'] = $post['total-lampu-'.$i];
                         $all[] = $d;
                     }
                 }
@@ -127,6 +130,30 @@ class Create extends CI_Controller
         $this->db->set('commitment_values', json_encode($s));
         $this->db->set('commitment_created', date('Y-m-d H:i:s'));
         $this->db->insert('ac_commitments');
+    }
+
+    function confirm()
+    {
+
+        $s['penerangan'] = $this->session->userdata('penerangan');
+        $s['dapur'] = $this->session->userdata('dapur');
+        $s['rumah_tangga'] = $this->session->userdata('rumah_tangga');
+        $s['pribadi'] = $this->session->userdata('pribadi');
+        $s['elektronik'] = $this->session->userdata('elektronik');
+        $s['komunikasi'] = $this->session->userdata('komunikasi');
+        $s['sampah'] = $this->session->userdata('sampah');
+        $s['darat'] = $this->session->userdata('darat');
+        $s['udara'] = $this->session->userdata('udara');
+        
+        Console::Log($s['sampah']);
+        Console::Log($s['darat']);
+        Console::Log($s['udara']);
+
+        foreach ($s as $k => $v) {
+            $this->tpl[$k] = $v;
+        }
+        $this->tpl['content'] = $this->load->view('create/confirm', $this->tpl, true);
+        $this->load->view('body', $this->tpl);
     }
 
     function check_session()

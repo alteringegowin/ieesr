@@ -16,8 +16,8 @@
             <?php endif; ?>
         <?php endforeach; ?>
     </fieldset>
-    <input type="text" id="total_elektronik" value="<?php echo element('total_elektronik', $elektronik, 0) ?>" />
-    <input type="text" id="total_elektronik_asli" value="<?php echo element('total_elektronik', $elektronik, 0) ?>" />
+    <input type="hidden" id="total_elektronik" name="total_elektronik" value="<?php echo element('total_elektronik', $elektronik, 0) ?>" />
+    <input type="hidden" id="total_elektronik_asli" name="total_elektronik_asli" value="<?php echo element('total_elektronik', $elektronik, 0) ?>" />
 
 </form>
 

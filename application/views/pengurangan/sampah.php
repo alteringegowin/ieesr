@@ -63,6 +63,11 @@
             <input type="hidden" name="total_kertas" value="<?php echo element('total_kertas', $sampah) ?>" id="total_kertas" />
             <input type="hidden" name="total_plastik" value="<?php echo element('total_plastik', $sampah) ?>" id="total_plastik" />
             <input type="hidden" name="total_sampah" value="<?php echo element('total_sampah', $sampah) ?>" id="total_sampah" />
+            
+            <input type="hidden" name="total_organik_asli"  value="<?php echo element('total_organik', $sampah) ?>" id="total_organik_asli" />
+            <input type="hidden" name="total_kertas_asli" value="<?php echo element('total_kertas', $sampah) ?>" id="total_kertas_asli" />
+            <input type="hidden" name="total_plastik_asli" value="<?php echo element('total_plastik', $sampah) ?>" id="total_plastik_asli" />
+            <input type="hidden" name="total_sampah_asli" value="<?php echo element('total_sampah', $sampah) ?>" id="total_sampah_asli" />
         </form>
 
         <div class="alert alert-info" style="text-align:right">

@@ -19,8 +19,8 @@
 
 
     </fieldset>
-    <input type="text" id="total_rumah_tangga" value="<?php echo element('total_rumah_tangga', $rumah_tangga, 0) ?>" />
-    <input type="text" id="total_rumah_tangga_asli" value="<?php echo element('total_rumah_tangga', $rumah_tangga, 0) ?>" />
+    <input type="hidden" id="total_rumah_tangga" name="total_rumah_tangga" value="<?php echo element('total_rumah_tangga', $rumah_tangga, 0) ?>" />
+    <input type="hidden" id="total_rumah_tangga_asli" name="total_rumah_tangga_asli" value="<?php echo element('total_rumah_tangga', $rumah_tangga, 0) ?>" />
 
 </form>
 
@@ -74,7 +74,6 @@
                 
             }
         }
-        
         
        
         

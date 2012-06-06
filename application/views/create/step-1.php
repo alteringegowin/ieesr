@@ -54,6 +54,7 @@ $tipes = array('LED', 'Neon - CFL', 'Bohlam - Lampu Pijar');
                             <div class="input-append">
                                 <input class="span1 detector" id="items-<?php echo $i ?>-waktu" name="items-<?php echo $i ?>-waktu" size="16" type="text" value="<?php echo $default[$i]['waktu'] ?>"><span class="add-on">Jam</span>
                             </div>
+                            <input type="hidden" name="total-lampu-<?php echo $i ?>" id="total-lampu-<?php echo $i ?>" value="0" />
                             <a href="#" class="iconbtnDel" rel="input-<?php echo $i ?>"><i class="icon-remove iconbtnDel"  rel="input-<?php echo $i ?>" data-item="<?php echo $i ?>"></i></a>
                         </div>
 
@@ -73,6 +74,7 @@ $tipes = array('LED', 'Neon - CFL', 'Bohlam - Lampu Pijar');
                             <div class="input-append">
                                 <input class="span1 detector" id="items-<?php echo $i ?>-waktu" name="items-<?php echo $i ?>-waktu" size="16" type="text"><span class="add-on">Jam</span>
                             </div>
+                            <input type="hidden" name="total-lampu-<?php echo $i ?>" id="total-lampu-<?php echo $i ?>" value="0" />
                             <a href="#" class="iconbtnDel" rel="input-<?php echo $i ?>"><i class="icon-remove iconbtnDel"  rel="input-<?php echo $i ?>" data-item="<?php echo $i ?>"></i></a>
                         </div>
 
@@ -112,9 +114,6 @@ $tipes = array('LED', 'Neon - CFL', 'Bohlam - Lampu Pijar');
             var item = $(this).attr('data-item');
             $("#items-"+item+'-daya').val('');
             $("#items-"+item+'-waktu').val('');
-            
-            
-            
             $('#'+rel).hide('slow');
             $('#btnAdd').removeAttr('disabled');
            
@@ -135,12 +134,12 @@ $tipes = array('LED', 'Neon - CFL', 'Bohlam - Lampu Pijar');
                     var daya = $("#items-"+i+'-daya').val();
                     var waktu = $("#items-"+i+'-waktu').val();
                     var total_item = waktu*daya*PROPINSI_CONS;
+                    console.log(total_item);
                     if(isNaN(total_item)){
                         total_item = 0;
-                    }else{
-                        total_item 
                     }
                     total = total+  total_item;
+                    $("#total-lampu-"+i).val(total_item);
                 }
             }
             $("#total_all").html(total);

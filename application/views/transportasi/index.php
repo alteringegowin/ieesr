@@ -169,7 +169,7 @@ $transportasi_udara = $this->session->userdata('udara');
                 url: "<?php echo site_url('create/submit') ?>/udara",
                 data: form2
             });  
-            //window.location.href = '<?php echo site_url('transportasi') ?>';
+            window.location.href = '<?php echo site_url('create/confirm') ?>';
             return true;
         }
         

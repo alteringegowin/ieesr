@@ -66,7 +66,7 @@ $session_sampah = $this->session->userdata('sampah');
             </form>
 
             <div class="alert alert-info" style="text-align:right">
-                <strong>Total Emisi Sampah:</strong> <span class="" id="total_sampah_text"><?php echo isset($session_sampah) ? number_format($session_sampah['total_sampah'],4) : 0; ?></span> gram CO<sub>2</sub>ek
+                <strong>Total Emisi Sampah:</strong> <span class="" id="total_sampah_text"><?php echo isset($session_sampah) ? $session_sampah['total_sampah'] : 0; ?></span> gram CO<sub>2</sub>ek
             </div>
 
 

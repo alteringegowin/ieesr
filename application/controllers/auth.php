@@ -17,17 +17,49 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|callback__check_login');
-        if ($this->form_validation->run()) {
-            //redirect;
-            redirect('dashboard');
-        }
+        redirect('auth/login');
+    }
 
-        $this->tpl['is_login_page'] = true;
-        $this->tpl['content'] = $this->load->view('auth/index', $this->tpl, true);
-        $this->load->view('body', $this->tpl);
+    //log the user in
+    function login()
+    {
+        $this->load->library('form_validation');
+        $this->tpl['title'] = "Login";
+
+        //validate form input
+        $this->form_validation->set_rules('identity', 'Identity', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if ($this->form_validation->run() == true) { //check to see if the user is logging in
+            //check for "remember me"
+            $remember = (bool) $this->input->post('remember');
+
+            if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) { //if the login is successful
+                //redirect them back to the home page
+                $this->session->set_flashdata('message', $this->ion_auth->messages());
+                redirect($this->config->item('base_url'), 'refresh');
+            } else { //if the login was un-successful
+                //redirect them back to the login page
+                $this->session->set_flashdata('message', $this->ion_auth->errors());
+                redirect('auth/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
+            }
+        } else {  //the user is not logging in so display the login page
+            //set the flash data error message if there is one
+            $this->tpl['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+
+            $this->tpl['identity'] = array('name' => 'identity',
+                'id' => 'identity',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('identity'),
+            );
+            $this->tpl['password'] = array('name' => 'password',
+                'id' => 'password',
+                'type' => 'password',
+            );
+
+            $this->tpl['content'] = $this->load->view('auth/login', $this->tpl, true);
+            $this->load->view('body', $this->tpl);
+        }
     }
 
     public function register()
@@ -147,7 +179,7 @@ class Auth extends CI_Controller
                 $this->tpl['code'] = $code;
 
                 //render
-                $this->tpl['content'] = $this->load->view('auth/reset_password', $this->tpl,true);
+                $this->tpl['content'] = $this->load->view('auth/reset_password', $this->tpl, true);
                 $this->load->view('body', $this->tpl);
             } else {
                 // do we have a valid request?

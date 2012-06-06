@@ -17,8 +17,8 @@
             <?php endif; ?>
         <?php endforeach; ?>
     </fieldset>
-    <input type="hidden" id="total_komunikasi" value="<?php echo element('total_komunikasi', $komunikasi, 0) ?>" />
-    <input type="hidden" id="total_komunikasi_asli" value="<?php echo element('total_komunikasi', $komunikasi, 0) ?>" />
+    <input type="hidden" id="total_komunikasi" name="total_komunikasi" value="<?php echo element('total_komunikasi', $komunikasi, 0) ?>" />
+    <input type="hidden" id="total_komunikasi_asli" name="total_komunikasi_asli" value="<?php echo element('total_komunikasi', $komunikasi, 0) ?>" />
 
 </form>
 

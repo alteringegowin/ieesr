@@ -17,8 +17,8 @@
 
 
     </fieldset>
-    <input type="text" id="total_pribadi" value="<?php echo element('total_pribadi', $pribadi, 0) ?>" />
-    <input type="text" id="total_pribadi_asli" value="<?php echo element('total_pribadi', $pribadi, 0) ?>" />
+    <input type="hidden" id="total_pribadi" name="total_pribadi" value="<?php echo element('total_pribadi', $pribadi, 0) ?>" />
+    <input type="hidden" id="total_pribadi_asli" name="total_pribadi_asli" value="<?php echo element('total_pribadi', $pribadi, 0) ?>" />
 
 </form>
 

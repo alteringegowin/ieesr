@@ -36,6 +36,7 @@
                             &nbsp;Jumlah Transit:
                             <input class="span1" id="jumlah_penumpang" size="16" type="text" name="jumlah_penumpang" value="<?php echo element('jumlah_penumpang', $udara) ?>" />
                             <input id="total_pesawat" type="hidden" name="total_pesawat" value="<?php echo element('total_pesawat', $udara) ?>">
+                            <input id="total_pesawat_asli" type="hidden" name="total_pesawat_asli" value="<?php echo element('total_pesawat', $udara) ?>">
                         </div>
                     </div>
                 </div>

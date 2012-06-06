@@ -77,7 +77,6 @@ class Pengurangan extends CI_Controller
         }
 
 
-
         $commitment = json_decode($this->baseline->commitment_values, true);
         console::log($commitment['darat']);
         console::log($commitment['udara']);
@@ -116,6 +115,78 @@ class Pengurangan extends CI_Controller
                 $this->session->set_userdata('pengurangan_rumah', $c);
                 break;
         }
+    }
+
+    function confirm()
+    {
+        $res = $this->db->get('ac_items')->result();
+        foreach ($res as $r) {
+            $f[$r->id] = $r;
+        }
+        foreach ($res as $r) {
+            $fgroup[$r->group_item_id][] = $r;
+        }
+
+
+
+        $commitment = json_decode($this->baseline->commitment_values, true);
+        $pengurangan['rumah'] = $this->session->userdata('pengurangan_rumah');
+        $pengurangan['sampah'] = $this->session->userdata('pengurangan_sampah');
+        $pengurangan['darat'] = $this->session->userdata('pengurangan_darat');
+        $pengurangan['udara'] = $this->session->userdata('pengurangan_udara');
+
+        parse_str($pengurangan['rumah'][0], $lampu);
+        parse_str($pengurangan['rumah'][1], $dapur);
+        parse_str($pengurangan['rumah'][2], $rumah_tangga);
+        parse_str($pengurangan['rumah'][3], $pribadi);
+        parse_str($pengurangan['rumah'][4], $elektronik);
+        parse_str($pengurangan['rumah'][5], $komunikasi);
+        parse_str($pengurangan['sampah'], $sampah);
+
+        Console::log($commitment['udara']);
+        Console::log($pengurangan['udara']);
+
+
+
+
+        $this->tpl['lampu'] = $lampu;
+        $this->tpl['dapur'] = $dapur;
+        $this->tpl['rumah_tangga'] = $rumah_tangga;
+        $this->tpl['pribadi'] = $pribadi;
+        $this->tpl['elektronik'] = $elektronik;
+        $this->tpl['komunikasi'] = $komunikasi;
+        $this->tpl['sampah'] = $sampah;
+        $this->tpl['darat'] = element('darat', $pengurangan);
+        $this->tpl['udara'] = element('udara', $pengurangan);
+
+        $this->tpl['baseline_dapur'] = $commitment['dapur'];
+        $this->tpl['baseline_rumah_tangga'] = $commitment['rumah_tangga'];
+        $this->tpl['baseline_pribadi'] = $commitment['pribadi'];
+        $this->tpl['baseline_elektronik'] = $commitment['elektronik'];
+        $this->tpl['baseline_komunikasi'] = $commitment['komunikasi'];
+        $this->tpl['baseline_sampah'] = $commitment['sampah'];
+        $this->tpl['baseline_darat'] = element('darat', $commitment);
+        $this->tpl['baseline_udara'] = element('udara', $commitment);
+        $this->tpl['commitment'] = $commitment;
+
+        $this->tpl['item'] = $f;
+        $this->tpl['fgroup'] = $fgroup;
+        $this->tpl['content'] = $this->load->view('pengurangan/confirm', $this->tpl, true);
+        $this->load->view('body', $this->tpl);
+    }
+
+    function save_to_db()
+    {
+
+        $pengurangan['rumah'] = $this->session->userdata('pengurangan_rumah');
+        $pengurangan['sampah'] = $this->session->userdata('pengurangan_sampah');
+        $pengurangan['darat'] = $this->session->userdata('pengurangan_darat');
+        $pengurangan['udara'] = $this->session->userdata('pengurangan_udara');
+
+        $this->db->set('commitment_shift', json_encode($pengurangan));
+        $this->db->where('id', $this->baseline->id);
+        $this->db->update('ac_commitments');
+        
     }
 
 }

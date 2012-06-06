@@ -205,3 +205,39 @@ function get_koef_propinsi($propinsi_id)
     $row = $ci->db->get('master_propinsi')->row();
     return $row ? $row->propinsi_koefisien : 0;
 }
+
+function check_baseline_exists()
+{
+    
+}
+
+function get_tipe_darat($param)
+{
+    if ($param['tipe'] == 'umum') {
+        $tipe = $param['tipe_umum'];
+    } else {
+        $tipe = $param['tipe_pribadi'];
+    }
+    $ci = get_instance();
+    $ci->db->where('id', $tipe);
+    $row = $ci->db->get('master_vehicles')->row();
+    return isset($row->vehicle_name) ? $row->vehicle_name : false;;
+}
+
+function get_keterangan_darat($param)
+{
+    if ($param['pribaditipe'] == 'jarak') {
+        $str = ' dengan jarak tempuh ' . $param['jarak_tempuh'] . ' KM ';
+    } else {
+        $str = ' dengan konsumsi bahan bakar Rp. ' . $param['konsumsi'];
+    }
+    return $str;
+}
+
+function get_tipe_pesawat($tipe)
+{
+    $ci = get_instance();
+    $ci->db->where('id', $tipe);
+    $row = $ci->db->get('master_pesawat')->row();
+    return isset($row->jenis_pesawat) ? $row->jenis_pesawat : false;
+}

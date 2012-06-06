@@ -30,8 +30,8 @@
 
 
     </fieldset>
-    <input type="hidden" id="total_dapur" value="<?php echo element('total_dapur', $dapur, 0) ?>" />
-    <input type="hidden" id="total_dapur_asli" value="<?php echo element('total_dapur', $dapur, 0) ?>" />
+    <input type="hidden" id="total_dapur" name="total_dapur" value="<?php echo element('total_dapur', $dapur, 0) ?>" />
+    <input type="hidden" id="total_dapur_asli" name="total_dapur_asli" value="<?php echo element('total_dapur', $dapur, 0) ?>" />
 </form>
 
 <div class="alert alert-info" style="text-align:right">
