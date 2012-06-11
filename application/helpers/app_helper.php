@@ -208,7 +208,8 @@ function get_koef_propinsi($propinsi_id)
 
 function check_baseline_exists()
 {
-    
+    $ci = get_instance();
+    $user_id = $ci->session->userdata('user_id');
 }
 
 function get_tipe_darat($param)
