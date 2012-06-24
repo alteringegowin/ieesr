@@ -110,16 +110,14 @@
                     </div>
                 </div>
             </div>
-            <?php if (isset($user) && $user): ?>
-                <div class="topbar topbar-fixed">
-                    <ul class="nav navBottom nav-pills">
-                        <li><a href="<?php echo site_url('create') ?>">Perhitungan Baseline</a></li>
-                        <li><a href="#">Pengurangan Emisi</a></li>
-                        <li><a href="#">Cetak Komitmen</a></li>
-                        <li><a href="#">Data Profile</a></li>
-                    </ul>
-                </div>
-            <?php endif; ?>
+            <div class="topbar topbar-fixed">
+                <ul class="nav navBottom nav-pills">
+                    <li><a href="<?php echo site_url('create') ?>">Perhitungan Baseline</a></li>
+                    <li><a href="#">Pengurangan Emisi</a></li>
+                    <li><a href="#">Cetak Komitmen</a></li>
+                    <li><a href="#">Data Profile</a></li>
+                </ul>
+            </div>
         </header>
         <div id="main" class="container">
             <?php if (isset($already_submit) && $already_submit): ?>

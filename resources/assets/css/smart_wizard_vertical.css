@@ -34,7 +34,7 @@
   margin: 0;
   padding:5px;    
   border: 1px solid #CCC; 
-  font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
+/*   font: normal 12px Verdana, Arial, Helvetica, sans-serif;  */
   color:#5A5655;   
   background-color:#F8F8F8;  
   height:300px;
@@ -50,7 +50,7 @@
 .swMain div.actionBar {
   display:block;
   position: relative; 
-  clear:right;
+  clear:both;
   margin:             3px 0 0 0;   
   border:             1px solid #CCC;
   padding:            0;    
@@ -73,7 +73,7 @@
   margin:0;   
   border:1px solid #E0E0E0;
   padding:5px;   
-  font: bold 16px Verdana, Arial, Helvetica, sans-serif; 
+/*   font: bold 16px Verdana, Arial, Helvetica, sans-serif;  */
   color:#5A5655;   
   background-color:#E0E0E0;
   clear:both;
@@ -88,7 +88,7 @@
   float:left;
   list-style: none;
   padding: 0px;  
-  margin: 5px 10px 0 0;
+  margin: -3px 10px 0 0;
   border: 0px solid #CCCCCC;    
   background: transparent; /*#EEEEEE */
 }
@@ -110,7 +110,7 @@
   float:left;
   margin:0;
   padding:3px;
-  height:70px;
+  height:40px;
   width:230px;
   text-decoration: none;
   outline-style:none;
@@ -121,20 +121,27 @@
 .swMain ul.anchor li a .stepNumber{
   position:relative;
   float:left;
-  width:30px;
+  width:10px;
   text-align: center;
   padding:5px;
-  padding-top:0;
-  font: bold 45px Verdana, Arial, Helvetica, sans-serif;
+  padding-top:8px;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-family:  Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
 }
 .swMain ul.anchor li a .stepDesc{
   position:relative;
   display:block;
   float:left;
   text-align: left;
-  padding:5px;
-  width:70%;
-  font: bold 20px Verdana, Arial, Helvetica, sans-serif;
+  padding:0px;
+  padding-top: 8px;
+  width:86%;
+  font-family:  Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
 }
 .swMain ul.anchor li a .stepDesc small{
   font: normal 12px Verdana, Arial, Helvetica, sans-serif;
@@ -145,8 +152,8 @@
   border: 1px solid #EA8511;
   cursor:text;
   -moz-box-shadow: 1px 5px 10px #888;
-  -webkit-box-shadow: 1px 5px 10px #888;
-  box-shadow: 1px 5px 10px #888;
+  -webkit-box-shadow: 1px 1px 3px #888;
+  box-shadow: 1px 1px 3px #888;
 }
 .swMain ul.anchor li a.selected:hover {
   color:#F8F8F8;  

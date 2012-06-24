@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Create extends CI_Controller
+class Baseline extends CI_Controller
 {
 
     protected $tpl;
@@ -32,19 +32,28 @@ class Create extends CI_Controller
 
     public function index()
     {
-        $this->tpl['content'] = $this->load->view('create/index', $this->tpl, true);
+        $res = $this->db->get('ac_items')->result();
+        foreach ($res as $r) {
+            $f[$r->id] = $r;
+        }
+        foreach ($res as $r) {
+            $fgroup[$r->group_item_id][] = $r;
+        }
+        $this->tpl['item'] = $f;
+        $this->tpl['fgroup'] = $fgroup;
+        $this->tpl['content'] = $this->load->view('baseline/index', $this->tpl, true);
         $this->load->view('body', $this->tpl);
     }
 
     public function sampah()
     {
-        $this->tpl['content'] = $this->load->view('create/sampah', $this->tpl, true);
+        $this->tpl['content'] = $this->load->view('baseline/sampah', $this->tpl, true);
         $this->load->view('body', $this->tpl);
     }
 
     public function transportasi()
     {
-        $this->tpl['content'] = $this->load->view('create/transportasi', $this->tpl, true);
+        $this->tpl['content'] = $this->load->view('baseline/transportasi', $this->tpl, true);
         $this->load->view('body', $this->tpl);
     }
 
@@ -60,7 +69,7 @@ class Create extends CI_Controller
         $this->tpl['item'] = $f;
         $this->tpl['fgroup'] = $fgroup;
         $step_number = $this->input->post('step_number', true);
-        $this->load->view('create/step-' . $step_number, $this->tpl);
+        $this->load->view('baseline/step-' . $step_number, $this->tpl);
     }
 
     function submit($step)
@@ -168,7 +177,7 @@ class Create extends CI_Controller
         foreach ($s as $k => $v) {
             $this->tpl[$k] = $v;
         }
-        $this->tpl['content'] = $this->load->view('create/confirm', $this->tpl, true);
+        $this->tpl['content'] = $this->load->view('baseline/confirm', $this->tpl, true);
         $this->load->view('body', $this->tpl);
     }
 
@@ -194,7 +203,7 @@ class Create extends CI_Controller
 
     function pop($m)
     {
-        $this->load->view('create/pop/' . $m, $this->tpl);
+        $this->load->view('baseline/pop/' . $m, $this->tpl);
     }
 
     function already_submit()
@@ -202,7 +211,7 @@ class Create extends CI_Controller
 
         $this->tpl['create_page'] = 0;
         $this->tpl['already_submit'] = 1;
-        $this->tpl['content'] = $this->load->view('create/already_submit', $this->tpl, true);
+        $this->tpl['content'] = $this->load->view('baseline/already_submit', $this->tpl, true);
         $this->load->view('body', $this->tpl);
     }
 
