@@ -19,7 +19,7 @@ $tipes = array('LED', 'Neon - CFL', 'Bohlam - Lampu Pijar');
 <div style="clear:both"></div>
 <div class="well formInfo">
     <div class="imgInfo">
-        <img src="<?php echo $themes ?>img/icons/neon-CFL.png" style="height:50;"  />
+        <img src="<?php echo $themes ?>img/icons/bulb.png" height="50"  />
         <p>Lampu pijar</p>
     </div>
     <div class="imgInfo">
@@ -27,7 +27,7 @@ $tipes = array('LED', 'Neon - CFL', 'Bohlam - Lampu Pijar');
         <p>Neon - CFL</p>
     </div>
     <div class="imgInfo">
-        <img src="<?php echo $themes ?>img/icons/neon-CFL.png"  />
+        <img src="<?php echo $themes ?>img/icons/led.png" width="35"  />
         <p>LED</p>
     </div>
     <div style="clear:both"></div>

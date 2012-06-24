@@ -4,6 +4,33 @@ $dapur = $this->session->userdata('dapur');
 <h2>Peralatan Dapur</h2>
 <hr />
 <div style="clear:both"></div>
+<div class="well formInfo">
+    <div class="imgInfo">
+        <a href="<?php echo site_url('create/pop/rice-cooker')?>" class="pop fancybox.ajax">
+            <img src="<?php echo $themes?>img/icons/rice-cooker.png" width="40"  />
+            <p>Rice Cooker</p>
+        </a>
+    </div>
+    <div class="imgInfo">
+        <a href="<?php echo site_url('create/pop/microwave')?>" class="pop fancybox.ajax">
+            <img src="<?php echo $themes?>img/icons/microwave.png" width="70"  />
+            <p>Microwave</p>
+        </a>
+    </div>
+
+    <div class="imgInfo">
+        <img src="<?php echo $themes?>img/icons/kulkas.png" width="30"  />
+        <p>Kulkas</p>
+    </div>
+
+    <div class="imgInfo">
+        <img src="<?php echo $themes?>img/icons/freezer.png" width="50"  />
+        <p>Freezer</p>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
 
 <form id="form-dapur" class="form-horizontal modalForm">
     <fieldset>

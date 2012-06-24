@@ -78,7 +78,7 @@
                 url: "<?php echo site_url('pengurangan/submit') ?>/f1",
                 data: {f1:c,f2:d,f3:e,f4:f,f5:g,f6:h,f7:h}
             }).done(function() { 
-                window.location.href = '<?php echo site_url('pengurangan/sampah') ?>';
+               //window.location.href = '<?php echo site_url('pengurangan/sampah') ?>';
             });   
             return false;
         }

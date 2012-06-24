@@ -12,7 +12,6 @@ class Transportasi extends CI_Controller
     {
         parent::__construct();
         $this->tpl['themes'] = base_url('resources') . '/';
-        
     }
 
     public function index()
@@ -58,10 +57,10 @@ class Transportasi extends CI_Controller
             $E = $row->n2o_hot;
             $N = $input * ($D + $E);
             $O = $input * ($H + $I);
-            
-            $TOTAL = ( ( ($N * 2889) + ($O * 72) ) / 1000) / $row->vehicle_capacity;
-            
-            
+
+            $TOTAL = ( ( ($N * 289) + ($O * 72) ) / 1000) / $row->vehicle_capacity;
+
+
             echo $TOTAL;
         } else {
             echo 0;
@@ -83,11 +82,13 @@ class Transportasi extends CI_Controller
             $I = $row->ch4_hot;
             $L = $row->fuel_economy;
 
+            $N = $H3 / $M;
+
             $M = 4500;
-            $O = ($H3 / $M) * $L;
+            $O = $N / $L;
             $Q = ($O * ($H + $I));
             $P = ($O * ($D + $E));
-            $R = $P * 2889;
+            $R = $P * 289;
             $S = $Q * 72;
             $T = $R + $S;
             $TOTAL = ( $T / 1000) / $row->vehicle_capacity;
@@ -113,12 +114,12 @@ class Transportasi extends CI_Controller
             $P = 70000;
             $D = $INPUT;
             $I = $E / ($D + 1);
-            $J = $F / ($D + 1);
+            $J = $F / ($D + 1); //
             $K = $G / ($D + 1);
             $L = $I + ($J * 72) + ($K * 289);
             $M = ($D + 1) * $L;
             $N = 100 / 10 * $H;
-            $Q = ($N - $H) * 0.0000443 * $P;
+            $Q = $D * (($N - $H) * 0.000043 * $P);
             $R = $Q + $M;
             $T = $R / $S;
             $total = $T * 1000;
@@ -128,4 +129,25 @@ class Transportasi extends CI_Controller
         }
     }
 
+    /*
+     * 
+      $S = $row->passanger; //db
+      $H = $row->lto; //db
+      $E = $row->co2; //db
+      $F = $row->ch4; //db
+      $G = $row->n2o; //db
+
+      $P = 70000;
+      $D = $INPUT;
+      $I = $E / ($D + 1);
+      $J = $F / ($D + 1); //CH4
+      $K = $G / ($D + 1);
+      $L = $I + ($J * 72) + ($K * 289);
+      $M = ($D + 1) * $L;
+      $N = 100 / 10 * $H;
+      $Q = $D*(($N - $H) * 0.0000443 * $P);
+      $R = $Q + $M;
+      $T = $R / $S;
+      $total = $T * 1000;
+     */
 }

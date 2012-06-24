@@ -1,10 +1,37 @@
 <h2>Peralatan Dapur</h2>
 <hr />
 <div style="clear:both"></div>
+<div class="well formInfo">
+    <div class="imgInfo">
+        <a href="<?php echo $themes?>pop/rice-cooker.php" class="pop fancybox.ajax">
+            <img src="img/icons/rice-cooker.png" width="40"  />
+            <p>Rice Cooker</p>
+        </a>
+    </div>
+    <div class="imgInfo">
+        <a href="<?php echo $themes?>pop/microwave.php" class="pop fancybox.ajax">
+            <img src="img/icons/microwave.png" width="70"  />
+            <p>Microwave</p>
+        </a>
+    </div>
+
+    <div class="imgInfo">
+        <img src="<?php echo $themes?>img/icons/kulkas.png" width="30"  />
+        <p>Kulkas</p>
+    </div>
+
+    <div class="imgInfo">
+        <img src="<?php echo $themes?>img/icons/freezer.png" width="50"  />
+        <p>Freezer</p>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
 <form id="form-step-2" class="form-horizontal modalForm">
     <fieldset>
         <?php for ($i = 2; $i <= 5; $i++): ?>
-            <?php if ( element('t-item-' . $i, $dapur) ): ?>
+            <?php if (element('t-item-' . $i, $dapur)): ?>
                 <div class="control-group" id="dapur-<?php echo $i ?>">
                     <label class="control-label" for="input01"><?php echo $item[$i]->item_name ?></label>
                     <div class="controls">
@@ -17,7 +44,7 @@
         <?php endfor; ?>
 
         <?php for ($i = 6; $i <= 7; $i++): ?>
-            <?php if ( element('t-item-' . $i, $dapur) ): ?>
+            <?php if (element('t-item-' . $i, $dapur)): ?>
                 <div class="control-group" id="dapur-<?php echo $i ?>">
                     <label class="control-label" for="jam-<?php echo $i ?>"><?php echo $item[$i]->item_name ?> dari <?php echo element('item-' . $i, $dapur) ?> jam menjadi</label>
                     <div class="controls">

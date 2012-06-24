@@ -11,7 +11,7 @@
         <link href="<?php echo $themes ?>css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>assets/fancybox/jquery.fancybox.css?v=2.0.6" media="screen" />
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>assets/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.2" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>css//ui-lightness/jquery-ui-1.8.19.custom.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>css/ui-lightness/jquery-ui-1.8.19.custom.css" />
         <!--     <link href="<?php echo $themes ?>assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
         <link href="<?php echo $themes ?>css//main.css" rel="stylesheet">
         <link href="<?php echo $themes ?>assets/js/google-code-prettify/prettify.css" rel="stylesheet">
@@ -100,7 +100,7 @@
                                 </li>
 
                                 <?php if (isset($user) && $user): ?>
-                                    <li class=""><a href="dashboard.php">Member Area</a></li>
+                                    <li class=""><a href="<?php echo site_url('dashboard') ?>">Member Area</a></li>
                                 <?php else: ?>
                                     <li class=""><a href="<?php echo site_url('auth/login') ?>">Login</a></li>
                                     <li class=""><a href="<?php echo site_url('auth/register') ?>">Register</a></li>
@@ -113,7 +113,7 @@
             <?php if (isset($user) && $user): ?>
                 <div class="topbar topbar-fixed">
                     <ul class="nav navBottom nav-pills">
-                        <li><a href="#">Perhitungan Baseline</a></li>
+                        <li><a href="<?php echo site_url('create') ?>">Perhitungan Baseline</a></li>
                         <li><a href="#">Pengurangan Emisi</a></li>
                         <li><a href="#">Cetak Komitmen</a></li>
                         <li><a href="#">Data Profile</a></li>
@@ -122,27 +122,29 @@
             <?php endif; ?>
         </header>
         <div id="main" class="container">
-            <?php /*
-              <div class="alert alert-success" style="text-align:center">
-              <a class="close" data-dismiss="alert" href="#">×</a>
-              <p>Penghitungan baseline emisi pernah anda lakukan pada tanggal 06 May 2012 20:56<br />
-              Apakah Anda ingin menghapus data ini dan mengisikan ulang perhitungan emisi anda? Hapus data ini
-              </p>
-              </div>
-             * 
-             */
-            ?>
+            <?php if (isset($already_submit) && $already_submit): ?>
+                <div class="alert alert-success" style="text-align:center">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>Penghitungan baseline emisi pernah anda lakukan pada tanggal 06 May 2012 20:56<br />
+                        Apakah Anda ingin menghapus data ini dan mengisikan ulang perhitungan emisi anda? Hapus data ini
+                    </p>
+                    <p>
+                        <a href="#" class="btn btn-danger">Hapus data ini</a>
+                        <a href="#" class="btn btn-success">Cetak Komitmen</a>
+                    </p>
+                </div>
+            <?php endif; ?>
 
-            <?php if (isset($user) && $user): ?>
+            <?php if (isset($create_page) && $create_page): ?>
                 <div class="row buttonRow">
                     <div class="span3">
                         &nbsp;
                     </div>
                     <div class="span9">	
                         <div class="btn-group">
-                            <button class="btn btn-large btn-success" onClick="window.location='listrik.php'"><i class="icon-off"></i> Listrik</button>
-                            <button class="btn btn-large btn-success" onclick="window.location='sampah.php'"><i class="icon-trash"></i> Sampah</button>
-                            <button class="btn btn-large btn-success" onclick="window.location='darat.php'"><i class="icon-road"></i> Transportasi</button>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('index') ?>" href="<?php echo site_url('create/index') ?>"><i class="icon-off"></i> Listrik</a>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('sampah') ?>"  href="<?php echo site_url('create/sampah') ?>"><i class="icon-trash"></i> Sampah</a>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('transportasi') ?>"  href="<?php echo site_url('create/transportasi') ?>"><i class="icon-road"></i> Transportasi</a>
                         </div>
                     </div>
                 </div>

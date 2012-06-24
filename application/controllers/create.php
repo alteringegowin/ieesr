@@ -1,5 +1,6 @@
 <?php
-if ( !defined('BASEPATH') )
+
+if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Create extends CI_Controller
@@ -13,16 +14,17 @@ class Create extends CI_Controller
         parent::__construct();
         $this->tpl['themes'] = base_url('resources') . '/';
         $this->load->library('ion_auth');
-        if ( !$this->ion_auth->logged_in() ) {
+        if (!$this->ion_auth->logged_in()) {
             redirect('auth');
         }
 
         $this->user = $this->ion_auth->user()->row();
         $this->tpl['user'] = $this->user;
+        $this->tpl['create_page'] = 1;
 
         $this->db->where('user_id', $this->user->user_id);
         $ada = $this->db->get('ac_commitments')->row();
-        if ( $ada ) {
+        if ($ada) {
             $this->session->set_flashdata('baselinedata', $ada);
             redirect('home/error/baseline');
         }
@@ -31,6 +33,18 @@ class Create extends CI_Controller
     public function index()
     {
         $this->tpl['content'] = $this->load->view('create/index', $this->tpl, true);
+        $this->load->view('body', $this->tpl);
+    }
+
+    public function sampah()
+    {
+        $this->tpl['content'] = $this->load->view('create/sampah', $this->tpl, true);
+        $this->load->view('body', $this->tpl);
+    }
+
+    public function transportasi()
+    {
+        $this->tpl['content'] = $this->load->view('create/transportasi', $this->tpl, true);
         $this->load->view('body', $this->tpl);
     }
 
@@ -56,7 +70,7 @@ class Create extends CI_Controller
                 $post = $this->input->post(NULL, true);
                 $all = array();
                 for ($i = 0; $i < 10; $i++) {
-                    if ( $post['items-' . $i . '-daya'] && $post['items-' . $i . '-waktu'] ) {
+                    if ($post['items-' . $i . '-daya'] && $post['items-' . $i . '-waktu']) {
                         $d = array();
                         $d['tipe'] = $post['items-' . $i . '-tipe'];
                         $d['daya'] = $post['items-' . $i . '-daya'];
@@ -151,10 +165,6 @@ class Create extends CI_Controller
         $s['darat'] = $this->session->userdata('darat');
         $s['udara'] = $this->session->userdata('udara');
 
-        Console::Log($s['sampah']);
-        Console::Log($s['darat']);
-        Console::Log($s['udara']);
-
         foreach ($s as $k => $v) {
             $this->tpl[$k] = $v;
         }
@@ -165,7 +175,6 @@ class Create extends CI_Controller
     function check_session()
     {
         $s = $this->session->userdata;
-        xdebug($s);
     }
 
     function reset_session()
@@ -181,6 +190,20 @@ class Create extends CI_Controller
         $this->session->unset_userdata('udara');
         $s = $this->session->userdata;
         xdebug($s);
+    }
+
+    function pop($m)
+    {
+        $this->load->view('create/pop/' . $m, $this->tpl);
+    }
+
+    function already_submit()
+    {
+
+        $this->tpl['create_page'] = 0;
+        $this->tpl['already_submit'] = 1;
+        $this->tpl['content'] = $this->load->view('create/already_submit', $this->tpl, true);
+        $this->load->view('body', $this->tpl);
     }
 
 }

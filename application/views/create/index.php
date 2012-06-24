@@ -78,8 +78,9 @@
                 type: 'POST',
                 url: "<?php echo site_url('create/submit') ?>/6/step-6",
                 data: f
-            });  
-            window.location.href = '<?php echo site_url('sampah') ?>';
+            }).done(function() { 
+                //window.location.href = '<?php echo site_url('create/sampah') ?>';
+            });
             return false;
         }
         function leaveAStepCallback(obj){
