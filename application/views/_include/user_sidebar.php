@@ -3,6 +3,7 @@
     <?php $this->load->view('_include/user_navigation'); ?>
 </div>
 
+<?php get_komitmen_dashboard($user->user_id); ?>
 <div class="well">
     <h3>Emisi</h3>      		
     <div class="alert alert-success">

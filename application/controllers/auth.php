@@ -1,6 +1,5 @@
 <?php
-
-if (!defined('BASEPATH'))
+if ( !defined('BASEPATH') )
     exit('No direct script access allowed');
 
 class Auth extends CI_Controller
@@ -17,7 +16,12 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        redirect('dashboard');
+        //redirect('dashboard');
+        if ( $this->ion_auth->logged_in() ) {
+            redirect('dashboard');
+        } else {
+            redirect('auth/login');
+        }
     }
 
     //log the user in
@@ -30,11 +34,11 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('identity', 'Identity', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
-        if ($this->form_validation->run() == true) { //check to see if the user is logging in
+        if ( $this->form_validation->run() == true ) { //check to see if the user is logging in
             //check for "remember me"
             $remember = (bool) $this->input->post('remember');
 
-            if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) { //if the login is successful
+            if ( $this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember) ) { //if the login is successful
                 //redirect them back to the home page
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
                 redirect('dashboard', 'refresh');
@@ -62,6 +66,12 @@ class Auth extends CI_Controller
         }
     }
 
+    //change password
+    function change_password()
+    {
+        
+    }
+
     public function register()
     {
         $this->load->library('form_validation');
@@ -70,7 +80,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'password', 'trim|required|matches[password_confirm]');
         $this->form_validation->set_rules('total_penghuni', 'Total Penghuni', 'trim|required');
 
-        if ($this->form_validation->run()) {
+        if ( $this->form_validation->run() ) {
             $username = $this->input->post('name', true);
             $password = $this->input->post('password', true);
             $propinsi_id = $this->input->post('propinsi_id', true);
@@ -80,7 +90,7 @@ class Auth extends CI_Controller
             $additional_data['total_penghuni'] = $this->input->post('total_penghuni', true);
             $user_id = $this->ion_auth->register($username, $password, $email, $additional_data);
 
-            if (!$user_id) {
+            if ( !$user_id ) {
                 $this->tpl['error'] = $this->ion_auth->errors();
             } else {
                 redirect();
@@ -121,7 +131,7 @@ class Auth extends CI_Controller
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('email', 'Email Address', 'required');
-        if ($this->form_validation->run() == false) {
+        if ( $this->form_validation->run() == false ) {
             //setup the input
             $this->tpl['email'] = array('name' => 'email',
                 'id' => 'email',
@@ -134,7 +144,7 @@ class Auth extends CI_Controller
             //run the forgotten password method to email an activation code to the user
             $forgotten = $this->ion_auth->forgotten_password($this->input->post('email'));
 
-            if ($forgotten) { //if there were no errors
+            if ( $forgotten ) { //if there were no errors
                 $this->tpl['success'] = $this->ion_auth->messages();
                 $this->tpl['content'] = $this->load->view('auth/forgot_password', $this->tpl, true);
                 $this->load->view('body', $this->tpl);
@@ -151,11 +161,11 @@ class Auth extends CI_Controller
         $this->load->library('form_validation');
         $user = $this->ion_auth->forgotten_password_check($code);
 
-        if ($user) {  //if the code is valid then display the password reset form
+        if ( $user ) {  //if the code is valid then display the password reset form
             $this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
             $this->form_validation->set_rules('new_confirm', 'Confirm New Password', 'required');
 
-            if ($this->form_validation->run() == false) {//display the form
+            if ( $this->form_validation->run() == false ) {//display the form
                 //set the flash data error message if there is one
                 $this->tpl['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
@@ -186,7 +196,7 @@ class Auth extends CI_Controller
                 $this->load->view('body', $this->tpl);
             } else {
                 // do we have a valid request?
-                if ($this->_valid_csrf_nonce() === FALSE || $user->id != $this->input->post('user_id')) {
+                if ( $this->_valid_csrf_nonce() === FALSE || $user->id != $this->input->post('user_id') ) {
 
                     //something fishy might be up
                     $this->ion_auth->clear_forgotten_password_code($code);
@@ -198,7 +208,7 @@ class Auth extends CI_Controller
 
                     $change = $this->ion_auth->reset_password($identity, $this->input->post('new'));
 
-                    if ($change) { //if the password was successfully changed
+                    if ( $change ) { //if the password was successfully changed
                         $this->session->set_flashdata('message', $this->ion_auth->messages());
                         $this->logout();
                     } else {
@@ -216,12 +226,12 @@ class Auth extends CI_Controller
     //activate the user
     function activate($id, $code=false)
     {
-        if ($code !== false)
+        if ( $code !== false )
             $activation = $this->ion_auth->activate($id, $code);
-        else if ($this->ion_auth->is_admin())
+        else if ( $this->ion_auth->is_admin() )
             $activation = $this->ion_auth->activate($id);
 
-        if ($activation) {
+        if ( $activation ) {
             //redirect them to the auth page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
             redirect("auth", 'refresh');
@@ -242,7 +252,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('confirm', 'confirmation', 'required');
         $this->form_validation->set_rules('id', 'user ID', 'required|is_natural');
 
-        if ($this->form_validation->run() == FALSE) {
+        if ( $this->form_validation->run() == FALSE ) {
             // insert csrf check
             $this->tpl['csrf'] = $this->_get_csrf_nonce();
             $this->tpl['user'] = $this->ion_auth->user($id)->row();
@@ -250,14 +260,14 @@ class Auth extends CI_Controller
             $this->load->view('auth/deactivate_user', $this->tpl);
         } else {
             // do we really want to deactivate?
-            if ($this->input->post('confirm') == 'yes') {
+            if ( $this->input->post('confirm') == 'yes' ) {
                 // do we have a valid request?
-                if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
+                if ( $this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id') ) {
                     show_404();
                 }
 
                 // do we have the right userlevel?
-                if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
+                if ( $this->ion_auth->logged_in() && $this->ion_auth->is_admin() ) {
                     $this->ion_auth->deactivate($id);
                 }
             }
@@ -280,8 +290,8 @@ class Auth extends CI_Controller
 
     function _valid_csrf_nonce()
     {
-        if ($this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
-            $this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue')) {
+        if ( $this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
+            $this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue') ) {
             return TRUE;
         } else {
             return FALSE;
@@ -294,7 +304,7 @@ class Auth extends CI_Controller
         $password = $this->input->post('password', true);
         $remember = FALSE; // remember the user
         $is_login = $this->ion_auth->login($identity, $password, $remember);
-        if ($is_login) {
+        if ( $is_login ) {
             return true;
         } else {
             $this->form_validation->set_message('_check_login', $this->ion_auth->errors());

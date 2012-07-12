@@ -10,7 +10,7 @@ function the_breadcrumbs($breadcrumbs = array(), $divider='&raquo;')
     $total = count($breadcrumbs);
     $str = '<ul class="breadcrumb">';
     for ($i = 0; $i < $total; $i++) {
-        if ($i < $total - 1) {
+        if ( $i < $total - 1 ) {
             $str .= '<li>';
             $str .= $breadcrumbs[$i];
             $str .= '<span class="divider">' . $divider . '</span>';
@@ -36,11 +36,11 @@ function create_unique_slug($string, $table, $field='slug', $key=NULL, $value=NU
     $params = array();
     $params[$field] = $slug;
 
-    if ($key)
+    if ( $key )
         $params["$key !="] = $value;
 
     while ($t->db->where($params)->get($table)->num_rows()) {
-        if (!preg_match('/-{1}[0-9]+$/', $slug)) {
+        if ( !preg_match('/-{1}[0-9]+$/', $slug) ) {
             $slug .= '-' . ++$i;
         } else {
             $slug = preg_replace('/[0-9]+$/', ++$i, $slug);
@@ -86,7 +86,7 @@ function the_checkbox_dapur($param, $match)
     $ci = get_instance();
     $s = $ci->session->userdata('dapur');
 
-    if (isset($s[$param]) && $s[$param] == $match) {
+    if ( isset($s[$param]) && $s[$param] == $match ) {
         return 'checked="checked"';
     } else {
         return '';
@@ -124,10 +124,10 @@ function check_baseline_exists()
 
 function get_tipe_darat($param)
 {
-    if (is_numeric($param)) {
+    if ( is_numeric($param) ) {
         $tipe = $param;
     } else {
-        if ($param['tipe'] == 'umum') {
+        if ( $param['tipe'] == 'umum' ) {
             $tipe = $param['tipe_umum'];
         } else {
             $tipe = $param['tipe_pribadi'];
@@ -142,7 +142,7 @@ function get_tipe_darat($param)
 
 function get_keterangan_darat($param)
 {
-    if ($param['pribaditipe'] == 'jarak') {
+    if ( $param['pribaditipe'] == 'jarak' ) {
         $str = ' dengan jarak tempuh ' . $param['jarak_tempuh'] . ' KM ';
     } else {
         $str = ' dengan konsumsi bahan bakar Rp. ' . $param['konsumsi'];
@@ -183,4 +183,15 @@ function get_total_carbon($dbbaseline)
     $total += element('total_darat', $bdarat, 0);
     $total += element('total_pesawat', $budara, 0);
     return $total;
+}
+
+
+
+function get_komitmen_dashboard($user_id)
+{
+    $user_id =
+        $ci = get_instance();
+    $ci->db->where('user_id', $user_id);
+    $row = $ci->db->get('ac_commitments')->row();
+    xdebug($row);
 }
