@@ -3,12 +3,12 @@
         <div class="span6 offset3">
             <h3>Registration</h3>    
             <form action="<?php echo current_url() ?>" method="post" >
-                <?php if ( validation_errors() ): ?>
+                <?php if (validation_errors()): ?>
                     <div class="alert alert-error">
                         <?php echo validation_errors(); ?>
                     </div>	
                 <?php endif; ?>
-                <?php if ( isset($error) ): ?>
+                <?php if (isset($error)): ?>
                     <div class="alert alert-error">
                         <?php echo $error; ?>
                     </div>	
@@ -50,6 +50,13 @@
                                 <input type="radio" name="jenis_kelamin" id="optionsRadios2" value="option2">
                                 Perempuan
                             </label>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Jumlah Orang Dalam Rumah/Kost</label>
+                        <div class="controls">
+                            <input type="text" name="total_penghuni" value="" id="jumlah_orang" class="span1">
                         </div>
                     </div>
 

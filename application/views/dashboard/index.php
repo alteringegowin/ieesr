@@ -1,5 +1,15 @@
 
 <div class="container dashboard">
+    <?php if (isset($msg_danger) && $msg_danger): ?>
+        <div class="row">
+            <div class="span12">
+                <div class="alert alert-danger" style="text-align:center">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <?php echo $msg_danger; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <div class="span3">
             <?php $this->load->view('_include/user_sidebar'); ?>
@@ -19,7 +29,6 @@
                     <div class="row">
                         <div class="span3">
                             <div class="well">
-
                                 Profil Emisi Gas Rumah Kaca Langkah berikut ini dimaksudkan untuk menghitung produksi emisi gas rumah kaca dari aktivitas harian yang dilakukan. Silahkan menghitung emisi harian anda.
                                 <p><a href="listrik.php" class="btn btn-primary btn-small disabled">Isi Baseline Emisi &raquo;</a></p>
                             </div>

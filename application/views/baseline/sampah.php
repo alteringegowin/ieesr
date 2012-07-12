@@ -103,10 +103,10 @@ $session_sampah = $this->session->userdata('sampah');
             var f = $('#sampah').serialize();
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('create/submit') ?>/sampah",
+                url: "<?php echo site_url('baseline/finish') ?>/sampah",
                 data: f
             }).done(function() { 
-                window.location.href = '<?php echo site_url('create/transportasi') ?>';
+                window.location.href = '<?php echo site_url('baseline/transportasi') ?>';
             });  
             return false;
         }

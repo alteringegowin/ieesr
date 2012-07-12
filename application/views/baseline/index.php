@@ -49,46 +49,23 @@
         </div>
 
         <div id="step-2">
-            
+            <?php $this->load->view('baseline/step-2') ?>     
         </div>                      
         <div id="step-3">
-            
+            <?php $this->load->view('baseline/step-3') ?> 
         </div>
         <div id="step-4">
+            <?php $this->load->view('baseline/step-4') ?> 
         </div>
         <div id="step-5">
-            
+            <?php $this->load->view('baseline/step-5') ?> 
+
         </div>
         <div id="step-6">
+            <?php $this->load->view('baseline/step-6') ?> 
         </div>
     </div>
     <!-- End SmartWizard Content --> 
 
 </div>
-<script>
-    $(document).ready(function(){
-        $('#wizard').smartWizard({
-            contentCache:false,
-            onLeaveStep:leaveAStepCallback,
-            onFinish:onFinishCallback
-        });
-        
-        function onFinishCallback(){
-            
-            var f = $('#form-komunikasi').serialize();
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo site_url('create/submit') ?>/6/step-6",
-                data: f
-            }).done(function() { 
-                //window.location.href = '<?php echo site_url('create/sampah') ?>';
-            });
-            return false;
-        }
-        function leaveAStepCallback(obj){
-            return true;
-        }
-            
-       
-    });
-</script>
+<script type="text/javascript" src="<?php echo $themes ?>js/baseline-listrik.js"></script>

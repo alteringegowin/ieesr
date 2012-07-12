@@ -3,25 +3,25 @@
 <div style="clear:both"></div>
 <div class="well formInfo">
     <div class="imgInfo">
-        <a href="<?php echo $themes?>pop/rice-cooker.php" class="pop fancybox.ajax">
+        <a href="<?php echo $themes ?>pop/rice-cooker.php" class="pop fancybox.ajax">
             <img src="img/icons/rice-cooker.png" width="40"  />
             <p>Rice Cooker</p>
         </a>
     </div>
     <div class="imgInfo">
-        <a href="<?php echo $themes?>pop/microwave.php" class="pop fancybox.ajax">
+        <a href="<?php echo $themes ?>pop/microwave.php" class="pop fancybox.ajax">
             <img src="img/icons/microwave.png" width="70"  />
             <p>Microwave</p>
         </a>
     </div>
 
     <div class="imgInfo">
-        <img src="<?php echo $themes?>img/icons/kulkas.png" width="30"  />
+        <img src="<?php echo $themes ?>img/icons/kulkas.png" width="30"  />
         <p>Kulkas</p>
     </div>
 
     <div class="imgInfo">
-        <img src="<?php echo $themes?>img/icons/freezer.png" width="50"  />
+        <img src="<?php echo $themes ?>img/icons/freezer.png" width="50"  />
         <p>Freezer</p>
     </div>
 
@@ -71,6 +71,7 @@
         
         var PROPINSI_CONS = '<?php echo get_koef_propinsi($user->propinsi_id) ?>';
         var cdapur = <?php echo json_encode(config_item('app_dapur_constanta', true)) ?>;
+        var TOTAL_PENGHUNI = '<?php echo $user->total_penghuni ? $user->total_penghuni : 1; ?>';
         $.each(cdapur, function(i,v){
             if($('#jam-'+i).length){
                 cdapur[i].j= parseFloat($('#jam-'+i).val());
@@ -102,6 +103,7 @@
                     total_dapur += total_t;
                     
                 }
+                total_dapur = total_dapur/TOTAL_PENGHUNI;
             });
             if(total_dapur > $("#total_dapur_asli").val()){
                 $('#form-step-2').each (function(){
@@ -109,7 +111,9 @@
                 });
                 alert('Nilai Total Emisi Dapur Tidak Berkurang');
             }else{
+                
                 $("#total_dapur").val(total_dapur);
+                
                 $("#total_dapur_text").html(total_dapur);
                 
             }

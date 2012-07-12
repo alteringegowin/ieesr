@@ -31,63 +31,83 @@ $transportasi_udara = $this->session->userdata('udara');
                 <form id="jarak-dekat" class="form-horizontal modalForm trans">
                     <fieldset>	   		
                         <div class="control-group">
-                            <label class="control-label" for="input01">Pilih Kendaraan</label>
+                            <label class="control-label">Jenis Kendaraan</label>
                             <div class="controls">
-                                <label for="inlineCheckbox1" class="radio inline">
-                                    <input name="tipe" type="radio" id="inlineCheckbox1" value="pribadi"> Pribadi
-                                </label>
-                                <label for="inlineCheckbox2" class="radio inline">
-                                    <input name="tipe" type="radio" id="inlineCheckbox2" value="umum"> Umum
-                                </label>
+                                <select id="darat-jenis-kendaraan" class="span2" name="jenis_kendaraan">
+                                    <option value="">--Pilih--</option>
+                                    <option value="pribadi">Pribadi</option>
+                                    <option value="umum">Umum</option>
+                                </select>
                             </div>
                         </div>
-
-                        <div id="jarak_or_konsumsi" class="control-group">
-                            <label class="control-label">&nbsp;</label>
+                        <div class="control-group" id="hide-penumpang-group">
+                            <label class="control-label" for="appendedInput">Jumlah Penumpang</label>
                             <div class="controls">
-                                <label for="check" class="radio inline">
-                                    <input name="pribaditipe" type="radio" id="check" value="jarak">Jarak
-                                </label>
-                                <label for="check2" class="radio inline">
-                                    <input name="pribaditipe" type="radio" id="check2" value="mingguan"> Biaya Bahan Bakar Mingguan
-                                </label>
-                            </div>
-                        </div>
-                        <div id="jarak">
-                            <div class="control-group">
-                                <label class="control-label" for="input01"></label>
-                                <div class="controls">
-                                    <select id="select_pribadi" class="span2" name="tipe_pribadi">
-                                        <option value="">--Pilih--</option>
-                                        <option value="2">Mobil Pribadi - CityCar (Bensin &lt; 1200cc)</option>
-                                        <option value="3">Mobil Pribadi - Bensin 1500cc</option>
-                                        <option value="4">Mobil Pribadi - Bensin &gt; 2000cc</option>
-                                        <option value="5">Mobil Pribadi - CityCar (Diesel &lt; 1200cc)</option>
-                                        <option value="6">Mobil Pribadi - Diesel 1500cc</option>
-                                        <option value="7">Mobil Pribadi - Diesel &gt; 2000cc</option>
-                                        <option value="1">Motor</option>
-                                    </select>
-
-                                    <select id="select_umum" class="span2" name="tipe_umum">
-                                        <option value="">--Pilih--</option>
-                                        <option value="8">Bus Kota</option>
-                                        <option value="9">Mikrolet / Angkot</option>
-                                        <option value="10">Metromini</option>
-                                        <option value="11">Bus Way</option>
-                                        <option value="12">Ojek</option>
-                                    </select>
-
-                                    <div id="hidden_jarak"class="input-append">
-                                        <input class="span1" id="jarak_tempuh" size="16" type="text" name="jarak_tempuh"><span class="add-on">KM</span>
-                                    </div>
-                                    <div id="hidden_konsumsi" class="input-prepend">
-                                        <span class="add-on" style="margin-right:-4px;">Rp</span>
-                                        <input class="span2" id="konsumsi" size="16" type="text" name="konsumsi">
-                                    </div>
-                                    <input class="span2" id="total_darat" size="16" type="hidden" name="total_darat">
+                                <div class="input-append">
+                                    <input class="span1" id="xpenumpang" size="16" type="text" name="xpenumpang"><span class="add-on">Orang</span>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="control-group hide" id="darat-tipe-kendaraan">
+                            <label class="control-label">Pilih Tipe Kendaraan</label>
+                            <div class="controls">
+                                <select id="darat-tipe-pribadi" class="input-xlarge hide" name="darat-tipe-pribadi">
+                                    <option value="2">Mobil Pribadi - CityCar (Bensin &lt; 1200cc)</option>
+                                    <option value="3">Mobil Pribadi - Bensin 1500cc</option>
+                                    <option value="4">Mobil Pribadi - Bensin &gt; 2000cc</option>
+                                    <option value="5">Mobil Pribadi - CityCar (Diesel &lt; 1200cc)</option>
+                                    <option value="6">Mobil Pribadi - Diesel 1500cc</option>
+                                    <option value="7">Mobil Pribadi - Diesel &gt; 2000cc</option>
+                                    <option value="1">Motor 2 Tax</option>
+                                    <option value="1">Motor 4 Tax</option>
+                                    <option value="s">Sepeda</option>
+                                </select>
+
+                                <select id="darat-tipe-umum" class="span2 hide" name="darat-tipe-umum">
+                                    <option value="8">Bus Kota</option>
+                                    <option value="9">Mikrolet / Angkot</option>
+                                    <option value="10">Metromini</option>
+                                    <option value="11">Bus Way</option>
+                                    <option value="12">Ojek/Motor</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group hide" id="darat-tipe-penghitungan-group">
+                            <label class="control-label">Pilih Tipe Penghitungan</label>
+                            <div class="controls">
+                                <select id="darat-tipe-penghitungan-pribadi" class="input-xlarge hide xtipe" name="darat-tipe-penghitungan-pribadi">
+                                    <option value="jarak">Jarak</option>
+                                    <option value="bahan bakar">Biaya Bahan Bakar Mingguan</option>
+                                </select>
+                                <select id="darat-tipe-penghitungan-umum" class="input-xlarge hide xtipe" name="darat-tipe-penghitungan-umum">
+                                    <option value="jarak">Jarak</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group hide" id="hide-penumpang-group">
+                            <label class="control-label" for="appendedInput">Jumlah Penumpang</label>
+                            <div class="controls">
+                                <div id="hide-param-penumpang"class="input-append">
+                                    <input class="span1" id="penumpang" size="16" type="text" name="penumpang"><span class="add-on">Orang</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group hide" id="hide-param-group">
+                            <label class="control-label" for="appendedInput">Jarak</label>
+                            <div class="controls">
+                                <div id="hide-param-jarak"class="input-append">
+                                    <input class="span1" id="jarak_tempuh" size="16" type="text" name="jarak_tempuh"><span class="add-on">KM</span>
+                                </div>
+                                <div id="hide-param-bahan-bakar" class="input-prepend hide">
+                                    <span class="add-on" style="margin-right:-4px;">Rp</span>
+                                    <input class="span2" id="konsumsi" size="16" type="text" name="konsumsi">
+                                </div>
+                            </div>
+                        </div>
+                        <input id="total_darat" size="16" type="hidden" name="total_darat">
                     </fieldset>
                 </form>
 
@@ -161,16 +181,17 @@ $transportasi_udara = $this->session->userdata('udara');
             var form2 = $("#non-darat").serialize();
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('create/submit') ?>/darat",
+                url: "<?php echo site_url('baseline/finish') ?>/darat",
                 data: form1
+            }).done(function() { 
+                $.ajax({
+                    type: 'POST',
+                    url: "<?php echo site_url('baseline/finish') ?>/udara",
+                    data: form2
+                }).done(function() { 
+                    window.location.href = SITE_URL+'/baseline/save_to_db';
+                });  
             });  
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo site_url('create/submit') ?>/udara",
-                data: form2
-            });  
-            window.location.href = '<?php echo site_url('create/confirm') ?>';
-            return true;
         }
         
         function leaveAStepCallback(obj){
@@ -179,73 +200,80 @@ $transportasi_udara = $this->session->userdata('udara');
                 var form1 = $("#jarak-dekat").serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "<?php echo site_url('create/submit') ?>/darat",
+                    url: "<?php echo site_url('baseline/finish') ?>/darat",
                     data: form1
                 });  
             }else{
                 var form2 = $("#non-darat").serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "<?php echo site_url('create/submit') ?>/udara",
+                    url: "<?php echo site_url('baseline/finish') ?>/udara",
                     data: form2
                 });  
             }
             return true;
         }
-        $("#jarak_or_konsumsi").hide();
-        $("#jarak").hide();
         
-        $("input[name$='tipe']").click(function(){
-            var radio_value = $(this).val();
-            if(radio_value == 'pribadi'){
-                $("#select_umum").hide();
-                $("#select_pribadi").show();
-                $("#jarak_or_konsumsi").show();
-            }else if(radio_value == 'umum'){
-                $("#select_pribadi").hide();
-                $("#select_umum").show();
-                $("#jarak_or_konsumsi").show();
-            }
-            if(radio_value=='jarak') {
-                $("#jarak").show();
-                $("#hidden_jarak").show();
-                $("#hidden_konsumsi").hide();
-            }
-            else if(radio_value=='mingguan') {
-                $("#jarak").show();
-                $("#hidden_jarak").hide();
-                $("#hidden_konsumsi").show();
+        $('#darat-jenis-kendaraan').change(function(){
+            var darat_jenis = $(this).val();
+            switch (darat_jenis) {
+                case 'umum':
+                    $('#darat-tipe-kendaraan').show();
+                    $('#darat-tipe-umum').show();
+                    $('#darat-tipe-penghitungan-group').show();
+                    $('#darat-tipe-penghitungan-umum').show();
+                    $("#hide-param-group").show();
+                    
+                    $('#darat-tipe-pribadi').hide();
+                    $('#darat-tipe-penghitungan-pribadi').hide();
+                    break;
+                case 'pribadi':
+                    $('#darat-tipe-kendaraan').show();
+                    $('#darat-tipe-pribadi').show();
+                    $('#darat-tipe-penghitungan-group').show();
+                    $('#darat-tipe-penghitungan-pribadi').show();
+                    $("#hide-param-group").show();
+                    
+                    $('#darat-tipe-umum').hide();
+                    $('#darat-tipe-penghitungan-umum').hide();
+                    
+                    break;
+                default:
+                    
+                    break;
             }
         });
- 
-        //$("#konsumsi").blur(function(){
-        $("#jarak-dekat").delegate('#konsumsi','blur',function(){
-            var input = $(this).val();
-            var tipe = $("input[name='tipe']:checked").val();
-            if(tipe == 'umum'){
-                var vehicle = $('#select_umum').val();
-            }else{
-                var vehicle = $('#select_pribadi').val();
+        $(".xtipe").change(function(){
+            var xtipe = $(this).val();
+            switch (xtipe) {
+                case 'bahan bakar':
+                    $("#hide-param-jarak").hide();
+                    $("#hide-param-bahan-bakar").show();
+                    break;
+                case 'jarak':
+                    $("#hide-param-bahan-bakar").hide();
+                    $("#hide-param-jarak").show();
+                default:
+                    break;
             }
-            $.post('<?php echo site_url('transportasi/hitung_konsumsi_darat') ?>', {id:vehicle,f:input}, function(r){
+        });
+        $("#jarak-dekat").delegate('#konsumsi','blur',function(){
+            var input = $("#jarak-dekat").serialize();
+            $.post('<?php echo site_url('baseline/hitung_konsumsi_darat') ?>', input, function(r){
                 $("#total_darat").val(r);
                 $("#total_darat_text").html(r);
             })
-            
         })
         $("#jarak-dekat").delegate('#jarak_tempuh','blur',function(){
-            var input = $(this).val();
-            var tipe = $("input[name='tipe']:checked").val();
-            if(tipe == 'umum'){
-                var vehicle = $('#select_umum').val();
-            }else{
-                var vehicle = $('#select_pribadi').val();
-            }
-            $.post('<?php echo site_url('transportasi/hitung_jarak_darat') ?>', {id:vehicle,f:input}, function(r){
+            var input = $("#jarak-dekat").serialize();
+            $.post('<?php echo site_url('baseline/hitung_jarak_darat') ?>', input, function(r){
                 $("#total_darat").val(r);
                 $("#total_darat_text").html(r);
             })
         })
+        
+        
+        
         
         
         $("#step-2").delegate('input[name=jenis_penerbangan]','click',function(){
@@ -266,7 +294,7 @@ $transportasi_udara = $this->session->userdata('udara');
         function hitungUdara(){
             var input = $('#jumlah_penumpang').val();
             var jenis = $("#tipe_pesawat").val();
-            $.post('<?php echo site_url('transportasi/hitung_pesawat') ?>', {jenis:jenis,penumpang:input}, function(r){
+            $.post('<?php echo site_url('baseline/hitung_pesawat') ?>', {jenis:jenis,penumpang:input}, function(r){
                 $("#total_pesawat").val(r);
                 $("#total_pesawat_text").html(r);
                 
@@ -274,6 +302,7 @@ $transportasi_udara = $this->session->userdata('udara');
         }
  
         $("#after-jenis-penerbangan").hide();
+     
  
     });
     

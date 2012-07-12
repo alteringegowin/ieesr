@@ -108,6 +108,14 @@ function get_koef_propinsi($propinsi_id)
     return $row ? $row->propinsi_koefisien : 0;
 }
 
+function get_propinsi($propinsi_id)
+{
+    $ci = get_instance();
+    $ci->db->where('id', $propinsi_id);
+    $row = $ci->db->get('master_propinsi')->row();
+    return $row ? $row->propinsi_name : '';
+}
+
 function check_baseline_exists()
 {
     $ci = get_instance();
@@ -116,16 +124,20 @@ function check_baseline_exists()
 
 function get_tipe_darat($param)
 {
-    if ($param['tipe'] == 'umum') {
-        $tipe = $param['tipe_umum'];
+    if (is_numeric($param)) {
+        $tipe = $param;
     } else {
-        $tipe = $param['tipe_pribadi'];
+        if ($param['tipe'] == 'umum') {
+            $tipe = $param['tipe_umum'];
+        } else {
+            $tipe = $param['tipe_pribadi'];
+        }
     }
+
     $ci = get_instance();
     $ci->db->where('id', $tipe);
     $row = $ci->db->get('master_vehicles')->row();
     return isset($row->vehicle_name) ? $row->vehicle_name : false;
-    ;
 }
 
 function get_keterangan_darat($param)
@@ -151,4 +163,24 @@ function check_user_nav_current($check)
     $ci = get_instance();
     $s = $ci->uri->segment(2, 'index');
     return $check == $s ? 'active' : '';
+}
+
+function get_total_carbon($dbbaseline)
+{
+
+    $blistrik = element('listrik', $dbbaseline);
+    $bsampah = element('sampah', $dbbaseline);
+    $bdarat = element('darat', $dbbaseline);
+    $budara = element('udara', $dbbaseline);
+
+    $total = 0;
+    foreach ($blistrik as $k => $r) {
+        parse_str($r, $d);
+        $t = element('total_' . $k, $d, 0);
+        $total = $total + $t;
+    }
+    $total += element('total_sampah', $bsampah, 0);
+    $total += element('total_darat', $bdarat, 0);
+    $total += element('total_pesawat', $budara, 0);
+    return $total;
 }

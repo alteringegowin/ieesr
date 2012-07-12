@@ -22,11 +22,19 @@ class Baseline extends CI_Controller
         $this->tpl['user'] = $this->user;
         $this->tpl['create_page'] = 1;
 
+        $this->db->where('id', $this->user->propinsi_id);
+        $mprop = $this->db->get('master_propinsi')->row();
+        $this->tpl['koef_propinsi'] = $mprop->propinsi_koefisien;
+
         $this->db->where('user_id', $this->user->user_id);
         $ada = $this->db->get('ac_commitments')->row();
         if ($ada) {
-            $this->session->set_flashdata('baselinedata', $ada);
-            redirect('home/error/baseline');
+            if ($ada->commitment_baseline_created) {
+                $str = ' Penghitungan baseline emisi pernah anda lakukan pada tanggal ' . date('d F Y H:i', strtotime($ada->commitment_baseline_created));
+                $str .= ' <br> Apakah Anda ingin menghapus data ini dan mengisikan ulang perhitungan emisi anda? ' . anchor('dashboard/delete/baseline', 'Hapus data ini');
+                $this->session->set_flashdata('msg_danger', $str);
+                redirect('dashboard');
+            }
         }
     }
 
@@ -143,22 +151,23 @@ class Baseline extends CI_Controller
 
     function save_to_db()
     {
-        $s['penerangan'] = $this->session->userdata('penerangan');
-        $s['dapur'] = $this->session->userdata('dapur');
-        $s['rumah_tangga'] = $this->session->userdata('rumah_tangga');
-        $s['pribadi'] = $this->session->userdata('pribadi');
-        $s['elektronik'] = $this->session->userdata('elektronik');
-        $s['komunikasi'] = $this->session->userdata('komunikasi');
+        $s['listrik'] = $this->session->userdata('listrik');
         $s['sampah'] = $this->session->userdata('sampah');
         $s['darat'] = $this->session->userdata('darat');
         $s['udara'] = $this->session->userdata('udara');
 
-
         $this->db->set('user_id', $this->session->userdata('user_id'));
         $this->db->set('commitment_values', json_encode($s));
-        $this->db->set('commitment_created', date('Y-m-d H:i:s'));
+        $this->db->set('commitment_baseline_created', date('Y-m-d H:i:s'));
         $this->db->insert('ac_commitments');
-        redirect('create');
+
+
+        $this->session->unset_userdata('listrik');
+        $this->session->unset_userdata('sampah');
+        $this->session->unset_userdata('darat');
+        $this->session->unset_userdata('udara');
+        $s = $this->session->userdata;
+        redirect('pengurangan');
     }
 
     function confirm()
@@ -184,21 +193,16 @@ class Baseline extends CI_Controller
     function check_session()
     {
         $s = $this->session->userdata;
+        xdebug($s);
     }
 
     function reset_session()
     {
-        $this->session->unset_userdata('penerangan');
-        $this->session->unset_userdata('dapur');
-        $this->session->unset_userdata('rumah_tangga');
-        $this->session->unset_userdata('pribadi');
-        $this->session->unset_userdata('elektronik');
-        $this->session->unset_userdata('komunikasi');
+        $this->session->unset_userdata('listrik');
         $this->session->unset_userdata('sampah');
         $this->session->unset_userdata('darat');
         $this->session->unset_userdata('udara');
         $s = $this->session->userdata;
-        xdebug($s);
     }
 
     function pop($m)
@@ -213,6 +217,167 @@ class Baseline extends CI_Controller
         $this->tpl['already_submit'] = 1;
         $this->tpl['content'] = $this->load->view('baseline/already_submit', $this->tpl, true);
         $this->load->view('body', $this->tpl);
+    }
+
+    function total($m)
+    {
+        switch ($m) {
+            case 'lampu':
+                $post = $this->input->post(NULL, true);
+                $total_all = 0;
+                foreach (element('tipe', $post) as $k => $v) {
+                    if ($post['daya'][$k] && $post['waktu'][$k]) {
+                        $total = $post['daya'][$k] * $post['waktu'][$k] * $post['koef_propinsi'];
+                        $total_all += $total;
+                    }
+                }
+                $total_penghuni = (int) $this->user->total_penghuni ? (int) $this->user->total_penghuni : 1;
+                echo $total_all / $total_penghuni;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    function finish($s)
+    {
+        switch ($s) {
+            case 'listrik':
+                $post = $this->input->post(NULL, true);
+                $post['lampu'] = str_replace(';', '', $post['lampu']);
+                parse_str($post['lampu'], $lampu);
+                $this->session->set_userdata('listrik', $post);
+                break;
+            case 'sampah':
+            case 'darat':
+            case 'udara':
+            default:
+                $post = $this->input->post(NULL, true);
+                $this->session->set_userdata($s, $post);
+                break;
+        }
+    }
+
+    function hitung_konsumsi_darat()
+    {
+        $post = $this->input->post(NULL, true);
+        $kendaraan_id = $post['jenis_kendaraan'] == 'pribadi' ? $post['darat-tipe-pribadi'] : $post['darat-tipe-umum'];
+        $this->db->where('id', $kendaraan_id);
+        $row = $this->db->get('master_vehicles')->row();
+        if ($row) {
+            $H3 = $post['konsumsi'];
+            $D = $row->n2o_cold;
+            $E = $row->n2o_hot;
+            $H = $row->ch4_cold;
+            $I = $row->ch4_hot;
+            $L = $row->fuel_economy;
+            $penumpang = (int) element('xpenumpang', $post, 1);
+            $penumpang = $penumpang ? $penumpang : 1;
+
+
+            $M = 4500;
+            $N = $H3 / $M;
+
+            $O = $N / $L;
+            $Q = ($O * ($H + $I));
+            $P = ($O * ($D + $E));
+            $R = $P * 289;
+            $S = $Q * 72;
+            $T = $R + $S;
+            $TOTAL = ( $T / 1000) / $penumpang;
+            echo $TOTAL;
+        } else {
+            echo 0;
+        }
+    }
+
+    function hitung_jarak_darat()
+    {
+        $post = $this->input->post(NULL, true);
+        $kendaraan_id = $post['jenis_kendaraan'] == 'pribadi' ? $post['darat-tipe-pribadi'] : $post['darat-tipe-umum'];
+
+        if ($kendaraan_id == 'sepeda') {
+            echo 0;
+        } else {
+            $this->db->where('id', $kendaraan_id);
+            $row = $this->db->get('master_vehicles')->row();
+            $input = $post['jarak_tempuh'];
+            if ($row) {
+                $H = $row->ch4_cold;
+                $I = $row->ch4_hot;
+                $D = $row->n2o_cold;
+                $E = $row->n2o_hot;
+                $N = $input * ($D + $E);
+                $O = $input * ($H + $I);
+                $penumpang = (int) element('xpenumpang', $post, 1);
+                $penumpang = $penumpang ? $penumpang : 1;
+                $TOTAL = ( ( ($N * 289) + ($O * 72) ) / 1000) / $penumpang;
+
+
+                echo $TOTAL;
+            } else {
+                echo 0;
+            }
+        }
+    }
+
+    function hitung_pesawat()
+    {
+        $transit = $this->input->post('penumpang', 0);
+        $jenis = $this->input->post('jenis', 1);
+        $this->db->where('id', $jenis);
+        $row = $this->db->get('master_pesawat')->row();
+        if ($row) {
+            $A = $row->co2; //db
+            $B = $row->ch4; //db
+            $C = $row->n2o; //db
+            $D = $row->lto; //db
+            $E = $row->passanger; //db
+
+            $I = 69300;
+            $F = $A + ($B * 72) + ($C * 289);
+            $G = ($transit + 1) * $F;
+
+            $H = 10 * $D;
+            $J = ($H - $D) * $transit * $I * 0.000043;
+            $K = $G + $J;
+            $L = ($K / $E) * 1000;
+            echo $L;
+        } else {
+            echo 0;
+        }
+    }
+
+    function hitung_pesawat_old()
+    {
+        $INPUT = $this->input->post('penumpang', 1);
+        $jenis = $this->input->post('jenis', 1);
+        $this->db->where('id', $jenis);
+        $row = $this->db->get('master_pesawat')->row();
+        if ($row) {
+            $S = $row->passanger; //db
+            $H = $row->lto; //db
+            $E = $row->co2; //db
+            $F = $row->ch4; //db
+            $G = $row->n2o; //db
+
+            $P = 70000;
+            $D = $INPUT;
+            $I = $E / ($D + 1);
+            $J = $F / ($D + 1); //
+            $K = $G / ($D + 1);
+            $L = $I + ($J * 72) + ($K * 289);
+            $M = ($D + 1) * $L;
+            $N = 100 / 10 * $H;
+            $Q = $D * (($N - $H) * 0.000043 * $P);
+            $R = $Q + $M;
+            $T = $R / $S;
+            $total = $T * 1000;
+            echo $total;
+        } else {
+            
+        }
     }
 
 }

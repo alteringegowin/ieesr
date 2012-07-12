@@ -98,36 +98,6 @@ class Transportasi extends CI_Controller
         }
     }
 
-    function hitung_pesawat()
-    {
-        $INPUT = $this->input->post('penumpang', 1);
-        $jenis = $this->input->post('jenis', 1);
-        $this->db->where('id', $jenis);
-        $row = $this->db->get('master_pesawat')->row();
-        if ($row) {
-            $S = $row->passanger; //db
-            $H = $row->lto; //db
-            $E = $row->co2; //db
-            $F = $row->ch4; //db
-            $G = $row->n2o; //db
-
-            $P = 70000;
-            $D = $INPUT;
-            $I = $E / ($D + 1);
-            $J = $F / ($D + 1); //
-            $K = $G / ($D + 1);
-            $L = $I + ($J * 72) + ($K * 289);
-            $M = ($D + 1) * $L;
-            $N = 100 / 10 * $H;
-            $Q = $D * (($N - $H) * 0.000043 * $P);
-            $R = $Q + $M;
-            $T = $R / $S;
-            $total = $T * 1000;
-            echo $total;
-        } else {
-            
-        }
-    }
 
     /*
      * 

@@ -17,28 +17,41 @@
                 <!-- dashboard Content -->
                 <div class="profileContent">
                     <div class="row">
-                        <div class="span2">Email</div>
-                        <div class="span7">deni@duniakreatif.com </div>
+                        <div class="span9">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="span3">Email</td>
+                                        <td><?php echo $user->email ?></td>
+                                    </tr>
 
-                        <div class="span2">Nama</div>
-                        <div class="span7">Deni</div>
-                        <hr />
-                        <div class="span2">Nama</div>
-                        <div class="span7">Deni</div>
+                                    <tr>
+                                        <td>Nama</td>
+                                        <td><?php echo $user->fullname ?></td>
+                                    </tr>
+                                    <tr><td>Propinsi</td>
+                                        <td><?php echo get_propinsi($user->propinsi_id) ?></td>
+                                    </tr>
 
-                        <div class="span2">Nama</div>
-                        <div class="span7">Deni</div>
+                                    <tr>
+                                        <td>Pekerjaan</td>
+                                        <td>Deni</td>
+                                    </tr>
 
-                        <div class="span2">Nama</div>
-                        <div class="span7">Deni</div>
+                                    <tr>
+                                        <td>Tipe Rumah / Total Penghuni</td>
+                                        <td><?php echo $user->tipe_rumah ?></td>
+                                    </tr>
 
-                        <div class="span2">Nama</div>
-                        <div class="span7">Deni</div>
-
-                        <div class="span2">&nbsp;</div>
-                        <div class="span7">
-                            <a style="margin-top:20px;" href="<?php echo site_url('dashboard/profile/edit') ?>" class="btn btn-primary btn-small">Rubah Data</a>
+                                    <tr>
+                                        <td>Total Penghuni</td>
+                                        <td><?php echo $user->total_penghuni ?> Orang</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+
+
                     </div>
                 </div>
                 <!-- /dashboard content -->

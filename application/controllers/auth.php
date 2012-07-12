@@ -17,7 +17,7 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        redirect('auth/login');
+        redirect('dashboard');
     }
 
     //log the user in
@@ -37,7 +37,7 @@ class Auth extends CI_Controller
             if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) { //if the login is successful
                 //redirect them back to the home page
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect($this->config->item('base_url'), 'refresh');
+                redirect('dashboard', 'refresh');
             } else { //if the login was un-successful
                 //redirect them back to the login page
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
@@ -66,15 +66,18 @@ class Auth extends CI_Controller
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
         $this->form_validation->set_rules('password', 'password', 'trim|required|matches[password_confirm]');
+        $this->form_validation->set_rules('total_penghuni', 'Total Penghuni', 'trim|required');
 
         if ($this->form_validation->run()) {
             $username = $this->input->post('name', true);
             $password = $this->input->post('password', true);
             $propinsi_id = $this->input->post('propinsi_id', true);
             $email = $this->input->post('email', true);
-            $additional_data = array('fullname' => $this->input->post('name', true), 'propinsi_id' => $propinsi_id);
+            $additional_data['fullname'] = $this->input->post('name', true);
+            $additional_data['propinsi_id'] = $this->input->post('propinsi_id', true);
+            $additional_data['total_penghuni'] = $this->input->post('total_penghuni', true);
             $user_id = $this->ion_auth->register($username, $password, $email, $additional_data);
 
             if (!$user_id) {

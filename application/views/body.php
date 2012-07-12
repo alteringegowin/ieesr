@@ -64,11 +64,16 @@
 
         <!-- Add Media helper (this is optional) -->
         <script type="text/javascript" src="<?php echo $themes ?>assets/fancybox/helpers/jquery.fancybox-media.js?v=1.0.0"></script>
-        <script>
-            $(document).ready(function(){
-                $('#pop').popover();
-                $('.pop').fancybox()
-            })
+        <script> 
+            var SITE_URL = '<?php echo site_url() ?>';
+<?php if (isset($user) && $user): ?>
+        var KOEF_PROPINSI = <?php echo get_koef_propinsi($user->propinsi_id) ?>;
+<?php endif; ?>
+    $(document).ready(function(){
+               
+        $('#pop').popover();
+        $('.pop').fancybox()
+    })
         </script>
     </head>
 
@@ -101,6 +106,7 @@
 
                                 <?php if (isset($user) && $user): ?>
                                     <li class=""><a href="<?php echo site_url('dashboard') ?>">Member Area</a></li>
+                                    <li class=""><a href="<?php echo site_url('auth/logout') ?>">Logout</a></li>
                                 <?php else: ?>
                                     <li class=""><a href="<?php echo site_url('auth/login') ?>">Login</a></li>
                                     <li class=""><a href="<?php echo site_url('auth/register') ?>">Register</a></li>
@@ -112,9 +118,9 @@
             </div>
             <div class="topbar topbar-fixed">
                 <ul class="nav navBottom nav-pills">
-                    <li><a href="<?php echo site_url('create') ?>">Perhitungan Baseline</a></li>
-                    <li><a href="#">Pengurangan Emisi</a></li>
-                    <li><a href="#">Cetak Komitmen</a></li>
+                    <li><a href="<?php echo site_url('baseline') ?>">Perhitungan Baseline</a></li>
+                    <li><a href="<?php echo site_url('pengurangan') ?>">Pengurangan Emisi</a></li>
+                    <li><a href="<?php echo site_url('dashboard/komitmen') ?>">Cetak Komitmen</a></li>
                     <li><a href="#">Data Profile</a></li>
                 </ul>
             </div>
@@ -140,9 +146,23 @@
                     </div>
                     <div class="span9">	
                         <div class="btn-group">
-                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('index') ?>" href="<?php echo site_url('create/index') ?>"><i class="icon-off"></i> Listrik</a>
-                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('sampah') ?>"  href="<?php echo site_url('create/sampah') ?>"><i class="icon-trash"></i> Sampah</a>
-                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('transportasi') ?>"  href="<?php echo site_url('create/transportasi') ?>"><i class="icon-road"></i> Transportasi</a>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('index') ?>" href="<?php echo site_url('baseline/index') ?>"><i class="icon-off"></i> Listrik</a>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('sampah') ?>"  href="<?php echo site_url('baseline/sampah') ?>"><i class="icon-trash"></i> Sampah</a>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('transportasi') ?>"  href="<?php echo site_url('baseline/transportasi') ?>"><i class="icon-road"></i> Transportasi</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($pengurangan) && $pengurangan): ?>
+                <div class="row buttonRow">
+                    <div class="span3">
+                        &nbsp;
+                    </div>
+                    <div class="span9">	
+                        <div class="btn-group">
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('index') ?>" href="<?php echo site_url('pengurangan/index') ?>"><i class="icon-off"></i> Listrik</a>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('sampah') ?>"  href="<?php echo site_url('pengurangan/sampah') ?>"><i class="icon-trash"></i> Sampah</a>
+                            <a class="btn btn-large btn-success <?php echo check_user_nav_current('transportasi') ?>"  href="<?php echo site_url('pengurangan/transportasi') ?>"><i class="icon-road"></i> Transportasi</a>
                         </div>
                     </div>
                 </div>

@@ -70,6 +70,8 @@ $rumah_tangga = $this->session->userdata('rumah_tangga');
                     
             });
             
+            var TOTAL_PENGHUNI = '<?php echo $user->total_penghuni ? $user->total_penghuni : 1; ?>';
+            total_rumah_tangga = total_rumah_tangga/TOTAL_PENGHUNI;
             $("#total_rumah_tangga").val(total_rumah_tangga);
             $("#total_rumah_tangga_text").html(total_rumah_tangga);
         }

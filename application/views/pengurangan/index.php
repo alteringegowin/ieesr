@@ -67,19 +67,26 @@
             onFinish:onFinishCallback
         });
         function onFinishCallback(){
-            var c = $('#form-step-1').serialize();
-            var d = $('#form-step-2').serialize();
-            var e = $('#form-step-3').serialize();
-            var f = $('#form-step-4').serialize();
-            var g = $('#form-step-5').serialize();
-            var h = $('#form-step-6').serialize();
+            var lampu = $('#form-listrik').serialize().replace('%5B%5D', '[]');
+            var dapur = $('#form-step-2').serialize();
+            var rumah_tangga = $('#form-step-3').serialize();
+            var pribadi = $('#form-step-4').serialize();
+            var elektronik = $('#form-step-5').serialize();
+            var komunikasi = $('#form-step-6').serialize();
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('pengurangan/submit') ?>/f1",
-                data: {f1:c,f2:d,f3:e,f4:f,f5:g,f6:h,f7:h}
+                url: SITE_URL+'pengurangan/finish/listrik',
+                data: {
+                    lampu:lampu,
+                    dapur:dapur,
+                    rumah_tangga:rumah_tangga,
+                    pribadi:pribadi,
+                    elektronik:elektronik,
+                    komunikasi:komunikasi
+                }
             }).done(function() { 
-               //window.location.href = '<?php echo site_url('pengurangan/sampah') ?>';
-            });   
+                //window.location.href = SITE_URL+'/baseline/sampah';
+            });
             return false;
         }
     });

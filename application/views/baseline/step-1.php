@@ -3,77 +3,54 @@
 <div style="clear:both"></div>
 <div class="well formInfo">
     <div class="imgInfo">
-        <a href="pop/pijar.php" class="pop fancybox.ajax">
-            <img src="img/icons/bulb.png" height="50"  />
+        <a href="<?php echo site_url('popup/pijar') ?>" class="pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/bulb.png" height="50"  />
             <p>Lampu pijar</p>
         </a>
     </div>
     <div class="imgInfo">
-        <a href="pop/cfl.php" class="pop fancybox.ajax">
-            <img src="img/icons/neon-CFL.png"  />
+        <a href="<?php echo site_url('popup/cfl') ?>" class="pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/neon-CFL.png"  />
             <p>Neon - CFL</p>
         </a>
     </div>
     <div class="imgInfo">
-        <a href="pop/led.php" class="pop fancybox.ajax">
-            <img src="img/icons/led.png" width="35"  />
+        <a href="<?php echo site_url('popup/led') ?>" class="pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/led.png" width="35"  />
             <p>LED</p>
         </a>
     </div>
     <div style="clear:both"></div>
 </div>
-<form class="form-horizontal modalForm">
+<form id="form-listrik" class="form-horizontal modalForm">
     <fieldset>
-        <div id="" class="control-group">	
-            <label class="control-label" for="input01">Jenis dan lampu yang biasa digunakan (10,15,20 Watt atau lebih)?</label>
-            <div id="input1" class="controls clonedInput">
+        <div class="control-group">	
+            <label class="control-label">Jenis dan lampu yang biasa digunakan (10,15,20 Watt atau lebih)?</label>
+            <div id="pat" class="controls clonedInput" style="margin-left: 407px">
                 <div class="input-append">
-                    <select class="span1">
+                    <select class="span1 recount"  name="tipe[]">
                         <option>LED</option>
                         <option>Neon - CFL</option>
                         <option>Bohlam - Lampu Pijar</option>
                     </select>
                 </div>
                 <div class="input-append">
-                    <input class="span1" id="" size="16" type="text"><span class="add-on">watt</span>
+                    <input class="span1 recount" size="16" type="text" name="daya[]"><span class="add-on">watt</span>
                 </div>
                 <div class="input-append">
-                    <input class="span1" id="" size="16" type="text"><span class="add-on">Jam</span>
+                    <input class="span1 recount" size="16" type="text"  name="waktu[]"><span class="add-on">Jam</span>
                 </div>
             </div>
+            <div id="c">
+            </div>
+
             <div style="clear:both"></div>
+            <input type="hidden" name="koef_propinsi" value="<?php echo $koef_propinsi ?>" />
+            <input type="hidden" name="total_lampu" id="total_lampu" value="" />
             <input type="button" style="float:right" class="btn btn-mini btn-primary" id="btnAddListrik" value="Tambah" />
         </div>
     </fieldset>
 </form>
-<script type="text/javascript">
-        !function ($) {
-
-        $(function(){
-            $('#btnAddListrik').unbind("click").click(function() {
-                var num		= $('.clonedInput').length;
-                var newNum	= new Number(num + 1);
-                var newElem = $('#input' + num).clone().attr('id', 'input' + newNum);
-                newElem.children(':first').attr('id', 'name' + newNum).attr('name', 'name' + newNum);
-                $('#input' + num).after(newElem);
-                $('#btnDel').attr('disabled','');
-                
-                if (newNum == 100)
-                    $('#btnAdd').attr('disabled','disabled');
-                return false;
-            });
-        
-            $('#btnDelListrik').unbind("click").click(function() {
-                console.log('d');
-                return false;
-            });
-
-        })
-        
-    }(window.jQuery)
-
-
-
-        
-    
-</script>
+<div class="alert alert-info" style="text-align:right">
+    <strong>Total Emisi:</strong> <span id="total_lampu_text">0</span> gram CO<sub>2</sub>ek  &nbsp;<span class="btn btn-success" id="btn-total-lampu"><i class="icon-refresh"></i> </span>
+</div>

@@ -6,25 +6,25 @@ $dapur = $this->session->userdata('dapur');
 <div style="clear:both"></div>
 <div class="well formInfo">
     <div class="imgInfo">
-        <a href="<?php echo site_url('create/pop/rice-cooker')?>" class="pop fancybox.ajax">
-            <img src="<?php echo $themes?>img/icons/rice-cooker.png" width="40"  />
+        <a href="<?php echo site_url('create/pop/rice-cooker') ?>" class="pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/rice-cooker.png" width="40"  />
             <p>Rice Cooker</p>
         </a>
     </div>
     <div class="imgInfo">
-        <a href="<?php echo site_url('create/pop/microwave')?>" class="pop fancybox.ajax">
-            <img src="<?php echo $themes?>img/icons/microwave.png" width="70"  />
+        <a href="<?php echo site_url('create/pop/microwave') ?>" class="pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/microwave.png" width="70"  />
             <p>Microwave</p>
         </a>
     </div>
 
     <div class="imgInfo">
-        <img src="<?php echo $themes?>img/icons/kulkas.png" width="30"  />
+        <img src="<?php echo $themes ?>img/icons/kulkas.png" width="30"  />
         <p>Kulkas</p>
     </div>
 
     <div class="imgInfo">
-        <img src="<?php echo $themes?>img/icons/freezer.png" width="50"  />
+        <img src="<?php echo $themes ?>img/icons/freezer.png" width="50"  />
         <p>Freezer</p>
     </div>
 
@@ -118,6 +118,7 @@ $dapur = $this->session->userdata('dapur');
     $(document).ready(function(){
         
         var PROPINSI_CONS = '<?php echo get_koef_propinsi($user->propinsi_id) ?>';
+        var TOTAL_PENGHUNI = '<?php echo $user->total_penghuni ? $user->total_penghuni : 1; ?>';
         var k_item_2 = 1300;
         var k_item_3 = 150;
         var k_item_4 = 170;
@@ -169,11 +170,9 @@ $dapur = $this->session->userdata('dapur');
         $("input").change(function(){
             var total = eval($("#t-item-2").val()+'+'+$("#t-item-3").val()+'+'+$("#t-item-4").val());
             var total = eval(total+'+'+$("#t-item-5").val()+'+'+$("#t-item-6").val()+'+'+$("#t-item-7").val());
+            total = total/TOTAL_PENGHUNI;
             $("#total_dapur").val(total);
             $("#total_dapur_text").html(total);
         })
-        
-       
-        
     });
 </script>
