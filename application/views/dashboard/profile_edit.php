@@ -1,5 +1,3 @@
-
-<div class="container dashboard">
     <div class="row">
         <div class="span3">
 
@@ -46,10 +44,6 @@
                     </div>
                 </div>
                 <!-- /dashboard content -->
-
-            </div>
-            <!-- /dashboard container -->
-
         </div><!--/row-->
     </div><!--/span-->
 </div><!--/row-->

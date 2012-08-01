@@ -1,5 +1,3 @@
-
-<div class="container dashboard">
     <div class="row">
         <div class="span3">
             <?php $this->load->view('_include/user_sidebar'); ?>
@@ -47,9 +45,6 @@
                     </div>
                 </div>
                 <!-- /dashboard content -->
-
-            </div>
-            <!-- /dashboard container -->
 
         </div><!--/row-->
     </div><!--/span-->

@@ -87,13 +87,26 @@ class Auth extends CI_Controller
             $email = $this->input->post('email', true);
             $additional_data['fullname'] = $this->input->post('name', true);
             $additional_data['propinsi_id'] = $this->input->post('propinsi_id', true);
+            $additional_data['jenis_kelamin'] = $this->input->post('jenis_kelamin', true);
+            $additional_data['usia'] = $this->input->post('usia', true);
+            $additional_data['tipe_rumah'] = $this->input->post('tipe_rumah', true);
             $additional_data['total_penghuni'] = $this->input->post('total_penghuni', true);
+            $additional_data['pekerjaan'] = $this->input->post('pekerjaan', true);
+            $additional_data['kota'] = $this->input->post('kota', true);
+            $additional_data['pengeluaran'] = $this->input->post('pengeluaran', true);
+            $additional_data['total_mobil'] = $this->input->post('total_mobil', true);
+            $additional_data['total_motor'] = $this->input->post('total_motor', true);
+            $additional_data['jenis_lainnya'] = $this->input->post('jenis_lainnya', true);
+            $additional_data['total_lainnya'] = $this->input->post('total_lainnya', true);
+            $additional_data['jarak_tempuh'] = $this->input->post('jarak_tempuh', true);
+            $additional_data['amdk'] = $this->input->post('amdk', true);
+            $additional_data['total_transit'] = $this->input->post('total_transit', true);
             $user_id = $this->ion_auth->register($username, $password, $email, $additional_data);
 
             if ( !$user_id ) {
                 $this->tpl['error'] = $this->ion_auth->errors();
             } else {
-                redirect();
+                redirect('auth/login');
             }
         }
 
@@ -115,7 +128,7 @@ class Auth extends CI_Controller
     function logout()
     {
         $this->ion_auth->logout();
-        redirect('');
+        redirect('http://www.iesr.or.id/kkv3/');
     }
 
     function help()

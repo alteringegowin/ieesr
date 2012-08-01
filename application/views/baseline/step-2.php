@@ -6,32 +6,46 @@ $dapur = $this->session->userdata('dapur');
 <div style="clear:both"></div>
 <div class="well formInfo">
     <div class="imgInfo">
-        <a href="<?php echo site_url('create/pop/rice-cooker') ?>" class="pop fancybox.ajax">
-            <img src="<?php echo $themes ?>img/icons/rice-cooker.png" width="40"  />
+        <a href="<?php echo site_url('popup/rice-cooker') ?>" class="pop thumbnail fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/rice-cooker.png" width="50"  />
             <p>Rice Cooker</p>
         </a>
     </div>
     <div class="imgInfo">
-        <a href="<?php echo site_url('create/pop/microwave') ?>" class="pop fancybox.ajax">
+        <a href="<?php echo site_url('popup/microwave') ?>" class="pop thumbnail fancybox.ajax">
             <img src="<?php echo $themes ?>img/icons/microwave.png" width="70"  />
             <p>Microwave</p>
         </a>
     </div>
 
     <div class="imgInfo">
-        <img src="<?php echo $themes ?>img/icons/kulkas.png" width="30"  />
-        <p>Kulkas</p>
+        <a href="<?php echo site_url('popup/kulkas-1'); ?>" class="pop thumbnail fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/kulkas-1.png" width="50"  />
+            <p>Kulkas &lt; 300 lt</p>
+        </a>
+    </div>
+    <div class="imgInfo">
+        <a href="<?php echo site_url('popup/kulkas-2') ?>" class="pop thumbnail fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/kulkas-2.png" width="50"  />
+            <p>Kulkas 300 - 500 lt</p>
+        </a>
+    </div>
+    <div class="imgInfo">
+        <a href="<?php echo site_url('popup/kulkas-3') ?>" class="pop thumbnail fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/kulkas-3.png" width="20"  />
+            <p>Kulkas &gt; 500</p>
+        </a>
     </div>
 
     <div class="imgInfo">
-        <img src="<?php echo $themes ?>img/icons/freezer.png" width="50"  />
-        <p>Freezer</p>
+        <a href="<?php echo site_url('popup/freezer') ?>" class="pop thumbnail fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/freezer-2.png" width="60"  />
+            <p>Freezer</p>
+        </a>
     </div>
 
     <div style="clear:both"></div>
 </div>
-
-
 <form id="form-dapur" class="form-horizontal modalForm">
     <fieldset>
         <div class="control-group">
@@ -45,6 +59,7 @@ $dapur = $this->session->userdata('dapur');
                 </label>
 
                 <input type="hidden" id="t-item-2" name="t-item-2" value="<?php echo element('t-item-2', $dapur, 0) ?>"/>
+                <input type="hidden" id="b-item-2" name="b-item-2" value="<?php echo element('b-item-2', $dapur, 0) ?>"/>
             </div>
         </div>
         <div class="control-group">
@@ -57,6 +72,7 @@ $dapur = $this->session->userdata('dapur');
                     <input type="radio" id="inlineCheckbox2" name="item-3"  value="0 <?php echo the_checkbox_dapur('item-3', 0) ?>"> Tidak
                 </label>
                 <input type="hidden" id="t-item-3" name="t-item-3" value="<?php echo element('t-item-3', $dapur, 0) ?>"/>
+                <input type="hidden" id="b-item-3" name="b-item-3" value="<?php echo element('b-item-3', $dapur, 0) ?>"/>
             </div>
         </div>
 
@@ -72,6 +88,7 @@ $dapur = $this->session->userdata('dapur');
             </div>
 
             <input type="hidden" id="t-item-4" name="t-item-4" value="<?php echo element('t-item-4', $dapur, 0) ?>"/>
+            <input type="hidden" id="b-item-4" name="b-item-4" value="<?php echo element('b-item-4', $dapur, 0) ?>"/>
         </div>
 
         <div class="control-group">
@@ -86,6 +103,7 @@ $dapur = $this->session->userdata('dapur');
             </div>
 
             <input type="hidden" id="t-item-5" name="t-item-5" value="<?php echo element('t-item-5', $dapur, 0) ?>"/>
+            <input type="hidden" id="b-item-5" name="b-item-5" value="<?php echo element('b-item-5', $dapur, 0) ?>"/>
         </div>
 
         <div class="control-group">
@@ -96,6 +114,7 @@ $dapur = $this->session->userdata('dapur');
                 </div>
             </div>
             <input type="hidden" id="t-item-6" name="t-item-6" value="<?php echo element('t-item-6', $dapur, 0) ?>"/>
+            <input type="hidden" id="b-item-6" name="b-item-6" value="<?php echo element('b-item-6', $dapur, 0) ?>"/>
         </div>
 
         <div class="control-group">
@@ -106,20 +125,23 @@ $dapur = $this->session->userdata('dapur');
                 </div>
             </div>
             <input type="hidden" id="t-item-7" name="t-item-7" value="<?php echo element('t-item-7', $dapur, 0) ?>"/>
+            <input type="hidden" id="b-item-7" name="b-item-7" value="<?php echo element('b-item-7', $dapur, 0) ?>"/>
         </div>
     </fieldset>
     <input type="hidden" id="total_dapur" name="total_dapur" value="<?php echo element('total_dapur', $dapur, 0) ?>"/>
+    <input type="hidden" id="total_biaya_dapur" name="total_biaya_dapur" value="<?php echo element('total_biaya_dapur', $dapur, 0) ?>"/>
 </form>
 
 <div class="alert alert-info" style="text-align:right">
-    <strong>Total Emisi Peralatan Dapur:</strong> <span class="" id="total_dapur_text"><?php echo element('total_dapur', $dapur, 0) ?></span> gram CO<sub>2</sub>ek
+    <strong>Total Emisi Peralatan Dapur:</strong> <span class="" id="total_dapur_text"><?php echo element('total_dapur', $dapur, 0) ?></span> gram CO<sub>2</sub>ek<br/>
+    <strong>Total Biaya Pemakaian Listrik:</strong> Rp. <span id="total_biaya_dapur_text">0</span>   &nbsp;
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
         
         var PROPINSI_CONS = '<?php echo get_koef_propinsi($user->propinsi_id) ?>';
         var TOTAL_PENGHUNI = '<?php echo $user->total_penghuni ? $user->total_penghuni : 1; ?>';
-        var k_item_2 = 1300;
+        var k_item_2 = 120;
         var k_item_3 = 150;
         var k_item_4 = 170;
         var k_item_5 = 195;
@@ -129,50 +151,68 @@ $dapur = $this->session->userdata('dapur');
         $("input[name=item-2]").change(function(){
             if($(this).val() == 1){
                 $("#t-item-2").val(k_item_2*24*PROPINSI_CONS);
+                $("#b-item-2").val(k_item_2*24*0.65);
             }else{
                 $("#t-item-2").val('0');
+                $("#b-item-2").val('0');
             }
         });
         
         $("input[name=item-3]").change(function(){
             if($(this).val() == 1){
                 $("#t-item-3").val(k_item_3*24*PROPINSI_CONS);
+                $("#b-item-3").val(k_item_3*24*0.65);
             }else{
                 $("#t-item-3").val('0');
+                $("#b-item-3").val('0');
             }
         });
         
         $("input[name=item-4]").change(function(){
             if($(this).val() == 1){
                 $("#t-item-4").val(k_item_4*24*PROPINSI_CONS);
+                $("#b-item-4").val(k_item_4*24*0.65);
             }else{
                 $("#t-item-4").val('0');
+                $("#b-item-4").val('0');
             }
         });
         
         $("input[name=item-5]").change(function(){
             if($(this).val() == 1){
                 $("#t-item-5").val(k_item_5*24*PROPINSI_CONS);
+                $("#b-item-5").val(k_item_5*24*0.65);
             }else{
                 $("#t-item-5").val('0');
+                $("#b-item-5").val('0');
             }
         });
         
         $("input[name=item-6]").change(function(){
             var v = $(this).val();
             $("#t-item-6").val(k_item_6*v*PROPINSI_CONS);
+            $("#b-item-6").val(k_item_6*v*0.65);
         });
         $("input[name=item-7]").change(function(){
             var v = $(this).val();
             $("#t-item-7").val(k_item_7*v*PROPINSI_CONS);
+            $("#b-item-7").val(k_item_7*v*0.65);
         });
         
         $("input").change(function(){
             var total = eval($("#t-item-2").val()+'+'+$("#t-item-3").val()+'+'+$("#t-item-4").val());
             var total = eval(total+'+'+$("#t-item-5").val()+'+'+$("#t-item-6").val()+'+'+$("#t-item-7").val());
             total = total/TOTAL_PENGHUNI;
-            $("#total_dapur").val(total);
-            $("#total_dapur_text").html(total);
+            
+            var btotal = eval($("#b-item-2").val()+'+'+$("#b-item-3").val()+'+'+$("#b-item-4").val());
+            var btotal = eval(btotal+'+'+$("#b-item-5").val()+'+'+$("#b-item-6").val()+'+'+$("#b-item-7").val());
+            //btotal = btotal/TOTAL_PENGHUNI;
+            
+            
+            $("#total_dapur").val(number_format(total,2,'.',''));
+            $("#total_dapur_text").html(number_format(total,2,'.',''));
+            $("#total_biaya_dapur").val(number_format(btotal,2,'.',''));
+            $("#total_biaya_dapur_text").html(number_format(btotal,2,'.',''));
         })
     });
 </script>

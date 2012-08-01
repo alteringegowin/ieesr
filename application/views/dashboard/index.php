@@ -1,5 +1,5 @@
 
-<div class="container dashboard">
+
     <?php if (isset($msg_danger) && $msg_danger): ?>
         <div class="row">
             <div class="span12">
@@ -49,8 +49,7 @@
                 </div>
                 <!-- /dashboard content -->
 
-            </div>
-            <!-- /dashboard container -->
+
 
         </div><!--/row-->
     </div><!--/span-->

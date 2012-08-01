@@ -1,6 +1,7 @@
 
 <!-- Smart Wizard -->
 <div id="wizard" class="swMain">
+
     <ul>
         <li><a href="#step-1">
                 <label class="stepNumber">1</label>
@@ -10,9 +11,27 @@
             </a></li>
     </ul>
     <div id="step-1">	
-        <div style="float: right;">
-            <img src="<?php echo $themes ?>img/organic.png" height="48" width="48"  />
-        </div>
+    <div class="well formInfo">
+			<div class="imgInfo">
+				<a href="<?php echo site_url('popup/organic') ?>" class="thumbnail pop fancybox.ajax">
+				<img src="<?php echo $themes ?>img/icons/sampah-organik.png" width="60"  />
+				<p>Sampah Organik</p>
+				</a>
+			</div>
+			<div class="imgInfo">
+				<a href="<?php echo site_url('popup/paper') ?>" class="thumbnail pop fancybox.ajax">
+				<img src="<?php echo $themes ?>img/icons/kertas.png" width="38"  />
+				<p>Sampah Kertas</p>
+				</a>
+			</div>
+			<div class="imgInfo">
+				<a href="<?php echo site_url('popup/plastic') ?>" class="thumbnail pop fancybox.ajax">
+				<img src="<?php echo $themes ?>img/icons/botol.png" width="17"  />
+				<p>Sampah Plastik</p>
+				</a>
+			</div>
+			<div style="clear:both"></div>
+			</div>
         <h3>Sampah Organik</h3>
         <form id="form-sampah" class="form-horizontal modalForm trash">
             <fieldset>	   		
@@ -27,9 +46,6 @@
                     </div>
                 <?php endif; ?>
             </fieldset>
-            <div style="float: right;">
-                <img src="<?php echo $themes ?>img/paper-trash.png" height="48" width="48"  />
-            </div>
             <h3>Sampah Kertas</h3>
             <fieldset>	   		
                 <?php if ( element('item-26', $sampah) ): ?>
@@ -112,17 +128,16 @@
             plastik = isNaN(plastik) ? 0 : plastik;
             total = isNaN(total) ? 0 : total;
             
-            var total_organik = ((organik/1000)*0.3*289) + ((organik/1000)*4*72);
+            var total_organik = organik*0.3747;
             var total_kertas = kertas*70*3.24;
-            var total_plastik = plastik*0.9444*PROPINSI_CONS*1000;
-            
+            var total_plastik = plastik*841.5;
             var total_sampah = total_kertas+total_organik+total_plastik;
             
-            $("#total_organik").val(total_organik);
-            $("#total_kertas").val(total_kertas);
-            $("#total_plastik").val(total_plastik);
-            $("#total_sampah_text").html(total_sampah);
-            $("#total_sampah").val(total_sampah);
+            $("#total_organik").val(number_format(total_organik,2,'.',''));
+            $("#total_kertas").val(number_format(total_kertas,2,'.',''));
+            $("#total_plastik").val(number_format(total_plastik,2,'.',''));
+            $("#total_sampah_text").html(number_format(total_sampah,2,'.',''));
+            $("#total_sampah").val(number_format(total_sampah,2,'.',''));
         });
     });
 </script>

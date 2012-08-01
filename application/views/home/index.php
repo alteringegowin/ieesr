@@ -1,5 +1,3 @@
-<div id="main" class="container">
-
     <header>
         <h1 class="title">Hitung dan Kurangi Jejak Karbon Anda</h1>
     </header>
@@ -18,5 +16,3 @@
         <a href="<?php echo site_url('create')?>" rel="flow" class="button green fancybox fancybox.ajax">Mulai!</a>
         <a href="<?php echo site_url('home/pelajari')?>" class="button yellow">Pelajari</a>
     </div>
-
-</div>

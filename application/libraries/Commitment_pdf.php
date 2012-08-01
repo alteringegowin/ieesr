@@ -295,26 +295,27 @@ class Commitment_pdf extends PDF_MC_Table
     {
         $b = element('udara', $this->baseline, array());
         $p = element('udara', $this->pengurangan, array());
+        if (element('total_pesawat', $b)) {
+            $x = element('total_pesawat', $b) - element('total_pesawat', $p);
+            $this->ln();
 
-        $x = element('total_pesawat', $b) - element('total_pesawat', $p);
-        $this->ln();
-
-        $this->SetFont('Arial', 'B', 8);
-        $this->cell($this->width * 2, $this->height, 'Penerbangan', 1, 0);
-        $this->cell($this->width * 4, $this->height, 'Tipe Pesawat', 1, 0, 'C');
-        $this->cell($this->width * 3, $this->height, 'Transit', 1, 0, 'C');
-        $this->cell($this->width * 3, $this->height, 'Emisi', 1, 1, 'C');
+            $this->SetFont('Arial', 'B', 8);
+            $this->cell($this->width * 2, $this->height, 'Penerbangan', 1, 0);
+            $this->cell($this->width * 4, $this->height, 'Tipe Pesawat', 1, 0, 'C');
+            $this->cell($this->width * 3, $this->height, 'Transit', 1, 0, 'C');
+            $this->cell($this->width * 3, $this->height, 'Emisi', 1, 1, 'C');
 
 
-        $this->SetFont('Arial', '', 8);
-        $this->_cetak_udara($b);
-        $this->_cetak_udara($p, 'komitmen');
+            $this->SetFont('Arial', '', 8);
+            $this->_cetak_udara($b);
+            $this->_cetak_udara($p, 'komitmen');
 
-        $this->SetFont('Arial', 'B', 8);
-        $this->SetFillColor(224, 235, 255);
-        $this->SetTextColor(0);
-        $this->Cell($this->width * 9, $this->height, "Total Emisi Perjalanan Udara", 1, 0, 'R', TRUE);
-        $this->Cell($this->width * 3, $this->height, number_format($x, 2) . ' gram CO2', 1, 1, 'R', true);
+            $this->SetFont('Arial', 'B', 8);
+            $this->SetFillColor(224, 235, 255);
+            $this->SetTextColor(0);
+            $this->Cell($this->width * 9, $this->height, "Total Emisi Perjalanan Udara", 1, 0, 'R', TRUE);
+            $this->Cell($this->width * 3, $this->height, number_format($x, 2) . ' gram CO2', 1, 1, 'R', true);
+        }
     }
 
     function _cetak_udara($b, $g='baseline')

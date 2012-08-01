@@ -168,10 +168,10 @@ function check_user_nav_current($check)
 function get_total_carbon($dbbaseline)
 {
 
-    $blistrik = element('listrik', $dbbaseline);
-    $bsampah = element('sampah', $dbbaseline);
-    $bdarat = element('darat', $dbbaseline);
-    $budara = element('udara', $dbbaseline);
+    $blistrik = element('listrik', $dbbaseline,array());
+    $bsampah = element('sampah', $dbbaseline,array());
+    $bdarat = element('darat', $dbbaseline,array());
+    $budara = element('udara', $dbbaseline,array());
 
     $total = 0;
     foreach ($blistrik as $k => $r) {
@@ -189,9 +189,9 @@ function get_total_carbon($dbbaseline)
 
 function get_komitmen_dashboard($user_id)
 {
-    $user_id =
-        $ci = get_instance();
+    $ci = get_instance();
     $ci->db->where('user_id', $user_id);
     $row = $ci->db->get('ac_commitments')->row();
-    xdebug($row);
+    $t = json_decode($row->commitment_values);
+    xdebug($t);
 }

@@ -1,5 +1,6 @@
 <?php
-if ( !defined('BASEPATH') )
+
+if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
@@ -14,7 +15,7 @@ class Dashboard extends CI_Controller
         $this->load->helper('array');
         $this->tpl['themes'] = base_url('resources') . '/';
         $this->load->library('ion_auth');
-        if ( !$this->ion_auth->logged_in() ) {
+        if (!$this->ion_auth->logged_in()) {
             redirect('auth');
         } else {
             $this->user = $this->ion_auth->user()->row();
@@ -31,6 +32,8 @@ class Dashboard extends CI_Controller
 
     public function profile($s='')
     {
+
+
         $this->tpl['content'] = $this->load->view('dashboard/profile', $this->tpl, true);
         $this->load->view('body', $this->tpl);
     }
@@ -42,11 +45,11 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
         $this->form_validation->set_rules('new_confirm', 'Confirm New Password', 'required');
 
-        if ( !$this->ion_auth->logged_in() ) {
+        if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
         $user = $this->ion_auth->user()->row();
-        if ( $this->form_validation->run() == false ) { //display the form
+        if ($this->form_validation->run() == false) { //display the form
             //set the flash data error message if there is one
             $this->tpl['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
@@ -83,7 +86,7 @@ class Dashboard extends CI_Controller
 
             $change = $this->ion_auth->change_password($identity, $this->input->post('old'), $this->input->post('new'));
 
-            if ( $change ) { //if the password was successfully changed
+            if ($change) { //if the password was successfully changed
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
@@ -96,7 +99,7 @@ class Dashboard extends CI_Controller
     {
         $this->db->where('user_id', $this->user->user_id);
         $komitmen = $this->db->get('ac_commitments')->row();
-        if ( $komitmen->commitment_shift ) {
+        if ($komitmen->commitment_shift) {
             $this->db->select('auth_users.*,master_propinsi.propinsi_name', 'LEFT');
             $this->db->where('auth_users.id', $this->user->user_id);
             $this->db->join('master_propinsi', 'master_propinsi.id=auth_users.propinsi_id');
@@ -153,9 +156,11 @@ class Dashboard extends CI_Controller
             case 'pengurangan':
                 //reset data saja
                 $this->db->set('commitment_shift', '');
+                $this->db->set('commitment_status', 0);
                 $this->db->set('commitment_created', NULL);
                 $this->db->where('user_id', $this->user->user_id);
                 $this->db->update('ac_commitments');
+
                 break;
 
             default:
@@ -164,6 +169,7 @@ class Dashboard extends CI_Controller
                 echo $this->db->delete('ac_commitments');
                 break;
         }
+        redirect('dashboard');
     }
 
 }

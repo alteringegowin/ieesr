@@ -1,19 +1,25 @@
-
 <h2>Penerangan</h2>
 <hr />
 <div style="clear:both"></div>
+
 <div class="well formInfo">
     <div class="imgInfo">
-        <img src="<?php echo $themes ?>img/icons/neon-CFL.png" />
-        <p>Lampu pijar</p>
+        <a href="<?php echo site_url('popup/pijar') ?>" class="thumbnail pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/bulb.png" height="50"  />
+            <p>Lampu pijar</p>
+        </a>
     </div>
     <div class="imgInfo">
-        <img src="<?php echo $themes ?>img/icons/neon-CFL.png"  />
-        <p>Neon - CFL</p>
+        <a href="<?php echo site_url('popup/cfl') ?>" class="thumbnail pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/neon-CFL.png"  />
+            <p>Neon - CFL</p>
+        </a>
     </div>
     <div class="imgInfo">
-        <img src="<?php echo $themes ?>img/icons/neon-CFL.png"  />
-        <p>LED</p>
+        <a href="<?php echo site_url('popup/led') ?>" class="thumbnail pop fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/led.png" width="35"  />
+            <p>LED</p>
+        </a>
     </div>
     <div style="clear:both"></div>
 </div>
@@ -47,12 +53,15 @@
     </fieldset>
     <input type="hidden" name="koef_propinsi" value="<?php echo $koef_propinsi ?>" />
     <input type="hidden" id="total_lampu_all" name="total_lampu_all" value="<?php echo isset($lampus['total_lampu']) ? $lampus['total_lampu'] : 0; ?>" />
+    <input type="hidden" id="total_biaya_lampu_all" name="total_biaya_lampu_all" value="<?php echo isset($lampus['total_biaya_lampu']) ? $lampus['total_biaya_lampu'] : 0; ?>" />
     <input type="hidden" id="total_lampu_asli" name="total_lampu_asli" value="<?php echo isset($lampus['total_lampu']) ? $lampus['total_lampu'] : 0; ?>" />
 </form>
 
 
 <div class="alert alert-info" style="text-align:right">
     <strong>Total Emisi Penerangan:</strong> <span class="" id="total_all_text"><?php echo isset($lampus['total_lampu']) ? number_format($lampus['total_lampu'], 4) : 0; ?></span> gram CO<sub>2</sub>ek
+    <br/>
+    <strong>Total Biaya Pemakaian Listrik:</strong> Rp. <span id="total_biaya_lampu_all_text"><?php echo isset($lampus['total_biaya_lampu']) ? number_format($lampus['total_biaya_lampu'], 4) : 0; ?></span>   &nbsp;
 </div>
 
 <script type="text/javascript">
@@ -61,7 +70,6 @@
         $("#form-listrik").unbind('click').delegate('.btnDelListrik','click',function(){
             $(this).parents("div:first").remove();
             total_listrik(); 
-           
             return false;
         });
     
@@ -74,6 +82,15 @@
             }).done(function(t) { 
                 $("#total_all_text").html(t);
                 $("#total_lampu_all").val(t);
+            });
+            
+            $.ajax({
+                type: 'POST',
+                url: SITE_URL+'/pengurangan/total/biaya',
+                data: s
+            }).done(function(t) { 
+                $("#total_biaya_lampu_all_text").html(t);
+                $("#total_biaya_lampu_all").val(t);
             });
             return false;
         }

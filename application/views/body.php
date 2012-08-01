@@ -8,15 +8,17 @@
         <meta name="author" content="">
 
         <!-- Le styles -->
+        <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>css/test.css" media="screen" />
         <link href="<?php echo $themes ?>css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>assets/fancybox/jquery.fancybox.css?v=2.0.6" media="screen" />
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>assets/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.2" />
         <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>css/ui-lightness/jquery-ui-1.8.19.custom.css" />
         <!--     <link href="<?php echo $themes ?>assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
-        <link href="<?php echo $themes ?>css//main.css" rel="stylesheet">
         <link href="<?php echo $themes ?>assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-        <link href="<?php echo $themes ?>assets/css/smart_wizard.css" rel="stylesheet">
+<!--         <link href="<?php echo $themes ?>assets/css/smart_wizard.css" rel="stylesheet"> -->
         <link href="<?php echo $themes ?>assets/css/smart_wizard_vertical.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="<?php echo $themes ?>css/main.css" media="screen" />
+        
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -24,7 +26,7 @@
         <![endif]-->
 
         <!-- Le fav and touch icons -->
-        <link rel="shortcut icon" href="<?php echo $themes ?>assets/ico/favicon.ico">
+        <link rel="shortcut icon" href="http://www.iesr.or.id/kkv3/wp-content/uploads/2012/07/fav.png" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $themes ?>assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $themes ?>assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="<?php echo $themes ?>assets/ico/apple-touch-icon-57-precomposed.png">
@@ -79,11 +81,18 @@
 
     <body>
 
-        <div class="headerbg">&nbsp;</div>
         <header>
+        <div class="branding clearfix">
+	 	<div class="pull-left" style="width:300px;">
+		 	<img src="<?php echo $themes ?>/img/logo.png" />
+	 	</div>
+	 	<div class="pull-right">
+		 	<img src="<?php echo $themes ?>/img/logokjk.png" />
+	 	</div>
+	 	</div>
             <!-- Navbar
             ================================================== -->
-            <div class="navbar navbar-fixed-top">
+            <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -91,17 +100,16 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <a class="brand" href="<?php echo site_url() ?>">Karbon Kalkulator</a>
                         <div class="nav-collapse collapse">
                             <ul class="nav">
                                 <li class="">
-                                    <a href="<?php echo site_url() ?>">Beranda</a>
+                                    <a href="../">Beranda</a>
                                 </li>
                                 <li class="">
-                                    <a href="<?php echo site_url('tentang-jejak-karbon') ?>">Tentang Jejak Karbon</a>
+                                    <a href="http://www.iesr.or.id/kkv3/tentang-jejak-karbon/">Tentang Jejak Karbon</a>
                                 </li>
                                 <li class="">
-                                    <a href="<?php echo site_url('panduan') ?>">Panduan</a>
+                                    <a href="http://www.iesr.or.id/kkv3/panduan-penggunaan/">Panduan</a>
                                 </li>
 
                                 <?php if (isset($user) && $user): ?>
@@ -116,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="topbar topbar-fixed">
+            <div class="topbar">
                 <ul class="nav navBottom nav-pills">
                     <li><a href="<?php echo site_url('baseline') ?>">Perhitungan Baseline</a></li>
                     <li><a href="<?php echo site_url('pengurangan') ?>">Pengurangan Emisi</a></li>
@@ -125,6 +133,8 @@
                 </ul>
             </div>
         </header>
+              
+
         <div id="main" class="container">
             <?php if (isset($already_submit) && $already_submit): ?>
                 <div class="alert alert-success" style="text-align:center">
@@ -137,6 +147,7 @@
                         <a href="#" class="btn btn-success">Cetak Komitmen</a>
                     </p>
                 </div>
+                
             <?php endif; ?>
 
             <?php if (isset($create_page) && $create_page): ?>
@@ -173,8 +184,15 @@
         </div>
 
 
-        <footer>
-        </footer>
-
+        	<div id="wrapper-footer">
+			<div id="footer-bottom" class="footer clearfix">
+				<p class="pull-left">
+					Copyright © 2012 - IESR Indonesia. All rights reserved.
+				</p>
+				<p class="pull-right">
+					<a href="http://www.temanweb.com">Powered by TemanWeb</a><a href="#top" class="backToTop">Back to Top</a>
+				</p>
+			</div>
+		</div>
     </body>
 </html>

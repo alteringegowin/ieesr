@@ -1,5 +1,4 @@
 
-<div class="container dashboard">
     <div class="row">
         <div class="span12">
             <!-- dashboard container -->
@@ -20,10 +19,6 @@
                     </div>
                 </div>
                 <!-- /dashboard content -->
-
-            </div>
-            <!-- /dashboard container -->
-
         </div><!--/row-->
     </div><!--/span-->
 </div><!--/row-->

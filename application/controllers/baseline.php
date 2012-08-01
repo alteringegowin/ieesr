@@ -222,6 +222,21 @@ class Baseline extends CI_Controller
     function total($m)
     {
         switch ($m) {
+            case 'biaya':
+                $post = $this->input->post(NULL, true);
+                $total_all = 0;
+                foreach (element('tipe', $post) as $k => $v) {
+                    if ($post['daya'][$k] && $post['waktu'][$k]) {
+                        $total = $post['daya'][$k] * $post['waktu'][$k] * 0.65;
+                        $total_all += $total;
+                    }
+                }
+                
+                $total_penghuni = (int) $this->user->total_penghuni ? (int) $this->user->total_penghuni : 1;
+                echo number_format($total_all/$total_penghuni, 2, '.', '');
+
+                break;
+
             case 'lampu':
                 $post = $this->input->post(NULL, true);
                 $total_all = 0;
@@ -232,7 +247,8 @@ class Baseline extends CI_Controller
                     }
                 }
                 $total_penghuni = (int) $this->user->total_penghuni ? (int) $this->user->total_penghuni : 1;
-                echo $total_all / $total_penghuni;
+                echo number_format($total_all / $total_penghuni, 2, '.', '');
+
                 break;
 
             default:
@@ -272,7 +288,8 @@ class Baseline extends CI_Controller
             $H = $row->ch4_cold;
             $I = $row->ch4_hot;
             $L = $row->fuel_economy;
-            $penumpang = (int) element('xpenumpang', $post, 1);
+
+            $penumpang = $post['jenis_kendaraan'] == 'pribadi' ? (int) element('xpenumpang', $post, 1) : $row->vehicle_capacity;
             $penumpang = $penumpang ? $penumpang : 1;
 
 
@@ -286,7 +303,7 @@ class Baseline extends CI_Controller
             $S = $Q * 72;
             $T = $R + $S;
             $TOTAL = ( $T / 1000) / $penumpang;
-            echo $TOTAL;
+            echo number_format($TOTAL, 2, '.', '');
         } else {
             echo 0;
         }
@@ -310,12 +327,16 @@ class Baseline extends CI_Controller
                 $E = $row->n2o_hot;
                 $N = $input * ($D + $E);
                 $O = $input * ($H + $I);
-                $penumpang = (int) element('xpenumpang', $post, 1);
+
+                $penumpang = $post['jenis_kendaraan'] == 'pribadi' ? (int) element('xpenumpang', $post, 1) : $row->vehicle_capacity;
+                $penumpang = $penumpang ? $penumpang : 1;
+
+
                 $penumpang = $penumpang ? $penumpang : 1;
                 $TOTAL = ( ( ($N * 289) + ($O * 72) ) / 1000) / $penumpang;
 
 
-                echo $TOTAL;
+                echo number_format($TOTAL, 2, '.', '');
             } else {
                 echo 0;
             }

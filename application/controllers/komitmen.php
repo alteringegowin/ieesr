@@ -102,7 +102,6 @@ class Komitmen extends CI_Controller
         }
 
 
-
         $this->load->library('Commitment_pdf');
         $this->commitment_pdf->AliasNbPages();
 

@@ -56,6 +56,15 @@ $(document).ready(function(){
             $("#total_lampu_text").html(t);
             $("#total_lampu").val(t);
         });
+        
+        $.ajax({
+            type: 'POST',
+            url: SITE_URL+'/baseline/total/biaya',
+            data: s
+        }).done(function(t) { 
+            $("#total_biaya_lampu_text").html(t);
+            $("#total_biaya_lampu").val(t);
+        });
         return false;
     }
     $("#btn-total-lampu").click(total_listrik);

@@ -1,15 +1,31 @@
 <h2>Peralatan Pribadi</h2>
 <hr />
+<div class="well formInfo">
+    <div class="imgInfo">
+        <a href="<?php echo site_url('popup/hairdryer') ?>" class="pop thumbnail fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/hair-dryer.png" width="70"  />
+            <p>Hair Dryer</p>
+        </a>
+    </div>
+    <div class="imgInfo">
+        <a href="<?php echo site_url('popup/razor') ?>" class="pop thumbnail fancybox.ajax">
+            <img src="<?php echo $themes ?>img/icons/electric_razor.png" width="30"  />
+            <p>Personal Care</p>
+        </a>
+    </div>
+    <div style="clear:both"></div>
+</div>
 <form id="form-step-4" class="form-horizontal modalForm">
     <fieldset>	   		
         <?php foreach ($fgroup[4] as $r): ?>
-            <?php if ( element('item-' . $r->id, $pribadi) ): ?>
+            <?php if (element('item-' . $r->id, $pribadi)): ?>
                 <div class="control-group">
                     <label class="control-label" for="input01"><?php echo $r->item_name ?></label>
                     <div class="controls">
                         <div class="input-append">
                             <input class="span1 count-pribadi" rel-id="<?php echo $r->id ?>" id="input-pribadi-<?php echo $r->id ?>"  name="jam-<?php echo $r->id ?>" size="16" type="text" value="<?php echo element('item-' . $r->id, $pribadi) ?>"><span class="add-on">jam</span>
                             <input type="hidden" name="total-item-<?php echo $r->id ?>" id="total-item-<?php echo $r->id ?>"  value="<?php echo element('t-item-' . $r->id, $pribadi) ?>" />
+                            <input type="hidden" name="total-biaya-item-<?php echo $r->id ?>" id="total-biaya-item-<?php echo $r->id ?>"  value="<?php echo element('b-item-' . $r->id, $pribadi) ?>" />
                         </div>
                     </div>
                 </div>
@@ -21,10 +37,16 @@
     <input type="hidden" id="total_pribadi" name="total_pribadi" value="<?php echo element('total_pribadi', $pribadi, 0) ?>" />
     <input type="hidden" id="total_pribadi_asli" name="total_pribadi_asli" value="<?php echo element('total_pribadi', $pribadi, 0) ?>" />
 
+    <input type="hidden" id="total_biaya_pribadi" name="total_biaya_pribadi" value="<?php echo element('total_biaya_pribadi', $pribadi, 0) ?>" />
+    <input type="hidden" id="total_biaya_pribadi_asli" name="total_biaya_pribadi_asli" value="<?php echo element('total_biaya_pribadi', $pribadi, 0) ?>" />
+
 </form>
 
 <div class="alert alert-info" style="text-align:right">
     <strong>Total Emisi Peralatan Pribadi:</strong> <span class="" id="total_pribadi_text"><?php echo element('total_pribadi', $pribadi) ?></span> gram CO<sub>2</sub>ek
+    <br/>
+    <strong>Total Biaya Pemakaian Listrik:</strong> Rp. <span id="total_biaya_pribadi_text"><?php echo element('total_biaya_pribadi', $pribadi) ?></span>   &nbsp
+
 </div>
 
 
@@ -51,30 +73,38 @@
         function recount_pribadi(){
             var total_pribadi = 0;
             var total_t = 0;
+            
+            var total_biaya_pribadi = 0;
+            var total_b = 0;
+            
+            
             $.each(crt, function(i,v){
                 if($('#input-pribadi-'+v.id).length){
                     total_t = v.item_daya*v.item_hour*PROPINSI_CONS;
+                    total_b = v.item_daya*v.item_hour*0.65;
                     
                     if(isNaN(total_t)){
                         total_pribadi = 0;
+                        total_biaya_pribadi = 0;
                     }
                     total_pribadi += total_t;
+                    total_biaya_pribadi += total_b;
                     $("#total-item-"+v.id).val(total_t);
+                    $("#total-biaya-item-"+v.id).val(total_t);
                     
                 }
             });
             
-            if(total_pribadi > $("#total_pribadi_asli").val()){
-                $('#form-step-4').each (function(){
-                    this.reset();
-                });
+            
+            total_pribadi= number_format(total_pribadi,2,'.','');
+            total_biaya_pribadi = number_format(total_biaya_pribadi,2,'.','');
+            
+            $("#total_pribadi").val(total_pribadi);
+            $("#total_pribadi_text").html(total_pribadi);
                 
-                alert(total_pribadi +' Nilai Total Emisi Pribadi Tidak Berkurang');
-            }else{
-                $("#total_pribadi").val(total_pribadi);
-                $("#total_pribadi_text").html(total_pribadi);
+            $("#total_biaya_pribadi").val(total_biaya_pribadi);
+            $("#total_biaya_pribadi_text").html(total_biaya_pribadi);
                 
-            }
         }
         
         

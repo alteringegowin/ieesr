@@ -1,17 +1,19 @@
 /* @import url(http://fonts.googleapis.com/css?family=Handlee); */
 .headerbg {
 /* 	height: 3px; */
-	background: url(../../img/headStripe.png) repeat top left;
+/*
+	background: url(../img/headStripe.png) repeat top left;
 	position: fixed;
 right: 0;
 left: 0;
 margin-bottom: 0;
 top: 0;
+*/
 }
 
 body {
-/* background:#f4f4f4 url(../../img/bodybg.png) top repeat; */
-background:#c4dfe6 url(../../img/texture_b.jpg) bottom fixed no-repeat;
+/* background:#f4f4f4 url(../img/bodybg.png) top repeat; */
+background:#fff url(../img/bgweb.png) bottom fixed no-repeat;
 padding-top:100px;
 /* font-family: Helvetica nueu, sans-serif; */
 }
@@ -31,16 +33,22 @@ p {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
   background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* W3C */
   border: 1px solid #e5e5e5;
+/*
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
 	
+*/
 }
 #main.container {
 	width: 980px;
 }
+header {
+	width: 1017px;
+	margin: 0 auto;
+}
 .topbar-fixed{
-	top:41px !important;
+	top:38px !important;
 }
 .topbar .nav {
   margin-bottom: 0;
@@ -225,7 +233,8 @@ p {
 }
 @media (min-width: 980px) {
 	body{
-   	padding-top: 90px;
+   	padding-top: 10px;
+   	padding-bottom: 30px;
    }
    
   .footerbar-fixed {
@@ -685,30 +694,59 @@ text-align: left;
 	width:80px !important;
 }
 .navbar {
-	margin-top: 3px;
+/* 	margin-top: 3px; */
+margin-bottom: 0px;
 }
 .navbar-inner {
-	height: 39px;
+	height: 52px;
 }
 #main {
 /* 	margin-top: 20px; */
+background: white;
+margin: 0 auto;
+margin-top: 0;
+width: 942px;
+border: 1px solid #DDD;
+border-top: none;
+position: relative;
+z-index: 1;
+padding-left: 19px;
+padding-right: 19px;
+padding-top: 19px;
 }
 ul.nav.navBottom {
 /* 	margin-left: 430px !important; */
 }
 .navbar-inner {
 /* 	background-color: #FBFBFB; */
-	background: url(../../img/mainheaderbg.png) repeat-x;
+	background: #539991 url(../img/nav_bg.png) repeat-x;
 /*     background-image: -moz-linear-gradient(center top , #F6F6F6, #FFFFFF); */
     background-repeat: repeat-x;
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 4px 4px 0px 0px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
-
+    border:1px solid #0C726C;
+	padding-left: 0px;
+}
+.navbar .nav > li {
+	background: url('../img/nav_sep.png') repeat-y top right;
+	position: relative;
+	cursor: pointer;
+}
+.navbar .nav > li > a:hover {
+	background: url('../img/nav_hover_bg.png') repeat-x; 
+}
+.branding {
+	margin-bottom: 10px;
 }
 .navbar .nav > li > a {
-    color: #fcc92e !important;
-    font-size: 15px;
-    font-weight: bold;
+height: 52px;
+line-height: 52px;
+font-size: 14px;
+color: white;
+padding: 0 20px;
+margin-right: 2px;
+font-weight: bold;
+text-shadow: 0px -1px 0px rgba(0,0,0,0.8)
 }
 .stepContainer div.content {
 	height: 410px !important;
@@ -750,7 +788,7 @@ margin: 10px 0 !important;
 	margin-bottom: 10px !important;
 }
 .imgInfo{
-	margin-right: 20px;
+	margin-right: 10px;
 	float: left;
 	text-align: center;
 }
@@ -782,25 +820,44 @@ margin: 10px 0 !important;
 	margin-bottom: 20px;
 }
 .sidebarnoteMain {
-	background:url(../../img/sidebar_note_bg.png) repeat-y top center;
+	background:url(../img/sidebar_note_bg.png) repeat-y top center;
 	width: 234px;
 	padding: 0px 5px;
 }
 .sidebarnoteHeader {
-	background:url(../../img/sidebar_note_top.png) no-repeat top center;
+	background:url(../img/sidebar_note_top.png) no-repeat top center;
 	height: 40px;
 	width: 234px;
 }
 .sidebarnoteFooter {
-	background:url(../../img/sidebar_note_bottom.png) no-repeat top center;
+	background:url(../img/sidebar_note_bottom.png) no-repeat top center;
 	height: 42px;
 	width: 234px;
 	margin-top: -20px;	
 }
-.dashboardContent .well, {
+.dashboardContent .well {
 	min-height: 180px;
 }
 .dashboardContent .alert {
 	padding: 19px;
 	min-height: 145px;
+}
+a.thumbnail {
+	background: #fff;
+}
+#footer-bottom { 
+	margin:0 auto;
+	background: #2c2c2c;
+	height: 21px;
+	border-top: 1px solid #3e3e3e; 
+	border-bottom: 1px solid #161616; 
+	width: 1000px;
+	line-height: 41px; 
+	font-size: 12px; 
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8); 
+}
+#footer-bottom, #footer-bottom a {
+	color: #fff;
+	padding: 10px 10px 10px 10px;
+	
 }
